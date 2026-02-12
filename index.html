@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0a1628">
+<title>KPI Dashboard Pro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+--bg:#0c1a2e;--surface:#132240;--surface2:#1a2d4d;--border:#243a5e;
+--text:#e8edf5;--text2:#8da0be;--accent:#00d4aa;--accent2:#00b894;
+--danger:#ff6b6b;--danger2:#ee5a24;--warn:#ffc048;
+--green:#00d4aa;--red:#ff6b6b;--radius:10px;
+--font:'DM Sans',system-ui,sans-serif;--mono:'JetBrains Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:15px;-webkit-text-size-adjust:100%}
+body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100dvh;overflow-x:hidden;
+background-image:radial-gradient(ellipse at 20% 50%,rgba(0,212,170,.04) 0%,transparent 60%),
+radial-gradient(ellipse at 80% 20%,rgba(0,120,255,.04) 0%,transparent 50%)}
+input,select,textarea,button{font-family:inherit;font-size:inherit}
+input[type=number]{-moz-appearance:textfield}
+input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+
+/* Sticky Header */
+.header{position:sticky;top:0;z-index:100;background:linear-gradient(135deg,#0a1628 0%,#132240 100%);
+border-bottom:1px solid var(--border);padding:12px 16px;backdrop-filter:blur(20px);
+-webkit-backdrop-filter:blur(20px)}
+.header-inner{max-width:960px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.header h1{font-family:var(--mono);font-size:1.15rem;font-weight:700;letter-spacing:-.02em;
+background:linear-gradient(135deg,var(--accent),#4fc3f7);-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;background-clip:text;white-space:nowrap}
+.header-sub{font-size:.7rem;color:var(--text2);font-family:var(--mono)}
+.header-actions{display:flex;gap:6px;flex-wrap:wrap}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;
+padding:8px 14px;border:1px solid var(--border);border-radius:var(--radius);
+background:var(--surface2);color:var(--text);font-size:.8rem;font-weight:600;
+cursor:pointer;transition:all .2s;white-space:nowrap;-webkit-tap-highlight-color:transparent}
+.btn:hover{background:var(--border);transform:translateY(-1px)}
+.btn:active{transform:scale(.97)}
+.btn-primary{background:linear-gradient(135deg,var(--accent2),var(--accent));color:#0a1628;border-color:transparent}
+.btn-primary:hover{filter:brightness(1.1)}
+.btn-danger{border-color:var(--danger);color:var(--danger)}
+.btn-danger:hover{background:rgba(255,107,107,.15)}
+.btn-sm{padding:5px 10px;font-size:.72rem}
+.btn-full{width:100%}
+.btn-lock{position:relative}
+.btn-lock.locked{background:var(--danger);border-color:var(--danger);color:#fff}
+
+/* Container */
+.container{max-width:960px;margin:auto;padding:12px}
+
+/* Cards */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+margin-bottom:10px;overflow:hidden;transition:border-color .3s}
+.card.status-green{border-color:var(--green)}
+.card.status-red{border-color:var(--red)}
+.card-head{display:flex;align-items:center;justify-content:space-between;
+padding:12px 14px;cursor:pointer;-webkit-tap-highlight-color:transparent;user-select:none}
+.card-head h2{font-size:.9rem;font-weight:700;display:flex;align-items:center;gap:8px}
+.card-head .badge{font-size:.65rem;padding:2px 8px;border-radius:20px;font-weight:600;font-family:var(--mono)}
+.badge-green{background:rgba(0,212,170,.15);color:var(--green)}
+.badge-red{background:rgba(255,107,107,.15);color:var(--red)}
+.card-head .chevron{font-size:1rem;transition:transform .3s;color:var(--text2)}
+.card-head.collapsed .chevron{transform:rotate(-90deg)}
+.card-body{padding:0 14px 14px;display:block}
+.card-body.hidden{display:none}
+
+/* Tables */
+.tbl{width:100%;border-collapse:collapse;font-size:.8rem;margin:6px 0}
+.tbl th{background:var(--surface2);color:var(--text2);font-weight:600;padding:8px 6px;
+text-align:center;border:1px solid var(--border);font-size:.72rem;text-transform:uppercase;letter-spacing:.03em}
+.tbl td{padding:6px;border:1px solid var(--border);text-align:center;vertical-align:middle}
+
+/* Inputs */
+.inp{width:100%;padding:8px 10px;background:var(--bg);border:1px solid var(--border);
+border-radius:6px;color:var(--text);font-size:.85rem;transition:border-color .2s}
+.inp:focus{outline:none;border-color:var(--accent)}
+.inp::placeholder{color:var(--text2);opacity:.6}
+select.inp{cursor:pointer;-webkit-appearance:none;appearance:none;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%238da0be'%3E%3Cpath d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+background-repeat:no-repeat;background-position:right 8px center;padding-right:28px}
+textarea.inp{resize:vertical;min-height:200px;font-family:var(--mono);font-size:.78rem;line-height:1.5}
+
+/* KPI Values */
+.kpi-good{color:var(--green);font-weight:700;font-family:var(--mono)}
+.kpi-bad{color:var(--red);font-weight:700;font-family:var(--mono)}
+
+/* Shift Card */
+.shift-block{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px;margin:8px 0}
+.shift-title{font-weight:700;font-size:.82rem;color:var(--accent);margin-bottom:8px;font-family:var(--mono)}
+.shift-result{margin-top:8px;padding:8px;background:var(--surface2);border-radius:6px;
+font-family:var(--mono);font-size:.8rem;font-weight:600}
+
+/* Summary sections */
+.summary-block{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px;margin:8px 0}
+.summary-block h3{font-size:.82rem;color:var(--accent);margin-bottom:8px;font-family:var(--mono)}
+.summary-row{display:flex;justify-content:space-between;padding:4px 0;font-size:.8rem;
+border-bottom:1px solid rgba(255,255,255,.05)}
+.summary-row:last-child{border:none}
+.summary-label{color:var(--text2)}
+
+/* 5S Grid */
+.fives-grid{display:grid;gap:8px}
+.fives-station{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px;
+display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center}
+.fives-station.fives-green{border-color:var(--green)}
+.fives-station.fives-red{border-color:var(--red)}
+.fives-inputs{display:grid;grid-template-columns:1fr 80px 80px;gap:6px;align-items:center}
+.fives-pct{font-family:var(--mono);font-weight:700;font-size:1rem;text-align:center;min-width:60px}
+
+/* Toast */
+.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(100px);
+background:var(--surface2);border:1px solid var(--border);color:var(--text);
+padding:10px 20px;border-radius:var(--radius);font-size:.82rem;font-weight:600;
+z-index:9999;opacity:0;transition:all .3s;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* Lock overlay */
+.locked-overlay{position:relative}
+.locked-overlay::after{content:'🔒 Locked';position:absolute;inset:0;
+background:rgba(10,22,40,.7);display:flex;align-items:center;justify-content:center;
+color:var(--text2);font-weight:700;font-size:1rem;border-radius:var(--radius);z-index:10;
+backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px)}
+.locked-overlay input,.locked-overlay select,.locked-overlay textarea{pointer-events:none}
+.locked-overlay .btn{pointer-events:none;opacity:.4}
+
+/* Responsive */
+@media(max-width:600px){
+.header-inner{flex-direction:column;align-items:stretch;text-align:center}
+.header-actions{justify-content:center}
+.tbl{font-size:.72rem}
+.tbl th,.tbl td{padding:5px 3px}
+.inp{font-size:.82rem;padding:7px 8px}
+.fives-inputs{grid-template-columns:1fr 65px 65px}
+}
+
+/* Print / Image capture helper */
+.capture-area{background:var(--surface);border-radius:var(--radius);padding:14px}
+
+/* Scrollbar */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+<div class="header-inner">
+<div>
+<h1>⚙ KPI Dashboard Pro</h1>
+<div class="header-sub">CNC Production · SQCDP Meeting</div>
+</div>
+<div class="header-actions">
+<button class="btn btn-sm btn-lock" id="lockBtn" onclick="App.toggleLock()">🔓 Unlocked</button>
+<button class="btn btn-sm" onclick="App.loadPreviousDay()">📅 Prev Day</button>
+<button class="btn btn-sm" onclick="App.copyPreviousDay()">📋 Copy Prev</button>
+<button class="btn btn-sm btn-primary" onclick="App.shareReport()">📤 Share</button>
+<button class="btn btn-sm" onclick="App.saveAsImage()">📸 Image</button>
+</div>
+</div>
+</div>
+
+<div class="container" id="mainContainer">
+
+<!-- BASIC INFO -->
+<div class="card" id="basicCard">
+<div class="card-head" onclick="toggleCard(this)">
+<h2>📋 Basic Info</h2>
+<span class="chevron">▼</span>
+</div>
+<div class="card-body">
+<table class="tbl">
+<tr><th>Team Lead</th><td><input class="inp" type="text" id="teamLead" placeholder="Your name (required)" data-save></td></tr>
+<tr><th>Date</th><td><input class="inp" type="date" id="kpiDate" data-save></td></tr>
+<tr>
+<th>Department</th>
+<td><select class="inp" id="dept" data-save>
+<option>Aerospace</option><option>Marine</option><option>Industries</option><option>Motors</option>
+</select></td>
+</tr>
+</table>
+</div>
+</div>
+
+<!-- MACHINES -->
+<div class="card" id="machineCard">
+<div class="card-head" onclick="toggleCard(this)">
+<h2>⚙ Machines <span class="badge" id="machineBadge"></span></h2>
+<span class="chevron">▼</span>
+</div>
+<div class="card-body">
+<div style="font-size:.72rem;color:var(--text2);margin-bottom:8px">OK: Util ≥ 50% AND Eff ≥ 70%</div>
+<div style="overflow-x:auto">
+<table class="tbl" id="machineTable">
+<thead><tr>
+<th>Machine</th><th>Avail Hrs</th><th>Oper Hrs</th><th>Planned Rate</th><th>Actual Rate</th><th>Remark</th><th></th><th>Util%</th><th>Eff%</th>
+</tr></thead>
+<tbody id="machineBody"></tbody>
+</table>
+</div>
+<button class="btn btn-full" onclick="App.addMachine()" style="margin-top:8px">+ Add Machine</button>
+</div>
+</div>
+
+<!-- SAFETY -->
+<div class="card" id="safetyCard">
+<div class="card-head" onclick="toggleCard(this)">
+<h2>🛡 Safety <span class="badge" id="safetyBadge"></span></h2>
+<span class="chevron">▼</span>
+</div>
+<div class="card-body">
+<div style="font-size:.72rem;color:var(--text2);margin-bottom:8px">OK: No Accidents AND No Near Misses</div>
+<table class="tbl">
+<tr><th>Accident</th><td><select class="inp" id="accident" data-save><option>No</option><option>Yes</option></select></td></tr>
+<tr><th>Near Miss</th><td><select class="inp" id="nearMiss" data-save><option>No</option><option>Yes</option></select></td></tr>
+</table>
+</div>
+</div>
+
+<!-- QUALITY -->
+<div class="card" id="qualityCard">
+<div class="card-head" onclick="toggleCard(this)">
+<h2>✅ Quality <span class="badge" id="qualityBadge"></span></h2>
+<span class="chevron">▼</span>
+</div>
+<div class="card-body">
+<table class="tbl">
+<tr><th>Customer Complaint</th><td><select class="inp" id="custComplaint" data-save><option>No</option><option>Yes</option></select></td></tr>
+<tr><th>Scrap</th><td><select class="inp" id="scrap" data-save><option>No</option><option>Yes</option></select></td></tr>
+<tr><th>NC MTD</th><td><select class="inp" id="ncMtd" data-save><option>No</option><option>Yes</option></select></td></tr>
+<tr><th>Extra Consumables</th><td><select class="inp" id="extraCons" data-save><option>No</option><option>Yes</option></select></td></tr>
+</table>
+</div>
+</div>
+
+<!-- LABOR -->
+<div class="card" id="laborCard">
+<div class="card-head" onclick="toggleCard(this)">
+<h2>👷 Labor <span class="badge" id="laborBadge"></span></h2>
+<span class="chevron">▼</span>
+</div>
+<div class="card-body">
+<div style="font-size:.72rem;color:var(--text2);margin-bottom:8px">OK: Util ≥ 80% AND Eff ≥ 80%</div>
+<div id="laborShifts"></div>
+<button class="btn btn-full" onclick="App.addShift()">+ Add Shift</button>
+</div>
+</div>
+
+<!-- PEOPLE -->
+<div class="card" id="peopleCard">
+<div class="card-head" onclick="toggleCard(this)">
+<h2>👥 People <span class="badge" id="peopleBadge"></span></h2>
+<span class="chevron">▼</span>
+</div>
+<div class="card-body">
+<div style="font-size:.72rem;color:var(--text2);margin-bottom:8px">OK: Attendance ≥ 100%</div>
+<table class="tbl">
+<tr><th>Planned</th><td><input class="inp" type="number" id="plannedPeople" placeholder="0" data-save></td></tr>
+<tr><th>Present</th><td><input class="inp" type="number" id="presentPeople" placeholder="0" data-save></td></tr>
+</table>
+</div>
+</div>
+
+<!-- 5S -->
+<div class="card" id="fiveSCard">
+<div class="card-head" onclick="toggleCard(this)">
+<h2>🏷 5S Audit <span class="badge" id="fiveSBadge"></span></h2>
+<span class="chevron">▼</span>
+</div>
+<div class="card-body">
+<div style="font-size:.72rem;color:var(--text2);margin-bottom:8px">OK: ≥ 85% Standards Followed. Per station: (Followed ÷ Allocated) × 100</div>
+<div class="fives-grid" id="fiveSGrid"></div>
+<button class="btn btn-full" onclick="App.add5S()" style="margin-top:8px">+ Add Station</button>
+</div>
+</div>
+
+<!-- REPORT OUTPUT -->
+<div class="card" id="reportCard">
+<div class="card-head" onclick="toggleCard(this)">
+<h2>📝 Daily Report</h2>
+<span class="chevron">▼</span>
+</div>
+<div class="card-body" id="reportBody">
+<textarea class="inp" id="reportOutput" readonly></textarea>
+<div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap">
+<button class="btn btn-primary" onclick="App.copyReport()" style="flex:1">📋 Copy</button>
+<button class="btn" onclick="App.shareReport()" style="flex:1">📤 Share</button>
+</div>
+</div>
+</div>
+
+<!-- WEEKLY SUMMARY -->
+<div class="card" id="weeklyCard">
+<div class="card-head collapsed" onclick="toggleCard(this)">
+<h2>📊 Weekly Summary (7 Days)</h2>
+<span class="chevron">▼</span>
+</div>
+<div class="card-body hidden" id="weeklyBody">
+<div id="weeklySummaryContent"></div>
+<textarea class="inp" id="weeklyOutput" readonly style="margin-top:8px"></textarea>
+<button class="btn btn-full" onclick="App.copyWeekly()" style="margin-top:6px">📋 Copy Weekly</button>
+</div>
+</div>
+
+<!-- MONTHLY SUMMARY -->
+<div class="card" id="monthlyCard">
+<div class="card-head collapsed" onclick="toggleCard(this)">
+<h2>📈 Monthly Summary</h2>
+<span class="chevron">▼</span>
+</div>
+<div class="card-body hidden" id="monthlyBody">
+<div id="monthlySummaryContent"></div>
+<textarea class="inp" id="monthlyOutput" readonly style="margin-top:8px"></textarea>
+<button class="btn btn-full" onclick="App.copyMonthly()" style="margin-top:6px">📋 Copy Monthly</button>
+</div>
+</div>
+
+</div><!-- /container -->
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* =============================================
+   MODULE: KPIEngine (PURE FUNCTIONS ONLY)
+   ============================================= */
+const KPIEngine = {
+  pct(a,b){ return b>0 ? +(a/b*100).toFixed(1) : 0; },
+  
+  calcMachine(availHrs, operHrs, plannedRate, actualRate){
+    const util = this.pct(operHrs, availHrs);
+    const eff = this.pct(actualRate, plannedRate);
+    const ok = util >= 50 && eff >= 70;
+    return { util, eff, ok };
+  },
+  
+  calcMachinesOverall(machines){
+    let allOk = true;
+    const results = machines.map(m => {
+      const r = this.calcMachine(m.availHrs, m.operHrs, m.plannedRate, m.actualRate);
+      if(!r.ok) allOk = false;
+      return { ...m, ...r };
+    });
+    return { results, allOk, count: machines.length };
+  },
+  
+  calcSafety(accident, nearMiss){
+    const ok = accident === 'No' && nearMiss === 'No';
+    return { accident, nearMiss, ok };
+  },
+  
+  calcQuality(complaint, scrap, nc, extraCons){
+    const qualOk = complaint==='No' && scrap==='No' && nc==='No';
+    const consOk = extraCons === 'No';
+    return { complaint, scrap, nc, extraCons, qualOk, consOk, ok: qualOk && consOk };
+  },
+  
+  calcShift(shiftHours, workers, projects, idles){
+    const avail = shiftHours * workers;
+    let prod = 0, planned = 0;
+    projects.forEach(p => {
+      prod += p.actualHrs * p.workers;
+      planned += p.plannedHrs * p.workers;
+    });
+    let idleHrs = 0;
+    idles.forEach(i => { idleHrs += i.workers * i.hours; });
+    const util = this.pct(prod, avail);
+    const eff = this.pct(planned, prod);
+    const ok = util >= 80 && eff >= 80;
+    return { avail, prod, planned, idleHrs, util, eff, ok };
+  },
+  
+  calcLaborOverall(shifts){
+    let totalAvail=0, totalProd=0, totalPlanned=0, allOk=true;
+    const results = shifts.map(s => {
+      const r = this.calcShift(s.shiftHours, s.workers, s.projects, s.idles);
+      totalAvail += r.avail; totalProd += r.prod; totalPlanned += r.planned;
+      if(!r.ok) allOk = false;
+      return { ...s, ...r };
+    });
+    const util = this.pct(totalProd, totalAvail);
+    const eff = this.pct(totalPlanned, totalProd);
+    return { results, totalAvail, totalProd, totalPlanned, util, eff, allOk };
+  },
+  
+  calcAttendance(planned, present){
+    const pct = this.pct(present, planned);
+    return { planned, present, pct, ok: pct >= 100 };
+  },
+  
+  calc5S(stations){
+    let totalAlloc=0, totalFollowed=0;
+    const results = stations.map(s => {
+      const pct = this.pct(s.followed, s.allocated);
+      totalAlloc += s.allocated;
+      totalFollowed += s.followed;
+      return { ...s, pct, ok: pct >= 85 };
+    });
+    const overallPct = this.pct(totalFollowed, totalAlloc);
+    const ok = overallPct >= 85;
+    return { results, totalAlloc, totalFollowed, overallPct, ok };
+  },
+  
+  calcAll(data){
+    return {
+      date: data.date,
+      teamLead: data.teamLead,
+      dept: data.dept,
+      machines: this.calcMachinesOverall(data.machines),
+      safety: this.calcSafety(data.accident, data.nearMiss),
+      quality: this.calcQuality(data.complaint, data.scrap, data.nc, data.extraCons),
+      labor: this.calcLaborOverall(data.shifts),
+      attendance: this.calcAttendance(data.plannedPeople, data.presentPeople),
+      fiveS: this.calc5S(data.stations)
+    };
+  },
+  
+  isRedDay(result){
+    return !result.machines.allOk || !result.safety.ok || !result.labor.allOk || !result.attendance.ok || !result.fiveS.ok;
+  }
+};
+
+/* =============================================
+   MODULE: DataCollector
+   ============================================= */
+const DataCollector = {
+  collect(){
+    const data = {
+      teamLead: g('teamLead').value.trim(),
+      date: g('kpiDate').value,
+      dept: g('dept').value,
+      machines: this._collectMachines(),
+      accident: g('accident').value,
+      nearMiss: g('nearMiss').value,
+      complaint: g('custComplaint').value,
+      scrap: g('scrap').value,
+      nc: g('ncMtd').value,
+      extraCons: g('extraCons').value,
+      shifts: this._collectShifts(),
+      plannedPeople: num(g('plannedPeople').value),
+      presentPeople: num(g('presentPeople').value),
+      stations: this._collect5S()
+    };
+    return data;
+  },
+  
+  _collectMachines(){
+    const rows = document.querySelectorAll('#machineBody tr');
+    return Array.from(rows).map(r => {
+      const inp = r.querySelectorAll('.inp');
+      return {
+        name: inp[0].value.trim(),
+        availHrs: num(inp[1].value),
+        operHrs: num(inp[2].value),
+        plannedRate: num(inp[3].value),
+        actualRate: num(inp[4].value),
+        remark: inp[5].value.trim()
+      };
+    });
+  },
+  
+  _collectShifts(){
+    const blocks = document.querySelectorAll('.shift-block');
+    return Array.from(blocks).map(b => {
+      const sinp = b.querySelectorAll('.shift-main-inp');
+      const projects = Array.from(b.querySelectorAll('.proj-row')).map(pr => {
+        const pi = pr.querySelectorAll('.inp');
+        return { name:pi[0].value.trim(), workers:num(pi[1].value), plannedHrs:num(pi[2].value), actualHrs:num(pi[3].value) };
+      });
+      const idles = Array.from(b.querySelectorAll('.idle-row')).map(ir => {
+        const ii = ir.querySelectorAll('.inp');
+        return { workers:num(ii[0].value), hours:num(ii[1].value) };
+      });
+      return { shiftHours:num(sinp[0].value), workers:num(sinp[1].value), projects, idles };
+    });
+  },
+  
+  _collect5S(){
+    const items = document.querySelectorAll('.fives-station');
+    return Array.from(items).map(el => {
+      const inp = el.querySelectorAll('.inp');
+      return { name:inp[0].value.trim(), allocated:num(inp[1].value), followed:num(inp[2].value) };
+    });
+  }
+};
+
+/* =============================================
+   MODULE: StorageManager
+   ============================================= */
+const StorageManager = {
+  KEY_PREFIX: 'kpi_',
+  LEAD_KEY: 'kpi_team_lead',
+  
+  save(date, data){
+    if(!date) return;
+    try{ localStorage.setItem(this.KEY_PREFIX + date, JSON.stringify(data)); } catch(e){}
+  },
+  
+  load(date){
+    if(!date) return null;
+    try{
+      const raw = localStorage.getItem(this.KEY_PREFIX + date);
+      return raw ? JSON.parse(raw) : null;
+    }catch(e){ return null; }
+  },
+  
+  getAllDates(){
+    const dates = [];
+    for(let i=0;i<localStorage.length;i++){
+      const k = localStorage.key(i);
+      if(k.startsWith(this.KEY_PREFIX) && k !== this.LEAD_KEY && k.length === this.KEY_PREFIX.length + 10){
+        dates.push(k.substring(this.KEY_PREFIX.length));
+      }
+    }
+    return dates.sort();
+  },
+  
+  getDateRange(startDate, endDate){
+    return this.getAllDates().filter(d => d >= startDate && d <= endDate);
+  },
+  
+  getLastNDays(n){
+    const dates = this.getAllDates();
+    return dates.slice(-n);
+  },
+  
+  getCurrentMonthDates(){
+    const now = new Date();
+    const y = now.getFullYear(), m = String(now.getMonth()+1).padStart(2,'0');
+    const prefix = `${y}-${m}`;
+    return this.getAllDates().filter(d => d.startsWith(prefix));
+  },
+  
+  saveTeamLead(name){
+    try{ localStorage.setItem(this.LEAD_KEY, name); }catch(e){}
+  },
+  
+  loadTeamLead(){
+    try{ return localStorage.getItem(this.LEAD_KEY) || ''; }catch(e){ return ''; }
+  }
+};
+
+/* =============================================
+   MODULE: SummaryEngine (PURE)
+   ============================================= */
+const SummaryEngine = {
+  calcSummary(dates){
+    if(!dates.length) return null;
+    let machUtil=[], labUtil=[], safetyInc=0, redDays=0, fivesPcts=[], attPcts=[];
+    const entries = [];
+    
+    dates.forEach(d => {
+      const raw = StorageManager.load(d);
+      if(!raw) return;
+      const result = KPIEngine.calcAll(raw);
+      entries.push({date:d, result});
+      machUtil.push(result.machines.results.length>0 ? 
+        KPIEngine.pct(
+          result.machines.results.reduce((s,m)=>s+m.operHrs,0),
+          result.machines.results.reduce((s,m)=>s+m.availHrs,0)
+        ) : 0);
+      labUtil.push(result.labor.util);
+      if(!result.safety.ok) safetyInc++;
+      if(KPIEngine.isRedDay(result)) redDays++;
+      fivesPcts.push(result.fiveS.overallPct);
+      attPcts.push(result.attendance.pct);
+    });
+    
+    const avg = arr => arr.length ? +(arr.reduce((a,b)=>a+b,0)/arr.length).toFixed(1) : 0;
+    return {
+      days: entries.length,
+      avgMachUtil: avg(machUtil),
+      avgLabUtil: avg(labUtil),
+      totalSafetyInc: safetyInc,
+      redDays,
+      avgFiveS: avg(fivesPcts),
+      avgAttendance: avg(attPcts),
+      entries
+    };
+  },
+  
+  weekly(){ return this.calcSummary(StorageManager.getLastNDays(7)); },
+  monthly(){ return this.calcSummary(StorageManager.getCurrentMonthDates()); }
+};
+
+/* =============================================
+   MODULE: Formatter
+   ============================================= */
+const Formatter = {
+  E(ok){ return ok ? '🟢' : '🔴'; },
+  
+  daily(result){
+    let t = '';
+    t += `📊 *DAILY KPI REPORT*\n`;
+    t += `━━━━━━━━━━━━━━━━\n`;
+    t += `📅 Date: ${result.date}\n`;
+    t += `👤 Team Lead: ${result.teamLead}\n`;
+    t += `🏭 Dept: ${result.dept}\n\n`;
+    
+    t += `⚙️ *MACHINES*\n`;
+    result.machines.results.forEach(m => {
+      t += `${this.E(m.ok)} ${m.name}: Util ${m.util}%, Eff ${m.eff}%`;
+      if(!m.ok && m.remark) t += ` — ${m.remark}`;
+      t += '\n';
+    });
+    
+    t += `\n🛡 *SAFETY*\n`;
+    t += `${this.E(result.safety.ok)} Accident: ${result.safety.accident} | Near Miss: ${result.safety.nearMiss}\n`;
+    
+    t += `\n✅ *QUALITY*\n`;
+    t += `${this.E(result.quality.qualOk)} Complaint: ${result.quality.complaint}, Scrap: ${result.quality.scrap}, NC: ${result.quality.nc}\n`;
+    t += `${this.E(result.quality.consOk)} Extra Consumables: ${result.quality.extraCons}\n`;
+    
+    t += `\n👷 *LABOR*\n`;
+    t += `${this.E(result.labor.allOk)} Overall: Util ${result.labor.util}%, Eff ${result.labor.eff}%\n`;
+    result.labor.results.forEach((s,i) => {
+      t += `  Shift ${i+1}: Util ${s.util}%, Eff ${s.eff}%\n`;
+    });
+    
+    t += `\n👥 *ATTENDANCE*\n`;
+    t += `${this.E(result.attendance.ok)} ${result.attendance.present}/${result.attendance.planned} = ${result.attendance.pct}%\n`;
+    
+    t += `\n🏷 *5S AUDIT*\n`;
+    result.fiveS.results.forEach(s => {
+      t += `${this.E(s.ok)} ${s.name}: ${s.followed}/${s.allocated} = ${s.pct}%\n`;
+    });
+    t += `${this.E(result.fiveS.ok)} Overall 5S: ${result.fiveS.overallPct}%\n`;
+    
+    t += `\n━━━━━━━━━━━━━━━━\n`;
+    t += KPIEngine.isRedDay(result) ? '🔴 *RED DAY*' : '🟢 *GREEN DAY*';
+    return t;
+  },
+  
+  summary(title, s){
+    if(!s) return `${title}\nNo data available.\n`;
+    let t = `📊 *${title}*\n━━━━━━━━━━━━━━━━\n`;
+    t += `📁 Days with data: ${s.days}\n`;
+    t += `⚙️ Avg Machine Util: ${s.avgMachUtil}%\n`;
+    t += `👷 Avg Labor Util: ${s.avgLabUtil}%\n`;
+    t += `🛡 Safety Incidents: ${s.totalSafetyInc}\n`;
+    t += `🔴 Red Days: ${s.redDays}\n`;
+    t += `🏷 Avg 5S: ${s.avgFiveS}%\n`;
+    t += `👥 Avg Attendance: ${s.avgAttendance}%\n`;
+    t += `━━━━━━━━━━━━━━━━`;
+    return t;
+  }
+};
+
+/* =============================================
+   MODULE: UIRenderer
+   ============================================= */
+const UIRenderer = {
+  setBadge(id, ok, text){
+    const el = g(id);
+    if(!el) return;
+    el.className = 'badge ' + (ok ? 'badge-green' : 'badge-red');
+    el.textContent = text || (ok ? 'OK' : 'ISSUE');
+  },
+  
+  setCardStatus(id, ok){
+    const el = g(id);
+    if(!el) return;
+    el.className = 'card ' + (ok ? 'status-green' : 'status-red');
+  },
+  
+  renderMachineResults(machines){
+    const rows = document.querySelectorAll('#machineBody tr');
+    machines.results.forEach((m, i) => {
+      if(!rows[i]) return;
+      const utilCell = rows[i].querySelector('.res-util');
+      const effCell = rows[i].querySelector('.res-eff');
+      if(utilCell){ utilCell.textContent = m.util + '%'; utilCell.className = 'res-util ' + (m.util>=50?'kpi-good':'kpi-bad'); }
+      if(effCell){ effCell.textContent = m.eff + '%'; effCell.className = 'res-eff ' + (m.eff>=70?'kpi-good':'kpi-bad'); }
+    });
+    this.setCardStatus('machineCard', machines.allOk);
+    this.setBadge('machineBadge', machines.allOk);
+  },
+  
+  renderShiftResults(labor){
+    const blocks = document.querySelectorAll('.shift-block');
+    labor.results.forEach((s, i) => {
+      if(!blocks[i]) return;
+      const res = blocks[i].querySelector('.shift-result');
+      if(res){
+        res.innerHTML = `Util: <span class="${s.util>=80?'kpi-good':'kpi-bad'}">${s.util}%</span> | Eff: <span class="${s.eff>=80?'kpi-good':'kpi-bad'}">${s.eff}%</span>`;
+      }
+    });
+    this.setCardStatus('laborCard', labor.allOk);
+    this.setBadge('laborBadge', labor.allOk);
+  },
+  
+  render5SResults(fiveS){
+    const items = document.querySelectorAll('.fives-station');
+    fiveS.results.forEach((s, i) => {
+      if(!items[i]) return;
+      const pctEl = items[i].querySelector('.fives-pct');
+      if(pctEl){
+        pctEl.textContent = s.pct + '%';
+        pctEl.className = 'fives-pct ' + (s.ok ? 'kpi-good' : 'kpi-bad');
+      }
+      items[i].className = 'fives-station ' + (s.ok ? 'fives-green' : 'fives-red');
+    });
+    this.setCardStatus('fiveSCard', fiveS.ok);
+    this.setBadge('fiveSBadge', fiveS.ok, fiveS.overallPct + '%');
+  },
+  
+  renderSummaryHTML(containerId, summary){
+    const el = g(containerId);
+    if(!el) return;
+    if(!summary){ el.innerHTML = '<div style="color:var(--text2);font-size:.82rem">No saved data found.</div>'; return; }
+    el.innerHTML = `
+    <div class="summary-block">
+      <div class="summary-row"><span class="summary-label">Days with data</span><span>${summary.days}</span></div>
+      <div class="summary-row"><span class="summary-label">Avg Machine Util</span><span class="${summary.avgMachUtil>=50?'kpi-good':'kpi-bad'}">${summary.avgMachUtil}%</span></div>
+      <div class="summary-row"><span class="summary-label">Avg Labor Util</span><span class="${summary.avgLabUtil>=80?'kpi-good':'kpi-bad'}">${summary.avgLabUtil}%</span></div>
+      <div class="summary-row"><span class="summary-label">Safety Incidents</span><span class="${summary.totalSafetyInc===0?'kpi-good':'kpi-bad'}">${summary.totalSafetyInc}</span></div>
+      <div class="summary-row"><span class="summary-label">Red Days</span><span class="${summary.redDays===0?'kpi-good':'kpi-bad'}">${summary.redDays}</span></div>
+      <div class="summary-row"><span class="summary-label">Avg 5S</span><span class="${summary.avgFiveS>=85?'kpi-good':'kpi-bad'}">${summary.avgFiveS}%</span></div>
+      <div class="summary-row"><span class="summary-label">Avg Attendance</span><span class="${summary.avgAttendance>=100?'kpi-good':'kpi-bad'}">${summary.avgAttendance}%</span></div>
+    </div>`;
+  },
+  
+  fullRender(result){
+    this.renderMachineResults(result.machines);
+    this.setCardStatus('safetyCard', result.safety.ok);
+    this.setBadge('safetyBadge', result.safety.ok);
+    this.setCardStatus('qualityCard', result.quality.ok);
+    this.setBadge('qualityBadge', result.quality.ok);
+    this.renderShiftResults(result.labor);
+    this.setCardStatus('peopleCard', result.attendance.ok);
+    this.setBadge('peopleBadge', result.attendance.ok, result.attendance.pct + '%');
+    this.render5SResults(result.fiveS);
+    
+    g('reportOutput').value = Formatter.daily(result);
+    
+    // Summaries
+    const weekly = SummaryEngine.weekly();
+    this.renderSummaryHTML('weeklySummaryContent', weekly);
+    g('weeklyOutput').value = Formatter.summary('WEEKLY SUMMARY (Last 7 Days)', weekly);
+    
+    const monthly = SummaryEngine.monthly();
+    this.renderSummaryHTML('monthlySummaryContent', monthly);
+    g('monthlyOutput').value = Formatter.summary('MONTHLY SUMMARY', monthly);
+  }
+};
+
+/* =============================================
+   HELPERS
+   ============================================= */
+function g(id){ return document.getElementById(id); }
+function num(v){ return parseFloat(v) || 0; }
+
+function toggleCard(head){
+  head.classList.toggle('collapsed');
+  const body = head.nextElementSibling;
+  body.classList.toggle('hidden');
+}
+
+function showToast(msg, dur=2000){
+  const t = g('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(()=> t.classList.remove('show'), dur);
+}
+
+/* =============================================
+   MAIN APP
+   ============================================= */
+const App = {
+  locked: false,
+  shiftCount: 0,
+  
+  init(){
+    // Set yesterday's date as default
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate()-1);
+    g('kpiDate').value = yesterday.toISOString().split('T')[0];
+    
+    // Load saved team lead
+    g('teamLead').value = StorageManager.loadTeamLead();
+    
+    // Try restore today's date data or yesterday
+    const todayData = StorageManager.load(g('kpiDate').value);
+    if(todayData){
+      this.restoreData(todayData);
+    } else {
+      this.addMachine();
+      this.addShift();
+      this.add5S();
+    }
+    
+    // Auto-save listener
+    document.addEventListener('input', ()=> {
+      this.autoSave();
+      this.recalculate();
+    });
+    document.addEventListener('change', ()=> {
+      this.autoSave();
+      this.recalculate();
+    });
+    
+    // Date change listener
+    g('kpiDate').addEventListener('change', ()=> {
+      const d = g('kpiDate').value;
+      const saved = StorageManager.load(d);
+      if(saved){
+        this.clearAll();
+        this.restoreData(saved);
+        showToast('Data loaded for ' + d);
+      }
+    });
+    
+    this.recalculate();
+  },
+  
+  recalculate(){
+    const data = DataCollector.collect();
+    const result = KPIEngine.calcAll(data);
+    UIRenderer.fullRender(result);
+  },
+  
+  autoSave(){
+    const data = DataCollector.collect();
+    const date = data.date;
+    if(date){
+      StorageManager.save(date, data);
+    }
+    if(data.teamLead){
+      StorageManager.saveTeamLead(data.teamLead);
+    }
+  },
+  
+  addMachine(data){
+    const tbody = g('machineBody');
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><input class="inp" placeholder="Machine" value="${data?.name||''}"></td>
+      <td><input class="inp" type="number" placeholder="0" value="${data?.availHrs||''}"></td>
+      <td><input class="inp" type="number" placeholder="0" value="${data?.operHrs||''}"></td>
+      <td><input class="inp" type="number" placeholder="0" value="${data?.plannedRate||''}"></td>
+      <td><input class="inp" type="number" placeholder="0" value="${data?.actualRate||''}"></td>
+      <td><input class="inp" placeholder="Remark" value="${data?.remark||''}"></td>
+      <td><button class="btn btn-sm btn-danger" onclick="this.closest('tr').remove();App.recalculate();App.autoSave()">✕</button></td>
+      <td class="res-util">0%</td>
+      <td class="res-eff">0%</td>`;
+    tbody.appendChild(tr);
+  },
+  
+  addShift(data){
+    this.shiftCount++;
+    const container = g('laborShifts');
+    const div = document.createElement('div');
+    div.className = 'shift-block';
+    const projs = data?.projects || [];
+    const idles = data?.idles || [];
+    
+    let projHTML = '';
+    projs.forEach(p => {
+      projHTML += `<tr class="proj-row">
+        <td><input class="inp" placeholder="Project" value="${p.name||''}"></td>
+        <td><input class="inp" type="number" value="${p.workers||0}"></td>
+        <td><input class="inp" type="number" value="${p.plannedHrs||0}"></td>
+        <td><input class="inp" type="number" value="${p.actualHrs||0}"></td>
+        <td><button class="btn btn-sm btn-danger" onclick="this.closest('tr').remove();App.recalculate();App.autoSave()">✕</button></td>
+      </tr>`;
+    });
+    
+    let idleHTML = '';
+    idles.forEach(i => {
+      idleHTML += `<tr class="idle-row">
+        <td><input class="inp" type="number" value="${i.workers||0}"></td>
+        <td><input class="inp" type="number" value="${i.hours||0}"></td>
+        <td><button class="btn btn-sm btn-danger" onclick="this.closest('tr').remove();App.recalculate();App.autoSave()">✕</button></td>
+      </tr>`;
+    });
+    
+    div.innerHTML = `
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div class="shift-title">Shift ${this.shiftCount}</div>
+        <button class="btn btn-sm btn-danger" onclick="this.closest('.shift-block').remove();App.recalculate();App.autoSave()">✕ Remove Shift</button>
+      </div>
+      <table class="tbl">
+        <tr><th>Shift Hours</th><td><input class="inp shift-main-inp" type="number" value="${data?.shiftHours||8}" min="1" max="12"></td></tr>
+        <tr><th># Workers</th><td><input class="inp shift-main-inp" type="number" value="${data?.workers||0}"></td></tr>
+      </table>
+      <div style="margin-top:6px;font-weight:600;font-size:.78rem;color:var(--accent)">Projects</div>
+      <table class="tbl proj-table">
+        <thead><tr><th>Project</th><th>Workers</th><th>Planned Hrs</th><th>Actual Hrs</th><th></th></tr></thead>
+        <tbody>${projHTML}</tbody>
+      </table>
+      <button class="btn btn-sm" onclick="App.addProject(this)" style="margin:4px 0">+ Project</button>
+      <div style="margin-top:6px;font-weight:600;font-size:.78rem;color:var(--warn)">Idle Time</div>
+      <table class="tbl idle-table">
+        <thead><tr><th>Workers</th><th>Hours</th><th></th></tr></thead>
+        <tbody>${idleHTML}</tbody>
+      </table>
+      <button class="btn btn-sm" onclick="App.addIdle(this)" style="margin:4px 0">+ Idle</button>
+      <div class="shift-result">Util: 0% | Eff: 0%</div>`;
+    container.appendChild(div);
+  },
+  
+  addProject(btn, data){
+    const tbody = btn.previousElementSibling.querySelector('tbody');
+    const tr = document.createElement('tr');
+    tr.className = 'proj-row';
+    tr.innerHTML = `
+      <td><input class="inp" placeholder="Project" value="${data?.name||''}"></td>
+      <td><input class="inp" type="number" value="${data?.workers||0}"></td>
+      <td><input class="inp" type="number" value="${data?.plannedHrs||0}"></td>
+      <td><input class="inp" type="number" value="${data?.actualHrs||0}"></td>
+      <td><button class="btn btn-sm btn-danger" onclick="this.closest('tr').remove();App.recalculate();App.autoSave()">✕</button></td>`;
+    tbody.appendChild(tr);
+  },
+  
+  addIdle(btn, data){
+    const tbody = btn.previousElementSibling.querySelector('tbody');
+    const tr = document.createElement('tr');
+    tr.className = 'idle-row';
+    tr.innerHTML = `
+      <td><input class="inp" type="number" value="${data?.workers||0}"></td>
+      <td><input class="inp" type="number" value="${data?.hours||0}"></td>
+      <td><button class="btn btn-sm btn-danger" onclick="this.closest('tr').remove();App.recalculate();App.autoSave()">✕</button></td>`;
+    tbody.appendChild(tr);
+  },
+  
+  add5S(data){
+    const grid = g('fiveSGrid');
+    const div = document.createElement('div');
+    div.className = 'fives-station';
+    div.innerHTML = `
+      <div class="fives-inputs">
+        <input class="inp" placeholder="Station name" value="${data?.name||''}">
+        <input class="inp" type="number" placeholder="Alloc" value="${data?.allocated||''}" min="0">
+        <input class="inp" type="number" placeholder="Follow" value="${data?.followed||''}" min="0">
+      </div>
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="fives-pct">0%</div>
+        <button class="btn btn-sm btn-danger" onclick="this.closest('.fives-station').remove();App.recalculate();App.autoSave()">✕</button>
+      </div>`;
+    grid.appendChild(div);
+  },
+  
+  clearAll(){
+    g('machineBody').innerHTML = '';
+    g('laborShifts').innerHTML = '';
+    g('fiveSGrid').innerHTML = '';
+    this.shiftCount = 0;
+  },
+  
+  restoreData(data){
+    g('teamLead').value = data.teamLead || StorageManager.loadTeamLead() || '';
+    g('kpiDate').value = data.date || '';
+    g('dept').value = data.dept || 'Aerospace';
+    g('accident').value = data.accident || 'No';
+    g('nearMiss').value = data.nearMiss || 'No';
+    g('custComplaint').value = data.complaint || 'No';
+    g('scrap').value = data.scrap || 'No';
+    g('ncMtd').value = data.nc || 'No';
+    g('extraCons').value = data.extraCons || 'No';
+    g('plannedPeople').value = data.plannedPeople || '';
+    g('presentPeople').value = data.presentPeople || '';
+    
+    // Clear dynamic sections
+    this.clearAll();
+    
+    // Restore machines
+    if(data.machines && data.machines.length){
+      data.machines.forEach(m => this.addMachine(m));
+    } else { this.addMachine(); }
+    
+    // Restore shifts
+    if(data.shifts && data.shifts.length){
+      data.shifts.forEach(s => this.addShift(s));
+    } else { this.addShift(); }
+    
+    // Restore 5S
+    if(data.stations && data.stations.length){
+      data.stations.forEach(s => this.add5S(s));
+    } else { this.add5S(); }
+    
+    this.recalculate();
+  },
+  
+  loadPreviousDay(){
+    const current = g('kpiDate').value;
+    if(!current) return;
+    const prev = new Date(current);
+    prev.setDate(prev.getDate()-1);
+    const prevStr = prev.toISOString().split('T')[0];
+    g('kpiDate').value = prevStr;
+    const saved = StorageManager.load(prevStr);
+    if(saved){
+      this.clearAll();
+      this.restoreData(saved);
+      showToast('Loaded data for ' + prevStr);
+    } else {
+      showToast('No data for ' + prevStr, 2500);
+    }
+  },
+  
+  copyPreviousDay(){
+    const current = g('kpiDate').value;
+    if(!current) return;
+    const prev = new Date(current);
+    prev.setDate(prev.getDate()-1);
+    const prevStr = prev.toISOString().split('T')[0];
+    const saved = StorageManager.load(prevStr);
+    if(saved){
+      saved.date = current; // keep current date
+      this.clearAll();
+      this.restoreData(saved);
+      g('kpiDate').value = current;
+      this.autoSave();
+      showToast('Copied data from ' + prevStr);
+    } else {
+      showToast('No previous day data found');
+    }
+  },
+  
+  toggleLock(){
+    this.locked = !this.locked;
+    const btn = g('lockBtn');
+    const container = g('mainContainer');
+    if(this.locked){
+      btn.textContent = '🔒 Locked';
+      btn.classList.add('locked');
+      container.classList.add('locked-overlay');
+    } else {
+      btn.textContent = '🔓 Unlocked';
+      btn.classList.remove('locked');
+      container.classList.remove('locked-overlay');
+    }
+  },
+  
+  copyReport(){
+    const text = g('reportOutput').value;
+    this._copyText(text);
+    showToast('Report copied!');
+  },
+  
+  copyWeekly(){
+    this._copyText(g('weeklyOutput').value);
+    showToast('Weekly summary copied!');
+  },
+  
+  copyMonthly(){
+    this._copyText(g('monthlyOutput').value);
+    showToast('Monthly summary copied!');
+  },
+  
+  _copyText(text){
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).catch(()=> this._fallbackCopy(text));
+    } else {
+      this._fallbackCopy(text);
+    }
+  },
+  
+  _fallbackCopy(text){
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.cssText = 'position:fixed;opacity:0';
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+  },
+  
+  shareReport(){
+    const text = g('reportOutput').value;
+    if(navigator.share){
+      navigator.share({ title:'KPI Report', text }).catch(()=>{});
+    } else {
+      this._copyText(text);
+      showToast('Copied to clipboard (share not supported)');
+    }
+  },
+  
+  saveAsImage(){
+    // Simple canvas-based image generation
+    const text = g('reportOutput').value;
+    const lines = text.split('\n');
+    const lineHeight = 20;
+    const padding = 30;
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    
+    ctx.font = '14px JetBrains Mono, monospace';
+    let maxWidth = 0;
+    lines.forEach(l => { const w = ctx.measureText(l).width; if(w>maxWidth) maxWidth=w; });
+    
+    canvas.width = Math.max(maxWidth + padding*2, 400);
+    canvas.height = lines.length * lineHeight + padding*2 + 40;
+    
+    // Background
+    ctx.fillStyle = '#0c1a2e';
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+    
+    // Header line
+    ctx.fillStyle = '#00d4aa';
+    ctx.fillRect(0,0,canvas.width,4);
+    
+    // Text
+    ctx.font = '13px JetBrains Mono, monospace';
+    ctx.fillStyle = '#e8edf5';
+    lines.forEach((line, i) => {
+      // Color emojis work in canvas, special color for red/green indicators
+      ctx.fillText(line, padding, padding + 20 + i * lineHeight);
+    });
+    
+    // Watermark
+    ctx.fillStyle = '#243a5e';
+    ctx.font = '10px DM Sans, sans-serif';
+    ctx.fillText('KPI Dashboard Pro', padding, canvas.height - 12);
+    
+    canvas.toBlob(blob => {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `KPI_${g('kpiDate').value || 'report'}.png`;
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast('Image saved!');
+    });
+  }
+};
+
+/* =============================================
+   INIT
+   ============================================= */
+document.addEventListener('DOMContentLoaded', ()=> App.init());
+
+/* =============================================
+   PWA: Service Worker + Manifest
+   ============================================= */
+(function registerPWA(){
+  // Inline Manifest
+  const manifest = {
+    name: 'KPI Dashboard Pro',
+    short_name: 'KPI Pro',
+    description: 'Daily KPI Calculator for SQCDP meetings',
+    start_url: './',
+    display: 'standalone',
+    background_color: '#0c1a2e',
+    theme_color: '#0a1628',
+    icons: [{
+      src: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="20" fill="%230c1a2e"/><text x="50" y="65" font-size="50" text-anchor="middle" fill="%2300d4aa">⚙</text></svg>',
+      sizes: '512x512',
+      type: 'image/svg+xml',
+      purpose: 'any maskable'
+    }]
+  };
+  const manifestBlob = new Blob([JSON.stringify(manifest)], {type:'application/json'});
+  const manifestURL = URL.createObjectURL(manifestBlob);
+  const link = document.createElement('link');
+  link.rel = 'manifest';
+  link.href = manifestURL;
+  document.head.appendChild(link);
+  
+  // Apple touch icon
+  const appleLink = document.createElement('link');
+  appleLink.rel = 'apple-touch-icon';
+  appleLink.href = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="20" fill="%230c1a2e"/><text x="50" y="65" font-size="50" text-anchor="middle" fill="%2300d4aa">⚙</text></svg>';
+  document.head.appendChild(appleLink);
+  
+  // Service Worker
+  if('serviceWorker' in navigator){
+    const swCode = `
+const CACHE_NAME = 'kpi-pro-v2';
+const ASSETS = ['./', './index.html'];
+self.addEventListener('install', e => {
+  e.waitUntil(caches.open(CACHE_NAME).then(c => c.addAll(ASSETS)).then(() => self.skipWaiting()));
+});
+self.addEventListener('activate', e => {
+  e.waitUntil(caches.keys().then(keys => Promise.all(
+    keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k))
+  )).then(() => self.clients.claim()));
+});
+self.addEventListener('fetch', e => {
+  e.respondWith(
+    caches.match(e.request).then(r => r || fetch(e.request).then(res => {
+      if(res.status === 200){
+        const clone = res.clone();
+        caches.open(CACHE_NAME).then(c => c.put(e.request, clone));
+      }
+      return res;
+    }).catch(() => caches.match('./')))
+  );
+});`;
+    const swBlob = new Blob([swCode], {type:'application/javascript'});
+    const swURL = URL.createObjectURL(swBlob);
+    navigator.serviceWorker.register(swURL).catch(()=>{});
+  }
+})();
+</script>
+</body>
+</html>
