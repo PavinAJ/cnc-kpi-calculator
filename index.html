@@ -10,912 +10,767 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{
---bg:#0c1a2e;--surface:#132240;--surface2:#1a2d4d;--border:#243a5e;
+:root{--bg:#0c1a2e;--surface:#132240;--surface2:#1a2d4d;--border:#243a5e;
 --text:#e8edf5;--text2:#8da0be;--accent:#00d4aa;--accent2:#00b894;
---danger:#ff6b6b;--danger2:#ee5a24;--warn:#ffc048;--blue:#4fc3f7;--purple:#a78bfa;
+--danger:#ff6b6b;--warn:#ffc048;--blue:#4fc3f7;--purple:#a78bfa;
 --green:#00d4aa;--red:#ff6b6b;--radius:10px;
---font:'DM Sans',system-ui,sans-serif;--mono:'JetBrains Mono',monospace;
-}
+--font:'DM Sans',system-ui,sans-serif;--mono:'JetBrains Mono',monospace}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{font-size:15px;-webkit-text-size-adjust:100%}
 body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100dvh;overflow-x:hidden;
-background-image:radial-gradient(ellipse at 20% 50%,rgba(0,212,170,.04) 0%,transparent 60%),
-radial-gradient(ellipse at 80% 20%,rgba(0,120,255,.04) 0%,transparent 50%)}
+background-image:radial-gradient(ellipse at 20% 50%,rgba(0,212,170,.04) 0%,transparent 60%),radial-gradient(ellipse at 80% 20%,rgba(0,120,255,.04) 0%,transparent 50%)}
 input,select,textarea,button{font-family:inherit;font-size:inherit}
 input[type=number]{-moz-appearance:textfield}
 input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
-
-.header{position:sticky;top:0;z-index:100;background:linear-gradient(135deg,#0a1628 0%,#132240 100%);
-border-bottom:1px solid var(--border);padding:10px 16px;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+.header{position:sticky;top:0;z-index:100;background:linear-gradient(135deg,#0a1628,#132240);border-bottom:1px solid var(--border);padding:10px 16px;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
 .header-inner{max-width:960px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
-.header h1{font-family:var(--mono);font-size:1.05rem;font-weight:700;letter-spacing:-.02em;
-background:linear-gradient(135deg,var(--accent),#4fc3f7);-webkit-background-clip:text;
--webkit-text-fill-color:transparent;background-clip:text;white-space:nowrap}
+.header h1{font-family:var(--mono);font-size:1.05rem;font-weight:700;background:linear-gradient(135deg,var(--accent),#4fc3f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;white-space:nowrap}
 .header-sub{font-size:.66rem;color:var(--text2);font-family:var(--mono)}
 .header-actions{display:flex;gap:4px;flex-wrap:wrap}
-
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:5px;
-padding:7px 12px;border:1px solid var(--border);border-radius:var(--radius);
-background:var(--surface2);color:var(--text);font-size:.76rem;font-weight:600;
-cursor:pointer;transition:all .15s;white-space:nowrap;-webkit-tap-highlight-color:transparent}
-.btn:hover{background:var(--border);transform:translateY(-1px)}
-.btn:active{transform:scale(.97)}
-.btn-primary{background:linear-gradient(135deg,var(--accent2),var(--accent));color:#0a1628;border-color:transparent}
-.btn-primary:hover{filter:brightness(1.1)}
-.btn-danger{border-color:var(--danger);color:var(--danger)}
-.btn-danger:hover{background:rgba(255,107,107,.15)}
-.btn-warn{border-color:var(--warn);color:var(--warn)}
-.btn-blue{border-color:var(--blue);color:var(--blue)}
-.btn-purple{border-color:var(--purple);color:var(--purple)}
-.btn-sm{padding:5px 9px;font-size:.68rem}
-.btn-full{width:100%}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:5px;padding:7px 12px;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface2);color:var(--text);font-size:.76rem;font-weight:600;cursor:pointer;transition:all .15s;white-space:nowrap;-webkit-tap-highlight-color:transparent}
+.btn:hover{background:var(--border);transform:translateY(-1px)}.btn:active{transform:scale(.97)}
+.btn-primary{background:linear-gradient(135deg,var(--accent2),var(--accent));color:#0a1628;border-color:transparent}.btn-primary:hover{filter:brightness(1.1)}
+.btn-danger{border-color:var(--danger);color:var(--danger)}.btn-danger:hover{background:rgba(255,107,107,.15)}
+.btn-warn{border-color:var(--warn);color:var(--warn)}.btn-blue{border-color:var(--blue);color:var(--blue)}.btn-purple{border-color:var(--purple);color:var(--purple)}
+.btn-sm{padding:5px 9px;font-size:.68rem}.btn-full{width:100%}
 .btn-lock.locked{background:var(--danger);border-color:var(--danger);color:#fff}
-
 .container{max-width:960px;margin:auto;padding:10px 12px}
-
-.date-nav{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
-padding:10px 14px;margin-bottom:10px;display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap}
+.date-nav{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:10px 14px;margin-bottom:10px;display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap}
 .date-nav .date-display{font-family:var(--mono);font-size:.95rem;font-weight:700;color:var(--accent);min-width:120px;text-align:center}
 .date-nav-today{background:var(--accent)!important;color:#0a1628!important;border-color:var(--accent)!important;font-weight:700!important}
-
 .dashboard{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:7px;margin-bottom:10px}
-.dash-tile{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
-padding:9px 10px;text-align:center;transition:border-color .3s}
-.dash-tile.tile-green{border-color:var(--green)}
-.dash-tile.tile-red{border-color:var(--red)}
-.dash-tile .tile-icon{font-size:1.2rem;margin-bottom:1px}
-.dash-tile .tile-label{font-size:.62rem;color:var(--text2);text-transform:uppercase;letter-spacing:.04em;font-weight:600}
+.dash-tile{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:9px 10px;text-align:center;transition:border-color .3s}
+.dash-tile.tile-green{border-color:var(--green)}.dash-tile.tile-red{border-color:var(--red)}
+.dash-tile .tile-icon{font-size:1.2rem}.dash-tile .tile-label{font-size:.62rem;color:var(--text2);text-transform:uppercase;letter-spacing:.04em;font-weight:600}
 .dash-tile .tile-value{font-family:var(--mono);font-size:1.05rem;font-weight:700;margin:2px 0}
 .dash-tile .tile-trend{font-size:.66rem;font-family:var(--mono)}
 .trend-up{color:var(--green)}.trend-down{color:var(--red)}.trend-flat{color:var(--text2)}
-
 .day-status{text-align:center;padding:6px;border-radius:var(--radius);margin-bottom:10px;font-weight:700;font-size:.82rem;font-family:var(--mono)}
 .day-status.green-day{background:rgba(0,212,170,.12);color:var(--green);border:1px solid rgba(0,212,170,.3)}
 .day-status.red-day{background:rgba(255,107,107,.12);color:var(--red);border:1px solid rgba(255,107,107,.3)}
-
 .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:10px;overflow:hidden;transition:border-color .3s}
 .card.status-green{border-color:var(--green)}.card.status-red{border-color:var(--red)}
 .card-head{display:flex;align-items:center;justify-content:space-between;padding:11px 14px;cursor:pointer;-webkit-tap-highlight-color:transparent;user-select:none}
 .card-head h2{font-size:.86rem;font-weight:700;display:flex;align-items:center;gap:8px}
 .card-head .badge{font-size:.62rem;padding:2px 8px;border-radius:20px;font-weight:600;font-family:var(--mono)}
-.badge-green{background:rgba(0,212,170,.15);color:var(--green)}
-.badge-red{background:rgba(255,107,107,.15);color:var(--red)}
+.badge-green{background:rgba(0,212,170,.15);color:var(--green)}.badge-red{background:rgba(255,107,107,.15);color:var(--red)}
 .card-head .chevron{font-size:1rem;transition:transform .3s;color:var(--text2)}
 .card-head.collapsed .chevron{transform:rotate(-90deg)}
-.card-body{padding:0 14px 14px;display:block}.card-body.hidden{display:none}
-
+.card-body{padding:0 14px 14px}.card-body.hidden{display:none}
 .tbl{width:100%;border-collapse:collapse;font-size:.76rem;margin:6px 0}
 .tbl th{background:var(--surface2);color:var(--text2);font-weight:600;padding:7px 4px;text-align:center;border:1px solid var(--border);font-size:.68rem;text-transform:uppercase;letter-spacing:.03em}
 .tbl td{padding:5px;border:1px solid var(--border);text-align:center;vertical-align:middle}
-
 .inp{width:100%;padding:8px 10px;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:.82rem;transition:border-color .2s}
 .inp:focus{outline:none;border-color:var(--accent)}.inp::placeholder{color:var(--text2);opacity:.6}
-select.inp{cursor:pointer;-webkit-appearance:none;appearance:none;
-background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%238da0be'%3E%3Cpath d='M6 8L1 3h10z'/%3E%3C/svg%3E");
-background-repeat:no-repeat;background-position:right 8px center;padding-right:28px}
+select.inp{cursor:pointer;-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%238da0be'%3E%3Cpath d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center;padding-right:28px}
 textarea.inp{resize:vertical;min-height:170px;font-family:var(--mono);font-size:.74rem;line-height:1.5}
-
-.kpi-good{color:var(--green);font-weight:700;font-family:var(--mono)}
-.kpi-bad{color:var(--red);font-weight:700;font-family:var(--mono)}
-
+.kpi-good{color:var(--green);font-weight:700;font-family:var(--mono)}.kpi-bad{color:var(--red);font-weight:700;font-family:var(--mono)}
 .shift-block{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px;margin:8px 0}
 .shift-title{font-weight:700;font-size:.78rem;color:var(--accent);margin-bottom:8px;font-family:var(--mono)}
 .shift-result{margin-top:8px;padding:8px;background:var(--surface2);border-radius:6px;font-family:var(--mono);font-size:.76rem;font-weight:600}
-
 .summary-block{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px;margin:8px 0}
-.summary-row{display:flex;justify-content:space-between;padding:4px 0;font-size:.76rem;border-bottom:1px solid rgba(255,255,255,.05)}
-.summary-row:last-child{border:none}
+.summary-row{display:flex;justify-content:space-between;padding:4px 0;font-size:.76rem;border-bottom:1px solid rgba(255,255,255,.05)}.summary-row:last-child{border:none}
 .summary-label{color:var(--text2)}
-
 .chart-container{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:14px;margin:10px 0;overflow-x:auto}
 .chart-title{font-family:var(--mono);font-size:.72rem;color:var(--text2);margin-bottom:10px;text-transform:uppercase;letter-spacing:.05em}
 .chart-svg{width:100%;height:auto;display:block}
-.chart-bar{transition:opacity .2s}.chart-bar:hover{opacity:.8}
+.chart-bar:hover{opacity:.8}
 .chart-legend{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px;font-size:.68rem}
-.chart-legend-item{display:flex;align-items:center;gap:4px}
-.chart-legend-dot{width:9px;height:9px;border-radius:2px}
-
+.chart-legend-item{display:flex;align-items:center;gap:4px}.chart-legend-dot{width:9px;height:9px;border-radius:2px}
 .fives-grid{display:grid;gap:8px}
 .fives-station{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px;display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center}
 .fives-station.fives-green{border-color:var(--green)}.fives-station.fives-red{border-color:var(--red)}
 .fives-inputs{display:grid;grid-template-columns:1fr 75px 75px;gap:6px;align-items:center}
 .fives-pct{font-family:var(--mono);font-weight:700;font-size:1rem;text-align:center;min-width:52px}
-
-/* Calendar Heatmap */
-.cal-wrap{overflow-x:auto}
 .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin:8px 0}
 .cal-header{font-size:.62rem;color:var(--text2);text-align:center;padding:4px 0;font-weight:600;font-family:var(--mono)}
-.cal-day{aspect-ratio:1;border-radius:5px;display:flex;flex-direction:column;align-items:center;justify-content:center;
-font-family:var(--mono);font-size:.7rem;font-weight:600;cursor:pointer;border:1px solid transparent;transition:all .15s}
-.cal-day:hover{transform:scale(1.1)}
-.cal-day.empty{cursor:default;background:transparent}.cal-day.empty:hover{transform:none}
+.cal-day{aspect-ratio:1;border-radius:5px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:var(--mono);font-size:.7rem;font-weight:600;cursor:pointer;border:1px solid transparent;transition:all .15s}
+.cal-day:hover{transform:scale(1.1)}.cal-day.empty{cursor:default;background:transparent}.cal-day.empty:hover{transform:none}
 .cal-day.cal-green{background:rgba(0,212,170,.2);border-color:rgba(0,212,170,.4);color:var(--green)}
 .cal-day.cal-red{background:rgba(255,107,107,.2);border-color:rgba(255,107,107,.4);color:var(--red)}
-.cal-day.cal-none{background:var(--surface2);color:var(--text2)}
-.cal-day.cal-today{outline:2px solid var(--accent);outline-offset:1px}
-.cal-day.cal-future{opacity:.3}
+.cal-day.cal-none{background:var(--surface2);color:var(--text2)}.cal-day.cal-today{outline:2px solid var(--accent);outline-offset:1px}.cal-day.cal-future{opacity:.3}
 .cal-nav{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:6px}
 .cal-month-label{font-family:var(--mono);font-weight:700;font-size:.85rem;min-width:130px;text-align:center}
 .cal-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px}
 .cal-stat{text-align:center;padding:8px;background:var(--surface2);border-radius:6px}
-.cal-stat-val{font-family:var(--mono);font-weight:700;font-size:1.1rem}
-.cal-stat-lbl{font-size:.62rem;color:var(--text2);text-transform:uppercase;margin-top:2px}
-
-/* Template pills */
-.tpl-list{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
-.tpl-pill{display:flex;align-items:center;gap:4px;padding:6px 12px;border-radius:20px;background:var(--surface2);
-border:1px solid var(--border);font-size:.72rem;font-weight:600;cursor:pointer;transition:all .15s}
-.tpl-pill:hover{border-color:var(--accent);background:rgba(0,212,170,.08)}
-.tpl-pill .tpl-del{color:var(--danger);font-size:.8rem;margin-left:4px;cursor:pointer}
-
+.cal-stat-val{font-family:var(--mono);font-weight:700;font-size:1.1rem}.cal-stat-lbl{font-size:.62rem;color:var(--text2);text-transform:uppercase;margin-top:2px}
 .action-item{display:flex;align-items:center;gap:8px;padding:8px;background:var(--bg);border:1px solid var(--border);border-radius:6px;margin:4px 0}
-.action-item.done{opacity:.5}
-.action-item input[type=checkbox]{width:18px;height:18px;accent-color:var(--accent);cursor:pointer;flex-shrink:0}
-
-/* History */
-.history-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(85px,1fr));gap:5px;margin:8px 0}
-.history-day{padding:5px;border-radius:6px;text-align:center;cursor:pointer;font-family:var(--mono);font-size:.68rem;font-weight:600;border:1px solid var(--border);transition:all .15s}
-.history-day:hover{transform:scale(1.05)}
-.history-day.h-green{background:rgba(0,212,170,.1);border-color:var(--green);color:var(--green)}
-.history-day.h-red{background:rgba(255,107,107,.1);border-color:var(--red);color:var(--red)}
-.history-day.h-active{outline:2px solid var(--accent);outline-offset:1px}
-
-.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(100px);
-background:var(--surface2);border:1px solid var(--border);color:var(--text);
-padding:10px 20px;border-radius:var(--radius);font-size:.78rem;font-weight:600;
-z-index:9999;opacity:0;transition:all .3s;pointer-events:none}
+.action-item.done{opacity:.5}.action-item input[type=checkbox]{width:18px;height:18px;accent-color:var(--accent);cursor:pointer;flex-shrink:0}
+.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:10px 20px;border-radius:var(--radius);font-size:.78rem;font-weight:600;z-index:9999;opacity:0;transition:all .3s;pointer-events:none}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-
-.locked-overlay{position:relative}
-.locked-overlay::after{content:'🔒 Locked';position:absolute;inset:0;
-background:rgba(10,22,40,.7);display:flex;align-items:center;justify-content:center;
-color:var(--text2);font-weight:700;font-size:1rem;border-radius:var(--radius);z-index:10;
-backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px)}
-.locked-overlay input,.locked-overlay select,.locked-overlay textarea{pointer-events:none}
-.locked-overlay .btn{pointer-events:none;opacity:.4}
-
-.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:200;display:flex;
-align-items:center;justify-content:center;padding:16px;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
-.modal{background:var(--surface);border:1px solid var(--border);border-radius:12px;
-padding:18px;max-width:440px;width:100%;max-height:82vh;overflow-y:auto}
-.modal h3{font-size:.92rem;margin-bottom:12px;color:var(--accent);font-family:var(--mono)}
-.modal-hide{display:none}
-
-/* Notification Banner */
-.notif-bar{background:linear-gradient(135deg,rgba(255,192,72,.15),rgba(255,192,72,.05));border:1px solid rgba(255,192,72,.3);
-border-radius:var(--radius);padding:10px 14px;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
-.notif-bar .notif-text{font-size:.78rem;color:var(--warn);font-weight:600}
-.notif-bar.notif-hide{display:none}
-
+.locked-overlay{position:relative}.locked-overlay::after{content:'🔒 Locked';position:absolute;inset:0;background:rgba(10,22,40,.7);display:flex;align-items:center;justify-content:center;color:var(--text2);font-weight:700;font-size:1rem;border-radius:var(--radius);z-index:10;backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px)}
+.locked-overlay input,.locked-overlay select,.locked-overlay textarea{pointer-events:none}.locked-overlay .btn{pointer-events:none;opacity:.4}
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:200;display:flex;align-items:center;justify-content:center;padding:16px;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+.modal{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px;max-width:440px;width:100%;max-height:82vh;overflow-y:auto}
+.modal h3{font-size:.92rem;margin-bottom:12px;color:var(--accent);font-family:var(--mono)}.modal-hide{display:none}
+.notif-bar{background:linear-gradient(135deg,rgba(255,192,72,.15),rgba(255,192,72,.05));border:1px solid rgba(255,192,72,.3);border-radius:var(--radius);padding:10px 14px;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.notif-bar .notif-text{font-size:.78rem;color:var(--warn);font-weight:600}.notif-bar.notif-hide{display:none}
+/* Notification Settings Panel */
+.notif-settings{display:grid;gap:10px;margin:10px 0}
+.notif-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px;background:var(--bg);border:1px solid var(--border);border-radius:8px}
+.notif-row-label{font-size:.8rem;font-weight:600}.notif-row-sub{font-size:.68rem;color:var(--text2)}
+.toggle-switch{position:relative;width:44px;height:24px;flex-shrink:0}
+.toggle-switch input{opacity:0;width:0;height:0}
+.toggle-slider{position:absolute;cursor:pointer;inset:0;background:var(--surface2);border-radius:24px;border:1px solid var(--border);transition:.3s}
+.toggle-slider::before{content:'';position:absolute;height:18px;width:18px;left:2px;bottom:2px;background:var(--text2);border-radius:50%;transition:.3s}
+.toggle-switch input:checked+.toggle-slider{background:var(--accent);border-color:var(--accent)}
+.toggle-switch input:checked+.toggle-slider::before{transform:translateX(20px);background:#fff}
+/* Export dropdown */
+.export-menu{position:relative;display:inline-block}
+.export-dropdown{display:none;position:absolute;top:100%;right:0;margin-top:4px;background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:hidden;z-index:50;min-width:160px;box-shadow:0 8px 24px rgba(0,0,0,.3)}
+.export-dropdown.show{display:block}
+.export-dropdown button{display:block;width:100%;padding:10px 14px;border:none;background:transparent;color:var(--text);text-align:left;font-size:.78rem;font-weight:600;cursor:pointer}
+.export-dropdown button:hover{background:var(--surface2)}
 @media(max-width:600px){
 .header-inner{flex-direction:column;align-items:stretch;text-align:center}
-.header-actions{justify-content:center}
-.tbl{font-size:.68rem}.tbl th,.tbl td{padding:4px 3px}
-.inp{font-size:.8rem;padding:7px 8px}
-.fives-inputs{grid-template-columns:1fr 60px 60px}
-.dashboard{grid-template-columns:repeat(3,1fr)}
-.dash-tile{padding:7px 5px}.dash-tile .tile-value{font-size:.9rem}
-.date-nav{padding:8px 8px;gap:4px}
-}
+.header-actions{justify-content:center}.tbl{font-size:.68rem}.tbl th,.tbl td{padding:4px 3px}
+.inp{font-size:.8rem;padding:7px 8px}.fives-inputs{grid-template-columns:1fr 60px 60px}
+.dashboard{grid-template-columns:repeat(3,1fr)}.dash-tile{padding:7px 5px}.dash-tile .tile-value{font-size:.9rem}
+.date-nav{padding:8px 8px;gap:4px}}
 ::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
 </style>
 </head>
 <body>
-
-<div class="header">
-<div class="header-inner">
-<div><h1>⚙ KPI Dashboard Pro</h1><div class="header-sub">CNC Production · SQCDP Meeting</div></div>
+<div class="header"><div class="header-inner"><div><h1>⚙ KPI Dashboard Pro</h1><div class="header-sub">CNC Production · SQCDP Meeting</div></div>
 <div class="header-actions">
 <button class="btn btn-sm btn-lock" id="lockBtn" onclick="App.toggleLock()">🔓 Open</button>
 <button class="btn btn-sm btn-purple" onclick="App.showTemplates()">📦 Templates</button>
 <button class="btn btn-sm btn-blue" onclick="App.showCalendar()">📅 Calendar</button>
-<button class="btn btn-sm btn-warn" onclick="App.showExportModal()">💾 Backup</button>
+<button class="btn btn-sm" onclick="App.showNotifSettings()">🔔</button>
+<button class="btn btn-sm btn-warn" onclick="App.showBackup()">💾</button>
 <button class="btn btn-sm btn-primary" onclick="App.shareReport()">📤 Share</button>
-<button class="btn btn-sm" onclick="App.exportPDF()">📄 PDF</button>
-</div>
-</div>
-</div>
+<div class="export-menu"><button class="btn btn-sm" onclick="this.nextElementSibling.classList.toggle('show')">📥 Export ▾</button>
+<div class="export-dropdown" id="exportDrop">
+<button onclick="App.exportPNG();closeExport()">📸 Export as PNG</button>
+<button onclick="App.exportPDF();closeExport()">📄 Export as PDF</button>
+<button onclick="App.saveAsImage();closeExport()">🖼 Quick Screenshot</button>
+</div></div>
+</div></div></div>
 
 <div class="container" id="mainContainer">
-
-<!-- NOTIFICATION REMINDER -->
-<div class="notif-bar notif-hide" id="notifBar">
-<span class="notif-text" id="notifText">⏰ Reminder: Fill in yesterday's KPI data!</span>
+<!-- NOTIFICATION BANNER -->
+<div class="notif-bar notif-hide" id="notifBanner">
+<span class="notif-text" id="notifText">⏰ Reminder</span>
 <div style="display:flex;gap:4px">
 <button class="btn btn-sm btn-primary" onclick="App.dismissNotif();App.goToday()">Fill Now</button>
 <button class="btn btn-sm" onclick="App.dismissNotif()">Dismiss</button>
-<button class="btn btn-sm" onclick="App.enablePushNotif()">🔔 Enable Push</button>
-</div>
-</div>
+</div></div>
 
-<!-- DATE NAVIGATOR -->
+<!-- DATE NAV -->
 <div class="date-nav">
 <button class="btn btn-sm" onclick="App.navDate(-1)">◀</button>
-<button class="btn btn-sm" onclick="App.copyPreviousDay()">📋 Copy Prev</button>
+<button class="btn btn-sm" onclick="App.copyPrev()">📋 Copy Prev</button>
 <div class="date-display" id="dateDisplay">—</div>
-<input type="date" id="kpiDate" class="inp" style="max-width:155px" data-save>
+<input type="date" id="kpiDate" class="inp" style="max-width:155px">
 <button class="btn btn-sm date-nav-today" onclick="App.goToday()">⏎ TODAY</button>
 <button class="btn btn-sm" onclick="App.navDate(1)">▶</button>
 </div>
-
 <div class="day-status" id="dayStatus">—</div>
 
 <div class="dashboard">
-<div class="dash-tile" id="dashMach"><div class="tile-icon">⚙</div><div class="tile-label">Machine</div><div class="tile-value" id="dashMachVal">—</div><div class="tile-trend" id="dashMachTrend"></div></div>
-<div class="dash-tile" id="dashLabor"><div class="tile-icon">👷</div><div class="tile-label">Labor</div><div class="tile-value" id="dashLaborVal">—</div><div class="tile-trend" id="dashLaborTrend"></div></div>
-<div class="dash-tile" id="dashSafety"><div class="tile-icon">🛡</div><div class="tile-label">Safety</div><div class="tile-value" id="dashSafetyVal">—</div><div class="tile-trend" id="dashSafetyTrend"></div></div>
-<div class="dash-tile" id="dashAtt"><div class="tile-icon">👥</div><div class="tile-label">Attendance</div><div class="tile-value" id="dashAttVal">—</div><div class="tile-trend" id="dashAttTrend"></div></div>
-<div class="dash-tile" id="dash5S"><div class="tile-icon">🏷</div><div class="tile-label">5S</div><div class="tile-value" id="dash5SVal">—</div><div class="tile-trend" id="dash5STrend"></div></div>
-<div class="dash-tile" id="dashQual"><div class="tile-icon">✅</div><div class="tile-label">Quality</div><div class="tile-value" id="dashQualVal">—</div><div class="tile-trend" id="dashQualTrend"></div></div>
+<div class="dash-tile" id="dM"><div class="tile-icon">⚙</div><div class="tile-label">Machine</div><div class="tile-value" id="dvM">—</div><div class="tile-trend" id="dtM"></div></div>
+<div class="dash-tile" id="dL"><div class="tile-icon">👷</div><div class="tile-label">Labor</div><div class="tile-value" id="dvL">—</div><div class="tile-trend" id="dtL"></div></div>
+<div class="dash-tile" id="dS"><div class="tile-icon">🛡</div><div class="tile-label">Safety</div><div class="tile-value" id="dvS">—</div><div class="tile-trend" id="dtS"></div></div>
+<div class="dash-tile" id="dA"><div class="tile-icon">👥</div><div class="tile-label">Attendance</div><div class="tile-value" id="dvA">—</div><div class="tile-trend" id="dtA"></div></div>
+<div class="dash-tile" id="d5"><div class="tile-icon">🏷</div><div class="tile-label">5S</div><div class="tile-value" id="dv5">—</div><div class="tile-trend" id="dt5"></div></div>
+<div class="dash-tile" id="dQ"><div class="tile-icon">✅</div><div class="tile-label">Quality</div><div class="tile-value" id="dvQ">—</div><div class="tile-trend" id="dtQ"></div></div>
 </div>
 
-<!-- BASIC INFO -->
-<div class="card" id="basicCard">
-<div class="card-head" onclick="toggleCard(this)"><h2>📋 Basic Info</h2><span class="chevron">▼</span></div>
-<div class="card-body">
-<table class="tbl">
-<tr><th>Team Lead</th><td><input class="inp" type="text" id="teamLead" placeholder="Your name (required)" data-save></td></tr>
-<tr><th>Department</th><td><select class="inp" id="dept" data-save>
-<option>Aerospace</option><option>Marine</option><option>Industries</option><option>Motors</option></select></td></tr>
-</table>
-</div></div>
+<!-- BASIC -->
+<div class="card" id="basicCard"><div class="card-head" onclick="TC(this)"><h2>📋 Basic Info</h2><span class="chevron">▼</span></div>
+<div class="card-body"><table class="tbl">
+<tr><th>Team Lead</th><td><input class="inp" type="text" id="teamLead" placeholder="Your name (required)"></td></tr>
+<tr><th>Department</th><td><select class="inp" id="dept"><option>Aerospace</option><option>Marine</option><option>Industries</option><option>Motors</option></select></td></tr>
+</table></div></div>
 
 <!-- MACHINES -->
-<div class="card" id="machineCard">
-<div class="card-head" onclick="toggleCard(this)"><h2>⚙ Machines <span class="badge" id="machineBadge"></span></h2><span class="chevron">▼</span></div>
+<div class="card" id="machineCard"><div class="card-head" onclick="TC(this)"><h2>⚙ Machines <span class="badge" id="machineBadge"></span></h2><span class="chevron">▼</span></div>
 <div class="card-body">
 <div style="font-size:.68rem;color:var(--text2);margin-bottom:6px">OK: Util ≥ 50% AND Eff ≥ 70%</div>
-<div style="overflow-x:auto">
-<table class="tbl" id="machineTable"><thead><tr><th>Machine</th><th>Avail</th><th>Oper</th><th>Plan Rate</th><th>Act Rate</th><th>Remark</th><th></th><th>Util%</th><th>Eff%</th></tr></thead>
-<tbody id="machineBody"></tbody></table></div>
-<div style="display:flex;gap:6px;margin-top:8px">
-<button class="btn btn-full" onclick="App.addMachine()">+ Add Machine</button>
-<button class="btn btn-sm btn-purple" onclick="App.saveTemplate('machine')" title="Save current machines as template">💾</button>
-</div></div></div>
+<div style="overflow-x:auto"><table class="tbl" id="machineTable"><thead><tr><th>Machine</th><th>Avail</th><th>Oper</th><th>Plan Rate</th><th>Act Rate</th><th>Remark</th><th></th><th>Util%</th><th>Eff%</th></tr></thead><tbody id="machineBody"></tbody></table></div>
+<button class="btn btn-full" onclick="App.addMachine()" style="margin-top:8px">+ Add Machine</button>
+</div></div>
 
 <!-- SAFETY -->
-<div class="card" id="safetyCard">
-<div class="card-head" onclick="toggleCard(this)"><h2>🛡 Safety <span class="badge" id="safetyBadge"></span></h2><span class="chevron">▼</span></div>
+<div class="card" id="safetyCard"><div class="card-head" onclick="TC(this)"><h2>🛡 Safety <span class="badge" id="safetyBadge"></span></h2><span class="chevron">▼</span></div>
 <div class="card-body"><table class="tbl">
-<tr><th>Accident</th><td><select class="inp" id="accident" data-save><option>No</option><option>Yes</option></select></td></tr>
-<tr><th>Near Miss</th><td><select class="inp" id="nearMiss" data-save><option>No</option><option>Yes</option></select></td></tr>
+<tr><th>Accident</th><td><select class="inp" id="accident"><option>No</option><option>Yes</option></select></td></tr>
+<tr><th>Near Miss</th><td><select class="inp" id="nearMiss"><option>No</option><option>Yes</option></select></td></tr>
 </table></div></div>
 
 <!-- QUALITY -->
-<div class="card" id="qualityCard">
-<div class="card-head" onclick="toggleCard(this)"><h2>✅ Quality <span class="badge" id="qualityBadge"></span></h2><span class="chevron">▼</span></div>
+<div class="card" id="qualityCard"><div class="card-head" onclick="TC(this)"><h2>✅ Quality <span class="badge" id="qualityBadge"></span></h2><span class="chevron">▼</span></div>
 <div class="card-body"><table class="tbl">
-<tr><th>Customer Complaint</th><td><select class="inp" id="custComplaint" data-save><option>No</option><option>Yes</option></select></td></tr>
-<tr><th>Scrap</th><td><select class="inp" id="scrap" data-save><option>No</option><option>Yes</option></select></td></tr>
-<tr><th>NC MTD</th><td><select class="inp" id="ncMtd" data-save><option>No</option><option>Yes</option></select></td></tr>
-<tr><th>Extra Consumables</th><td><select class="inp" id="extraCons" data-save><option>No</option><option>Yes</option></select></td></tr>
+<tr><th>Customer Complaint</th><td><select class="inp" id="custComplaint"><option>No</option><option>Yes</option></select></td></tr>
+<tr><th>Scrap</th><td><select class="inp" id="scrap"><option>No</option><option>Yes</option></select></td></tr>
+<tr><th>NC MTD</th><td><select class="inp" id="ncMtd"><option>No</option><option>Yes</option></select></td></tr>
+<tr><th>Extra Consumables</th><td><select class="inp" id="extraCons"><option>No</option><option>Yes</option></select></td></tr>
 </table></div></div>
 
 <!-- LABOR -->
-<div class="card" id="laborCard">
-<div class="card-head" onclick="toggleCard(this)"><h2>👷 Labor <span class="badge" id="laborBadge"></span></h2><span class="chevron">▼</span></div>
+<div class="card" id="laborCard"><div class="card-head" onclick="TC(this)"><h2>👷 Labor <span class="badge" id="laborBadge"></span></h2><span class="chevron">▼</span></div>
 <div class="card-body">
 <div style="font-size:.68rem;color:var(--text2);margin-bottom:6px">OK: Util ≥ 80% AND Eff ≥ 80%</div>
 <div id="laborShifts"></div>
-<div style="display:flex;gap:6px;margin-top:8px">
 <button class="btn btn-full" onclick="App.addShift()">+ Add Shift</button>
-<button class="btn btn-sm btn-purple" onclick="App.saveTemplate('shift')" title="Save current shifts as template">💾</button>
-</div></div></div>
+</div></div>
 
 <!-- PEOPLE -->
-<div class="card" id="peopleCard">
-<div class="card-head" onclick="toggleCard(this)"><h2>👥 People <span class="badge" id="peopleBadge"></span></h2><span class="chevron">▼</span></div>
+<div class="card" id="peopleCard"><div class="card-head" onclick="TC(this)"><h2>👥 People <span class="badge" id="peopleBadge"></span></h2><span class="chevron">▼</span></div>
 <div class="card-body">
 <div style="font-size:.68rem;color:var(--text2);margin-bottom:6px">OK: Attendance ≥ 100%</div>
 <table class="tbl">
-<tr><th>Planned</th><td><input class="inp" type="number" id="plannedPeople" placeholder="0" data-save></td></tr>
-<tr><th>Present</th><td><input class="inp" type="number" id="presentPeople" placeholder="0" data-save></td></tr>
+<tr><th>Planned</th><td><input class="inp" type="number" id="plannedPeople" placeholder="0"></td></tr>
+<tr><th>Present</th><td><input class="inp" type="number" id="presentPeople" placeholder="0"></td></tr>
 </table></div></div>
 
 <!-- 5S -->
-<div class="card" id="fiveSCard">
-<div class="card-head" onclick="toggleCard(this)"><h2>🏷 5S Audit <span class="badge" id="fiveSBadge"></span></h2><span class="chevron">▼</span></div>
+<div class="card" id="fiveSCard"><div class="card-head" onclick="TC(this)"><h2>🏷 5S Audit <span class="badge" id="fiveSBadge"></span></h2><span class="chevron">▼</span></div>
 <div class="card-body">
 <div style="font-size:.68rem;color:var(--text2);margin-bottom:6px">OK: ≥ 85% · (Followed ÷ Allocated) × 100</div>
 <div class="fives-grid" id="fiveSGrid"></div>
-<div style="display:flex;gap:6px;margin-top:8px">
-<button class="btn btn-full" onclick="App.add5S()">+ Add Station</button>
-<button class="btn btn-sm btn-purple" onclick="App.saveTemplate('5s')" title="Save current 5S stations as template">💾</button>
-</div></div></div>
+<button class="btn btn-full" onclick="App.add5S()" style="margin-top:8px">+ Add Station</button>
+</div></div>
 
-<!-- ACTION ITEMS -->
-<div class="card" id="actionCard">
-<div class="card-head" onclick="toggleCard(this)"><h2>📌 Action Items <span class="badge badge-green" id="actionBadge">0</span></h2><span class="chevron">▼</span></div>
-<div class="card-body">
-<div id="actionList"></div>
-<div style="display:flex;gap:6px;margin-top:8px">
-<input class="inp" type="text" id="newAction" placeholder="Add follow-up action..." style="flex:1">
-<button class="btn btn-primary" onclick="App.addAction()">+</button>
-</div></div></div>
+<!-- ACTIONS -->
+<div class="card" id="actionCard"><div class="card-head" onclick="TC(this)"><h2>📌 Actions <span class="badge badge-green" id="actionBadge">0</span></h2><span class="chevron">▼</span></div>
+<div class="card-body"><div id="actionList"></div>
+<div style="display:flex;gap:6px;margin-top:8px"><input class="inp" type="text" id="newAction" placeholder="Add action..." style="flex:1"><button class="btn btn-primary" onclick="App.addAction()">+</button></div>
+</div></div>
 
-<!-- REPORT OUTPUT -->
-<div class="card" id="reportCard">
-<div class="card-head" onclick="toggleCard(this)"><h2>📝 Daily Report</h2><span class="chevron">▼</span></div>
-<div class="card-body">
-<textarea class="inp" id="reportOutput" readonly></textarea>
+<!-- REPORT -->
+<div class="card" id="reportCard"><div class="card-head" onclick="TC(this)"><h2>📝 Daily Report</h2><span class="chevron">▼</span></div>
+<div class="card-body"><textarea class="inp" id="reportOutput" readonly></textarea>
 <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap">
 <button class="btn btn-primary" onclick="App.copyReport()" style="flex:1">📋 Copy</button>
 <button class="btn" onclick="App.shareReport()" style="flex:1">📤 Share</button>
+<button class="btn" onclick="App.exportPNG()" style="flex:1">📸 PNG</button>
 <button class="btn" onclick="App.exportPDF()" style="flex:1">📄 PDF</button>
 </div></div></div>
 
-<!-- WEEKLY SUMMARY -->
-<div class="card" id="weeklyCard">
-<div class="card-head collapsed" onclick="toggleCard(this)"><h2>📊 Weekly Summary (7 Days)</h2><span class="chevron">▼</span></div>
-<div class="card-body hidden" id="weeklyBody">
-<div id="weeklySummaryContent"></div><div id="weeklyCharts"></div>
-<textarea class="inp" id="weeklyOutput" readonly style="margin-top:8px"></textarea>
-<button class="btn btn-full" onclick="App.copyText('weeklyOutput','Weekly summary copied!')" style="margin-top:6px">📋 Copy Weekly</button>
-</div></div>
+<!-- WEEKLY -->
+<div class="card"><div class="card-head collapsed" onclick="TC(this)"><h2>📊 Weekly (7 Days)</h2><span class="chevron">▼</span></div>
+<div class="card-body hidden"><div id="wkSum"></div><div id="wkChart"></div>
+<textarea class="inp" id="wkOut" readonly style="margin-top:8px"></textarea>
+<button class="btn btn-full" onclick="App.copyEl('wkOut','Copied!')" style="margin-top:6px">📋 Copy</button></div></div>
 
-<!-- MONTHLY SUMMARY -->
-<div class="card" id="monthlyCard">
-<div class="card-head collapsed" onclick="toggleCard(this)"><h2>📈 Monthly Summary</h2><span class="chevron">▼</span></div>
-<div class="card-body hidden" id="monthlyBody">
-<div id="monthlySummaryContent"></div><div id="monthlyCharts"></div>
-<textarea class="inp" id="monthlyOutput" readonly style="margin-top:8px"></textarea>
-<button class="btn btn-full" onclick="App.copyText('monthlyOutput','Monthly summary copied!')" style="margin-top:6px">📋 Copy Monthly</button>
-</div></div>
+<!-- MONTHLY -->
+<div class="card"><div class="card-head collapsed" onclick="TC(this)"><h2>📈 Monthly</h2><span class="chevron">▼</span></div>
+<div class="card-body hidden"><div id="moSum"></div><div id="moChart"></div>
+<textarea class="inp" id="moOut" readonly style="margin-top:8px"></textarea>
+<button class="btn btn-full" onclick="App.copyEl('moOut','Copied!')" style="margin-top:6px">📋 Copy</button></div></div>
 
-<!-- CALENDAR HEATMAP -->
-<div class="card" id="calendarCard">
-<div class="card-head collapsed" onclick="toggleCard(this)"><h2>🗓 Calendar Heatmap</h2><span class="chevron">▼</span></div>
-<div class="card-body hidden" id="calendarBody"></div>
+<!-- CALENDAR -->
+<div class="card"><div class="card-head collapsed" onclick="TC(this)"><h2>🗓 Calendar Heatmap</h2><span class="chevron">▼</span></div>
+<div class="card-body hidden" id="calBody"></div></div>
 </div>
 
-</div>
-
-<div class="modal-bg modal-hide" id="modalBg" onclick="if(event.target===this)this.classList.add('modal-hide')">
-<div class="modal" id="modalContent"></div>
-</div>
+<div class="modal-bg modal-hide" id="modalBg" onclick="if(event.target===this)this.classList.add('modal-hide')"><div class="modal" id="modalContent"></div></div>
 <div class="toast" id="toast"></div>
 
 <script>
-/* ========== HELPERS ========== */
-const g=id=>document.getElementById(id);
-const num=v=>parseFloat(v)||0;
-function toggleCard(h){h.classList.toggle('collapsed');h.nextElementSibling.classList.toggle('hidden')}
-function showToast(m,d=2000){const t=g('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),d)}
-function fmtDate(d){const p=d.split('-');return p[2]+'/'+p[1]}
-function dateStr(d){const y=d.getFullYear(),m=String(d.getMonth()+1).padStart(2,'0'),dd=String(d.getDate()).padStart(2,'0');return`${y}-${m}-${dd}`}
-function todayStr(){return dateStr(new Date())}
-function yesterdayStr(){const d=new Date();d.setDate(d.getDate()-1);return dateStr(d)}
+/* ===== HELPERS ===== */
+const $=id=>document.getElementById(id),num=v=>parseFloat(v)||0;
+function TC(h){h.classList.toggle('collapsed');h.nextElementSibling.classList.toggle('hidden')}
+function showToast(m,d){d=d||2000;const t=$('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),d)}
+function fmtD(d){const p=d.split('-');return p[2]+'/'+p[1]}
+function dStr(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function today(){return dStr(new Date())}
+function yesterday(){const d=new Date();d.setDate(d.getDate()-1);return dStr(d)}
+function closeExport(){$('exportDrop').classList.remove('show')}
+document.addEventListener('click',e=>{if(!e.target.closest('.export-menu'))closeExport()});
 
-/* ========== KPIEngine (PURE) ========== */
-const KPIEngine={
-  pct(a,b){return b>0?+(a/b*100).toFixed(1):0},
-  calcMachine(av,op,pr,ar){const u=this.pct(op,av),e=this.pct(ar,pr);return{util:u,eff:e,ok:u>=50&&e>=70}},
-  calcMachinesOverall(machines){
-    let ok=true;const r=machines.map(m=>{const c=this.calcMachine(m.availHrs,m.operHrs,m.plannedRate,m.actualRate);if(!c.ok)ok=false;return{...m,...c}});
-    const tu=this.pct(r.reduce((s,m)=>s+m.operHrs,0),r.reduce((s,m)=>s+m.availHrs,0));
-    return{results:r,allOk:ok,count:machines.length,overallUtil:tu}
-  },
-  calcSafety(a,n){return{accident:a,nearMiss:n,ok:a==='No'&&n==='No'}},
-  calcQuality(cc,sc,nc,ec){const q=cc==='No'&&sc==='No'&&nc==='No',c=ec==='No';return{complaint:cc,scrap:sc,nc,extraCons:ec,qualOk:q,consOk:c,ok:q&&c}},
-  calcShift(sh,w,projs,idles){
-    const av=sh*w;let prod=0,planned=0;projs.forEach(p=>{prod+=p.actualHrs*p.workers;planned+=p.plannedHrs*p.workers});
-    let idle=0;idles.forEach(i=>{idle+=i.workers*i.hours});
-    const u=this.pct(prod,av),e=this.pct(planned,prod);return{avail:av,prod,planned,idleHrs:idle,util:u,eff:e,ok:u>=80&&e>=80}
-  },
-  calcLaborOverall(shifts){
-    let ta=0,tp=0,tpl=0,ok=true;
-    const r=shifts.map(s=>{const c=this.calcShift(s.shiftHours,s.workers,s.projects,s.idles);ta+=c.avail;tp+=c.prod;tpl+=c.planned;if(!c.ok)ok=false;return{...s,...c}});
-    return{results:r,totalAvail:ta,totalProd:tp,totalPlanned:tpl,util:this.pct(tp,ta),eff:this.pct(tpl,tp),allOk:ok}
-  },
-  calcAttendance(p,pr){const pc=this.pct(pr,p);return{planned:p,present:pr,pct:pc,ok:pc>=100}},
-  calc5S(stations){
-    let ta=0,tf=0;const r=stations.map(s=>{const p=this.pct(s.followed,s.allocated);ta+=s.allocated;tf+=s.followed;return{...s,pct:p,ok:p>=85}});
-    const op=this.pct(tf,ta);return{results:r,overallPct:op,ok:op>=85}
-  },
-  calcAll(d){return{date:d.date,teamLead:d.teamLead,dept:d.dept,
-    machines:this.calcMachinesOverall(d.machines),safety:this.calcSafety(d.accident,d.nearMiss),
-    quality:this.calcQuality(d.complaint,d.scrap,d.nc,d.extraCons),
-    labor:this.calcLaborOverall(d.shifts),attendance:this.calcAttendance(d.plannedPeople,d.presentPeople),
-    fiveS:this.calc5S(d.stations),actions:d.actions||[]}},
-  isRedDay(r){return!r.machines.allOk||!r.safety.ok||!r.labor.allOk||!r.attendance.ok||!r.fiveS.ok}
+/* ===== KPIEngine ===== */
+const KE={
+pct(a,b){return b>0?+(a/b*100).toFixed(1):0},
+mach(av,op,pr,ar){const u=this.pct(op,av),e=this.pct(ar,pr);return{util:u,eff:e,ok:u>=50&&e>=70}},
+machAll(ms){let ok=true;const r=ms.map(m=>{const c=this.mach(m.availHrs,m.operHrs,m.plannedRate,m.actualRate);if(!c.ok)ok=false;return{...m,...c}});
+return{results:r,allOk:ok,oU:this.pct(r.reduce((s,m)=>s+m.operHrs,0),r.reduce((s,m)=>s+m.availHrs,0))}},
+safety(a,n){return{accident:a,nearMiss:n,ok:a==='No'&&n==='No'}},
+quality(cc,sc,nc,ec){const q=cc==='No'&&sc==='No'&&nc==='No',c=ec==='No';return{complaint:cc,scrap:sc,nc,extraCons:ec,qualOk:q,consOk:c,ok:q&&c}},
+shift(sh,w,projs,idles){const av=sh*w;let prod=0,planned=0;projs.forEach(p=>{prod+=p.actualHrs*p.workers;planned+=p.plannedHrs*p.workers});
+let idle=0;idles.forEach(i=>{idle+=i.workers*i.hours});const u=this.pct(prod,av),e=this.pct(planned,prod);return{avail:av,prod,planned,idleHrs:idle,util:u,eff:e,ok:u>=80&&e>=80}},
+laborAll(shifts){let ta=0,tp=0,tpl=0,ok=true;const r=shifts.map(s=>{const c=this.shift(s.shiftHours,s.workers,s.projects,s.idles);ta+=c.avail;tp+=c.prod;tpl+=c.planned;if(!c.ok)ok=false;return{...s,...c}});
+return{results:r,util:this.pct(tp,ta),eff:this.pct(tpl,tp),allOk:ok}},
+att(p,pr){const pc=this.pct(pr,p);return{planned:p,present:pr,pct:pc,ok:pc>=100}},
+fiveS(st){let ta=0,tf=0;const r=st.map(s=>{const p=this.pct(s.followed,s.allocated);ta+=s.allocated;tf+=s.followed;return{...s,pct:p,ok:p>=85}});
+const op=this.pct(tf,ta);return{results:r,overallPct:op,ok:op>=85}},
+all(d){return{date:d.date,teamLead:d.teamLead,dept:d.dept,machines:this.machAll(d.machines),safety:this.safety(d.accident,d.nearMiss),
+quality:this.quality(d.complaint,d.scrap,d.nc,d.extraCons),labor:this.laborAll(d.shifts),attendance:this.att(d.plannedPeople,d.presentPeople),
+fiveS:this.fiveS(d.stations),actions:d.actions||[]}},
+isRed(r){return!r.machines.allOk||!r.safety.ok||!r.labor.allOk||!r.attendance.ok||!r.fiveS.ok}
 };
 
-/* ========== DataCollector ========== */
-const DataCollector={
-  collect(){return{teamLead:g('teamLead').value.trim(),date:g('kpiDate').value,dept:g('dept').value,
-    machines:this._machines(),accident:g('accident').value,nearMiss:g('nearMiss').value,
-    complaint:g('custComplaint').value,scrap:g('scrap').value,nc:g('ncMtd').value,extraCons:g('extraCons').value,
-    shifts:this._shifts(),plannedPeople:num(g('plannedPeople').value),presentPeople:num(g('presentPeople').value),
-    stations:this._5s(),actions:this._actions()}},
-  _machines(){return[...document.querySelectorAll('#machineBody tr')].map(r=>{const i=r.querySelectorAll('.inp');return{name:i[0].value.trim(),availHrs:num(i[1].value),operHrs:num(i[2].value),plannedRate:num(i[3].value),actualRate:num(i[4].value),remark:i[5].value.trim()}})},
-  _shifts(){return[...document.querySelectorAll('.shift-block')].map(b=>{
-    const si=b.querySelectorAll('.shift-main-inp');
-    const projs=[...b.querySelectorAll('.proj-row')].map(r=>{const i=r.querySelectorAll('.inp');return{name:i[0].value.trim(),workers:num(i[1].value),plannedHrs:num(i[2].value),actualHrs:num(i[3].value)}});
-    const idles=[...b.querySelectorAll('.idle-row')].map(r=>{const i=r.querySelectorAll('.inp');return{workers:num(i[0].value),hours:num(i[1].value)}});
-    return{shiftHours:num(si[0].value),workers:num(si[1].value),projects:projs,idles}})},
-  _5s(){return[...document.querySelectorAll('.fives-station')].map(el=>{const i=el.querySelectorAll('.inp');return{name:i[0].value.trim(),allocated:num(i[1].value),followed:num(i[2].value)}})},
-  _actions(){return[...document.querySelectorAll('.action-item')].map(el=>({text:el.querySelector('.action-text').value,done:el.querySelector('input[type=checkbox]').checked}))}
+/* ===== DataCollector ===== */
+const DC={
+collect(){return{teamLead:$('teamLead').value.trim(),date:$('kpiDate').value,dept:$('dept').value,
+machines:[...$('machineBody').querySelectorAll('tr')].map(r=>{const i=r.querySelectorAll('.inp');return{name:i[0].value.trim(),availHrs:num(i[1].value),operHrs:num(i[2].value),plannedRate:num(i[3].value),actualRate:num(i[4].value),remark:i[5].value.trim()}}),
+accident:$('accident').value,nearMiss:$('nearMiss').value,complaint:$('custComplaint').value,scrap:$('scrap').value,nc:$('ncMtd').value,extraCons:$('extraCons').value,
+shifts:[...document.querySelectorAll('.shift-block')].map(b=>{const si=b.querySelectorAll('.shift-main-inp');
+return{shiftHours:num(si[0].value),workers:num(si[1].value),
+projects:[...b.querySelectorAll('.proj-row')].map(r=>{const i=r.querySelectorAll('.inp');return{name:i[0].value.trim(),workers:num(i[1].value),plannedHrs:num(i[2].value),actualHrs:num(i[3].value)}}),
+idles:[...b.querySelectorAll('.idle-row')].map(r=>{const i=r.querySelectorAll('.inp');return{workers:num(i[0].value),hours:num(i[1].value)}})}}),
+plannedPeople:num($('plannedPeople').value),presentPeople:num($('presentPeople').value),
+stations:[...document.querySelectorAll('.fives-station')].map(el=>{const i=el.querySelectorAll('.inp');return{name:i[0].value.trim(),allocated:num(i[1].value),followed:num(i[2].value)}}),
+actions:[...document.querySelectorAll('.action-item')].map(el=>({text:el.querySelector('.action-text').value,done:el.querySelector('input[type=checkbox]').checked}))}}
 };
 
-/* ========== StorageManager ========== */
+/* ===== StorageManager ===== */
 const SM={
-  PFX:'kpi_',LK:'kpi_lead',TK:'kpi_templates',NK:'kpi_notif_dismissed',
-  save(d,data){if(!d)return;try{localStorage.setItem(this.PFX+d,JSON.stringify(data))}catch(e){}},
-  load(d){if(!d)return null;try{const r=localStorage.getItem(this.PFX+d);return r?JSON.parse(r):null}catch(e){return null}},
-  allDates(){const d=[];const skip=new Set([this.LK,this.TK,this.NK]);for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k.startsWith(this.PFX)&&!skip.has(k)&&k.length===this.PFX.length+10)d.push(k.substring(this.PFX.length))}return d.sort()},
-  lastN(n){return this.allDates().slice(-n)},
-  currentMonth(){const now=new Date(),pfx=now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0');return this.allDates().filter(d=>d.startsWith(pfx))},
-  monthDates(y,m){const pfx=y+'-'+String(m+1).padStart(2,'0');return this.allDates().filter(d=>d.startsWith(pfx))},
-  saveLead(n){try{localStorage.setItem(this.LK,n)}catch(e){}},
-  loadLead(){try{return localStorage.getItem(this.LK)||''}catch(e){return''}},
-  exportAll(){const o={};this.allDates().forEach(d=>{o[d]=this.load(d)});return JSON.stringify(o,null,2)},
-  importAll(json){try{const o=JSON.parse(json);Object.keys(o).forEach(d=>{if(/^\d{4}-\d{2}-\d{2}$/.test(d))this.save(d,o[d])});return true}catch(e){return false}},
-  // Templates
-  getTemplates(){try{return JSON.parse(localStorage.getItem(this.TK)||'{}');}catch(e){return{}}},
-  saveTemplates(t){try{localStorage.setItem(this.TK,JSON.stringify(t))}catch(e){}},
-  // Notification dismissed
-  isNotifDismissed(){try{return localStorage.getItem(this.NK)===todayStr()}catch(e){return false}},
-  dismissNotif(){try{localStorage.setItem(this.NK,todayStr())}catch(e){}}
+PFX:'kpi_',LK:'kpi_lead',TK:'kpi_tmpl',NK:'kpi_notif',NS:'kpi_notif_settings',
+save(d,data){if(!d)return;try{localStorage.setItem(this.PFX+d,JSON.stringify(data))}catch(e){}},
+load(d){if(!d)return null;try{const r=localStorage.getItem(this.PFX+d);return r?JSON.parse(r):null}catch(e){return null}},
+allDates(){const skip=new Set([this.LK,this.TK,this.NK,this.NS]);const d=[];for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k.startsWith(this.PFX)&&!skip.has(k)&&k.length===this.PFX.length+10)d.push(k.substring(this.PFX.length))}return d.sort()},
+lastN(n){return this.allDates().slice(-n)},
+currentMonth(){const now=new Date(),pfx=now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0');return this.allDates().filter(d=>d.startsWith(pfx))},
+monthDates(y,m){return this.allDates().filter(d=>d.startsWith(y+'-'+String(m).padStart(2,'0')))},
+saveLead(n){try{localStorage.setItem(this.LK,n)}catch(e){}},loadLead(){try{return localStorage.getItem(this.LK)||''}catch(e){return''}},
+loadTmpl(){try{return JSON.parse(localStorage.getItem(this.TK)||'[]')}catch(e){return[]}},
+saveTmpl(t){try{localStorage.setItem(this.TK,JSON.stringify(t))}catch(e){}},
+exportAll(){const o={};this.allDates().forEach(d=>{o[d]=this.load(d)});return JSON.stringify(o,null,2)},
+importAll(j){try{const o=JSON.parse(j);Object.keys(o).forEach(d=>{if(/^\d{4}-\d{2}-\d{2}$/.test(d))this.save(d,o[d])});return true}catch(e){return false}},
+/* Notification state */
+getNotifState(){try{return JSON.parse(localStorage.getItem(this.NK)||'{}')}catch(e){return{}}},
+setNotifState(s){try{localStorage.setItem(this.NK,JSON.stringify(s))}catch(e){}},
+/* Notification settings */
+getNotifSettings(){try{return JSON.parse(localStorage.getItem(this.NS)||'null')}catch(e){return null}},
+setNotifSettings(s){try{localStorage.setItem(this.NS,JSON.stringify(s))}catch(e){}}
 };
 
-/* ========== SummaryEngine ========== */
-const SummaryEngine={
-  calc(dates){
-    if(!dates.length)return null;
-    let mu=[],lu=[],si=0,rd=0,fs=[],at=[];const entries=[];
-    dates.forEach(d=>{const raw=SM.load(d);if(!raw)return;const r=KPIEngine.calcAll(raw);entries.push({date:d,result:r});
-      mu.push(r.machines.overallUtil);lu.push(r.labor.util);if(!r.safety.ok)si++;if(KPIEngine.isRedDay(r))rd++;fs.push(r.fiveS.overallPct);at.push(r.attendance.pct)});
-    const avg=a=>a.length?+(a.reduce((x,y)=>x+y,0)/a.length).toFixed(1):0;
-    return{days:entries.length,avgMachUtil:avg(mu),avgLabUtil:avg(lu),totalSafetyInc:si,redDays:rd,avgFiveS:avg(fs),avgAtt:avg(at),entries,
-      machUtils:mu,labUtils:lu,fivesPcts:fs,attPcts:at,dateLabels:entries.map(e=>fmtDate(e.date))}
-  },
-  weekly(){return this.calc(SM.lastN(7))},
-  monthly(){return this.calc(SM.currentMonth())}
+/* ===== SummaryEngine ===== */
+const SE={
+calc(dates){if(!dates.length)return null;let mu=[],lu=[],si=0,rd=0,fs=[],at=[];const entries=[];
+dates.forEach(d=>{const raw=SM.load(d);if(!raw)return;const r=KE.all(raw);entries.push({date:d,result:r});
+mu.push(r.machines.oU);lu.push(r.labor.util);if(!r.safety.ok)si++;if(KE.isRed(r))rd++;fs.push(r.fiveS.overallPct);at.push(r.attendance.pct)});
+const avg=a=>a.length?+(a.reduce((x,y)=>x+y,0)/a.length).toFixed(1):0;
+return{days:entries.length,aM:avg(mu),aL:avg(lu),sI:si,rD:rd,a5:avg(fs),aA:avg(at),entries,mu,lu,fs,at,labels:entries.map(e=>fmtD(e.date))}},
+weekly(){return this.calc(SM.lastN(7))},monthly(){return this.calc(SM.currentMonth())}
 };
 
-/* ========== ChartEngine (SVG) ========== */
-const ChartEngine={
-  barChart(containerId,title,labels,datasets){
-    const el=g(containerId);if(!el)return;if(!labels.length){el.innerHTML='';return}
-    const W=Math.max(labels.length*55+80,280),H=190,pad={t:28,r:18,b:38,l:42};
-    const cw=W-pad.l-pad.r,ch=H-pad.t-pad.b,allV=datasets.flatMap(d=>d.data),maxV=Math.max(...allV,1);
-    const gW=cw/labels.length,bW=Math.min(gW/(datasets.length+1),18);
-    let s=`<div class="chart-container"><div class="chart-title">${title}</div><svg class="chart-svg" viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">`;
-    for(let i=0;i<=4;i++){const y=pad.t+ch-ch*(i/4),v=(maxV*i/4).toFixed(0);
-      s+=`<line x1="${pad.l}" y1="${y}" x2="${W-pad.r}" y2="${y}" stroke="#243a5e" stroke-width="0.5"/>`;
-      s+=`<text x="${pad.l-5}" y="${y+3}" fill="#8da0be" font-size="8" text-anchor="end" font-family="JetBrains Mono,monospace">${v}</text>`}
-    // Threshold lines
-    s+=`<line x1="${pad.l}" y1="${pad.t+ch-ch*(80/maxV)}" x2="${W-pad.r}" y2="${pad.t+ch-ch*(80/maxV)}" stroke="#ff6b6b" stroke-width="0.5" stroke-dasharray="4,3" opacity="0.4"/>`;
-    datasets.forEach((ds,di)=>{ds.data.forEach((v,i)=>{const bH=maxV>0?(v/maxV)*ch:0;const x=pad.l+i*gW+(di+0.5)*(gW/(datasets.length+1))-bW/2;const y=pad.t+ch-bH;
-      s+=`<rect class="chart-bar" x="${x}" y="${y}" width="${bW}" height="${bH}" rx="2" fill="${ds.color}" opacity="0.85"><title>${ds.label}: ${v}%</title></rect>`})});
-    labels.forEach((l,i)=>{s+=`<text x="${pad.l+i*gW+gW/2}" y="${H-7}" fill="#8da0be" font-size="8" text-anchor="middle" font-family="JetBrains Mono,monospace">${l}</text>`});
-    s+=`<line x1="${pad.l}" y1="${pad.t}" x2="${pad.l}" y2="${pad.t+ch}" stroke="#243a5e"/><line x1="${pad.l}" y1="${pad.t+ch}" x2="${W-pad.r}" y2="${pad.t+ch}" stroke="#243a5e"/></svg>`;
-    s+=`<div class="chart-legend">`;datasets.forEach(ds=>{s+=`<div class="chart-legend-item"><div class="chart-legend-dot" style="background:${ds.color}"></div>${ds.label}</div>`});
-    s+=`</div></div>`;el.innerHTML=s;
-  },
-  renderSummaryCharts(cid,summary){
-    if(!summary||!summary.entries.length){g(cid).innerHTML='';return}
-    this.barChart(cid,'Daily Trends',summary.dateLabels,[
-      {label:'Machine%',data:summary.machUtils,color:'#00d4aa'},
-      {label:'Labor%',data:summary.labUtils,color:'#4fc3f7'},
-      {label:'5S%',data:summary.fivesPcts,color:'#ffc048'},
-      {label:'Attend%',data:summary.attPcts,color:'#a78bfa'}]);
-  }
+/* ===== ChartEngine ===== */
+const CE={
+render(cid,s){const el=$(cid);if(!el)return;if(!s||!s.labels.length){el.innerHTML='';return}
+const labels=s.labels,W=Math.max(labels.length*55+80,280),H=190,P={t:28,r:18,b:38,l:42};
+const cw=W-P.l-P.r,ch=H-P.t-P.b,ds=[{l:'Mach%',d:s.mu,c:'#00d4aa'},{l:'Labor%',d:s.lu,c:'#4fc3f7'},{l:'5S%',d:s.fs,c:'#ffc048'},{l:'Attend%',d:s.at,c:'#a78bfa'}];
+const mx=Math.max(...ds.flatMap(d=>d.d),1),gW=cw/labels.length,bW=Math.min(gW/(ds.length+1),18);
+let svg='<div class="chart-container"><div class="chart-title">Daily Trends</div><svg class="chart-svg" viewBox="0 0 '+W+' '+H+'" xmlns="http://www.w3.org/2000/svg">';
+for(let i=0;i<=4;i++){const y=P.t+ch-ch*(i/4);svg+='<line x1="'+P.l+'" y1="'+y+'" x2="'+(W-P.r)+'" y2="'+y+'" stroke="#243a5e" stroke-width="0.5"/><text x="'+(P.l-5)+'" y="'+(y+3)+'" fill="#8da0be" font-size="8" text-anchor="end" font-family="monospace">'+(mx*i/4).toFixed(0)+'</text>'}
+ds.forEach((d,di)=>{d.d.forEach((v,i)=>{const bH=mx>0?(v/mx)*ch:0;const x=P.l+i*gW+(di+.5)*(gW/(ds.length+1))-bW/2;
+svg+='<rect class="chart-bar" x="'+x+'" y="'+(P.t+ch-bH)+'" width="'+bW+'" height="'+bH+'" rx="2" fill="'+d.c+'" opacity="0.85"><title>'+d.l+': '+v+'%</title></rect>'})});
+labels.forEach((l,i)=>{svg+='<text x="'+(P.l+i*gW+gW/2)+'" y="'+(H-7)+'" fill="#8da0be" font-size="8" text-anchor="middle" font-family="monospace">'+l+'</text>'});
+svg+='</svg><div class="chart-legend">';ds.forEach(d=>{svg+='<div class="chart-legend-item"><div class="chart-legend-dot" style="background:'+d.c+'"></div>'+d.l+'</div>'});
+svg+='</div></div>';el.innerHTML=svg}
 };
 
-/* ========== CalendarEngine ========== */
-const CalendarEngine={
-  viewYear:new Date().getFullYear(),viewMonth:new Date().getMonth(),
-  render(){
-    const el=g('calendarBody');if(!el)return;
-    const y=this.viewYear,m=this.viewMonth;
-    const months=['January','February','March','April','May','June','July','August','September','October','November','December'];
-    const days=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
-    const first=new Date(y,m,1),last=new Date(y,m+1,0);
-    let startDay=(first.getDay()+6)%7; // Monday=0
-    const totalDays=last.getDate();
-    const savedDates=new Set(SM.monthDates(y,m));
-    const today=todayStr();
-    
-    // Stats
-    let greenDays=0,redDays=0,noData=0;
-    for(let d=1;d<=totalDays;d++){
-      const ds=`${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-      if(ds>today){continue}
-      if(savedDates.has(ds)){const raw=SM.load(ds);if(raw){const r=KPIEngine.calcAll(raw);KPIEngine.isRedDay(r)?redDays++:greenDays++}else noData++}else noData++
-    }
-    
-    let h=`<div class="cal-nav">
-      <button class="btn btn-sm" onclick="CalendarEngine.prev()">◀</button>
-      <div class="cal-month-label">${months[m]} ${y}</div>
-      <button class="btn btn-sm" onclick="CalendarEngine.next()">▶</button>
-      <button class="btn btn-sm btn-primary" onclick="CalendarEngine.goNow()">Now</button></div>`;
-    h+=`<div class="cal-wrap"><div class="cal-grid">`;
-    days.forEach(d=>{h+=`<div class="cal-header">${d}</div>`});
-    for(let i=0;i<startDay;i++)h+=`<div class="cal-day empty"></div>`;
-    for(let d=1;d<=totalDays;d++){
-      const ds=`${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-      const isFuture=ds>today;const isToday=ds===today;
-      let cls='cal-none';
-      if(isFuture){cls='cal-none cal-future'}
-      else if(savedDates.has(ds)){const raw=SM.load(ds);if(raw){const r=KPIEngine.calcAll(raw);cls=KPIEngine.isRedDay(r)?'cal-red':'cal-green'}}
-      h+=`<div class="cal-day ${cls}${isToday?' cal-today':''}" onclick="App.jumpToDate('${ds}')" title="${ds}">${d}</div>`;
-    }
-    h+=`</div></div>`;
-    h+=`<div class="cal-stats">
-      <div class="cal-stat"><div class="cal-stat-val kpi-good">${greenDays}</div><div class="cal-stat-lbl">Green Days</div></div>
-      <div class="cal-stat"><div class="cal-stat-val kpi-bad">${redDays}</div><div class="cal-stat-lbl">Red Days</div></div>
-      <div class="cal-stat"><div class="cal-stat-val" style="color:var(--text2)">${noData}</div><div class="cal-stat-lbl">No Data</div></div></div>`;
-    el.innerHTML=h;
-  },
-  prev(){this.viewMonth--;if(this.viewMonth<0){this.viewMonth=11;this.viewYear--}this.render()},
-  next(){this.viewMonth++;if(this.viewMonth>11){this.viewMonth=0;this.viewYear++}this.render()},
-  goNow(){this.viewYear=new Date().getFullYear();this.viewMonth=new Date().getMonth();this.render()}
+/* ===== Formatter ===== */
+const FM={
+E(ok){return ok?'🟢':'🔴'},
+daily(r){let t='📊 *DAILY KPI REPORT*\n━━━━━━━━━━━━━━━━\n📅 Date: '+r.date+'\n👤 Team Lead: '+r.teamLead+'\n🏭 Dept: '+r.dept+'\n\n⚙️ *MACHINES*\n';
+r.machines.results.forEach(m=>{t+=this.E(m.ok)+' '+m.name+': Util '+m.util+'%, Eff '+m.eff+'%';if(!m.ok&&m.remark)t+=' — '+m.remark;t+='\n'});
+t+='\n🛡 *SAFETY*\n'+this.E(r.safety.ok)+' Accident: '+r.safety.accident+' | Near Miss: '+r.safety.nearMiss+'\n';
+t+='\n✅ *QUALITY*\n'+this.E(r.quality.qualOk)+' Complaint: '+r.quality.complaint+', Scrap: '+r.quality.scrap+', NC: '+r.quality.nc+'\n'+this.E(r.quality.consOk)+' Extra Consumables: '+r.quality.extraCons+'\n';
+t+='\n👷 *LABOR*\n'+this.E(r.labor.allOk)+' Overall: Util '+r.labor.util+'%, Eff '+r.labor.eff+'%\n';
+r.labor.results.forEach((s,i)=>{t+='  Shift '+(i+1)+': Util '+s.util+'%, Eff '+s.eff+'%\n'});
+t+='\n👥 *ATTENDANCE*\n'+this.E(r.attendance.ok)+' '+r.attendance.present+'/'+r.attendance.planned+' = '+r.attendance.pct+'%\n';
+t+='\n🏷 *5S AUDIT*\n';r.fiveS.results.forEach(s=>{t+=this.E(s.ok)+' '+s.name+': '+s.followed+'/'+s.allocated+' = '+s.pct+'%\n'});
+t+=this.E(r.fiveS.ok)+' Overall 5S: '+r.fiveS.overallPct+'%\n';
+if(r.actions&&r.actions.length){t+='\n📌 *ACTIONS*\n';r.actions.forEach(a=>{t+=(a.done?'☑':'☐')+' '+a.text+'\n'})}
+t+='\n━━━━━━━━━━━━━━━━\n'+(KE.isRed(r)?'🔴 *RED DAY*':'🟢 *GREEN DAY*');return t},
+summary(title,s){if(!s)return title+'\nNo data.\n';
+return'📊 *'+title+'*\n━━━━━━━━━━━━━━━━\n📁 Days: '+s.days+'\n⚙️ Avg Machine: '+s.aM+'%\n👷 Avg Labor: '+s.aL+'%\n🛡 Safety Inc: '+s.sI+'\n🔴 Red Days: '+s.rD+'\n🏷 Avg 5S: '+s.a5+'%\n👥 Avg Attend: '+s.aA+'%\n━━━━━━━━━━━━━━━━'}
 };
 
-/* ========== Formatter ========== */
-const Formatter={
-  E(ok){return ok?'🟢':'🔴'},
-  daily(r){
-    let t=`📊 *DAILY KPI REPORT*\n━━━━━━━━━━━━━━━━\n📅 Date: ${r.date}\n👤 Team Lead: ${r.teamLead}\n🏭 Dept: ${r.dept}\n\n⚙️ *MACHINES*\n`;
-    r.machines.results.forEach(m=>{t+=`${this.E(m.ok)} ${m.name}: Util ${m.util}%, Eff ${m.eff}%`;if(!m.ok&&m.remark)t+=` — ${m.remark}`;t+='\n'});
-    t+=`\n🛡 *SAFETY*\n${this.E(r.safety.ok)} Accident: ${r.safety.accident} | Near Miss: ${r.safety.nearMiss}\n`;
-    t+=`\n✅ *QUALITY*\n${this.E(r.quality.qualOk)} Complaint: ${r.quality.complaint}, Scrap: ${r.quality.scrap}, NC: ${r.quality.nc}\n${this.E(r.quality.consOk)} Extra Consumables: ${r.quality.extraCons}\n`;
-    t+=`\n👷 *LABOR*\n${this.E(r.labor.allOk)} Overall: Util ${r.labor.util}%, Eff ${r.labor.eff}%\n`;
-    r.labor.results.forEach((s,i)=>{t+=`  Shift ${i+1}: Util ${s.util}%, Eff ${s.eff}%\n`});
-    t+=`\n👥 *ATTENDANCE*\n${this.E(r.attendance.ok)} ${r.attendance.present}/${r.attendance.planned} = ${r.attendance.pct}%\n`;
-    t+=`\n🏷 *5S AUDIT*\n`;r.fiveS.results.forEach(s=>{t+=`${this.E(s.ok)} ${s.name}: ${s.followed}/${s.allocated} = ${s.pct}%\n`});
-    t+=`${this.E(r.fiveS.ok)} Overall 5S: ${r.fiveS.overallPct}%\n`;
-    if(r.actions?.length){t+=`\n📌 *ACTION ITEMS*\n`;r.actions.forEach(a=>{t+=`${a.done?'☑':'☐'} ${a.text}\n`})}
-    t+=`\n━━━━━━━━━━━━━━━━\n`+(KPIEngine.isRedDay(r)?'🔴 *RED DAY*':'🟢 *GREEN DAY*');return t;
-  },
-  summary(title,s){
-    if(!s)return`${title}\nNo data available.\n`;
-    return`📊 *${title}*\n━━━━━━━━━━━━━━━━\n📁 Days: ${s.days}\n⚙️ Avg Machine Util: ${s.avgMachUtil}%\n👷 Avg Labor Util: ${s.avgLabUtil}%\n🛡 Safety Incidents: ${s.totalSafetyInc}\n🔴 Red Days: ${s.redDays}\n🏷 Avg 5S: ${s.avgFiveS}%\n👥 Avg Attendance: ${s.avgAtt}%\n━━━━━━━━━━━━━━━━`;
-  }
+/* ===== UIRenderer ===== */
+const UI={
+sb(id,ok,t){const el=$(id);if(!el)return;el.className='badge '+(ok?'badge-green':'badge-red');el.textContent=t||(ok?'OK':'⚠')},
+sc(id,ok){const el=$(id);if(!el)return;el.className='card '+(ok?'status-green':'status-red')},
+rMach(m){[...$('machineBody').querySelectorAll('tr')].forEach((row,i)=>{if(!m.results[i])return;const x=m.results[i];
+const u=row.querySelector('.ru'),e=row.querySelector('.re');
+if(u){u.textContent=x.util+'%';u.className='ru '+(x.util>=50?'kpi-good':'kpi-bad')}
+if(e){e.textContent=x.eff+'%';e.className='re '+(x.eff>=70?'kpi-good':'kpi-bad')}});
+this.sc('machineCard',m.allOk);this.sb('machineBadge',m.allOk)},
+rShifts(l){[...document.querySelectorAll('.shift-block')].forEach((b,i)=>{if(!l.results[i])return;const s=l.results[i];const r=b.querySelector('.shift-result');
+if(r)r.innerHTML='Util: <span class="'+(s.util>=80?'kpi-good':'kpi-bad')+'">'+s.util+'%</span> | Eff: <span class="'+(s.eff>=80?'kpi-good':'kpi-bad')+'">'+s.eff+'%</span>'});
+this.sc('laborCard',l.allOk);this.sb('laborBadge',l.allOk)},
+r5S(f){[...document.querySelectorAll('.fives-station')].forEach((el,i)=>{if(!f.results[i])return;const s=f.results[i];
+const p=el.querySelector('.fives-pct');if(p){p.textContent=s.pct+'%';p.className='fives-pct '+(s.ok?'kpi-good':'kpi-bad')}
+el.className='fives-station '+(s.ok?'fives-green':'fives-red')});
+this.sc('fiveSCard',f.ok);this.sb('fiveSBadge',f.ok,f.overallPct+'%')},
+dash(result,prev){
+const set=(tid,vid,trid,val,ok,pv)=>{const t=$(tid),v=$(vid),tr=$(trid);if(t)t.className='dash-tile '+(ok?'tile-green':'tile-red');if(v)v.innerHTML=val;
+if(tr&&pv!=null){const d=+(parseFloat(val)-pv).toFixed(1);tr.innerHTML=d>0?'<span class="trend-up">▲'+d+'</span>':d<0?'<span class="trend-down">▼'+Math.abs(d)+'</span>':'<span class="trend-flat">—</span>'}else if(tr)tr.innerHTML=''};
+set('dM','dvM','dtM',result.machines.oU+'%',result.machines.allOk,prev?prev.machines.oU:null);
+set('dL','dvL','dtL',result.labor.util+'%',result.labor.allOk,prev?prev.labor.util:null);
+set('dS','dvS','dtS',result.safety.ok?'OK':'⚠',result.safety.ok,null);
+set('dA','dvA','dtA',result.attendance.pct+'%',result.attendance.ok,prev?prev.attendance.pct:null);
+set('d5','dv5','dt5',result.fiveS.overallPct+'%',result.fiveS.ok,prev?prev.fiveS.overallPct:null);
+set('dQ','dvQ','dtQ',result.quality.ok?'OK':'⚠',result.quality.ok,null);
+const ds=$('dayStatus'),red=KE.isRed(result);ds.className='day-status '+(red?'red-day':'green-day');ds.textContent=red?'🔴 RED DAY':'🟢 GREEN DAY'},
+sumHTML(id,s){const el=$(id);if(!el)return;if(!s){el.innerHTML='<div style="color:var(--text2);font-size:.78rem">No data.</div>';return}
+const c=(v,t)=>v>=t?'kpi-good':'kpi-bad';
+el.innerHTML='<div class="summary-block"><div class="summary-row"><span class="summary-label">Days</span><span>'+s.days+'</span></div><div class="summary-row"><span class="summary-label">Avg Machine</span><span class="'+c(s.aM,50)+'">'+s.aM+'%</span></div><div class="summary-row"><span class="summary-label">Avg Labor</span><span class="'+c(s.aL,80)+'">'+s.aL+'%</span></div><div class="summary-row"><span class="summary-label">Safety Inc</span><span class="'+(s.sI===0?'kpi-good':'kpi-bad')+'">'+s.sI+'</span></div><div class="summary-row"><span class="summary-label">Red Days</span><span class="'+(s.rD===0?'kpi-good':'kpi-bad')+'">'+s.rD+'</span></div><div class="summary-row"><span class="summary-label">Avg 5S</span><span class="'+c(s.a5,85)+'">'+s.a5+'%</span></div><div class="summary-row"><span class="summary-label">Avg Attend</span><span class="'+c(s.aA,100)+'">'+s.aA+'%</span></div></div>'},
+full(r,p){this.rMach(r.machines);this.sc('safetyCard',r.safety.ok);this.sb('safetyBadge',r.safety.ok);
+this.sc('qualityCard',r.quality.ok);this.sb('qualityBadge',r.quality.ok);
+this.rShifts(r.labor);this.sc('peopleCard',r.attendance.ok);this.sb('peopleBadge',r.attendance.ok,r.attendance.pct+'%');
+this.r5S(r.fiveS);this.dash(r,p);$('reportOutput').value=FM.daily(r);
+const acts=r.actions||[];const pend=acts.filter(a=>!a.done).length;$('actionBadge').textContent=pend;$('actionBadge').className='badge '+(pend===0?'badge-green':'badge-red');
+const w=SE.weekly();this.sumHTML('wkSum',w);$('wkOut').value=FM.summary('WEEKLY SUMMARY (7 Days)',w);CE.render('wkChart',w);
+const m=SE.monthly();this.sumHTML('moSum',m);$('moOut').value=FM.summary('MONTHLY SUMMARY',m);CE.render('moChart',m)}
 };
 
-/* ========== UIRenderer ========== */
-const UIRenderer={
-  setBadge(id,ok,text){const el=g(id);if(!el)return;el.className='badge '+(ok?'badge-green':'badge-red');el.textContent=text||(ok?'OK':'ISSUE')},
-  setCard(id,ok){const el=g(id);if(!el)return;el.className='card '+(ok?'status-green':'status-red')},
-  renderMachines(m){[...document.querySelectorAll('#machineBody tr')].forEach((row,i)=>{if(!m.results[i])return;const x=m.results[i];
-    const u=row.querySelector('.res-util'),e=row.querySelector('.res-eff');
-    if(u){u.textContent=x.util+'%';u.className='res-util '+(x.util>=50?'kpi-good':'kpi-bad')}
-    if(e){e.textContent=x.eff+'%';e.className='res-eff '+(x.eff>=70?'kpi-good':'kpi-bad')}});
-    this.setCard('machineCard',m.allOk);this.setBadge('machineBadge',m.allOk)},
-  renderShifts(l){[...document.querySelectorAll('.shift-block')].forEach((b,i)=>{if(!l.results[i])return;const s=l.results[i];const r=b.querySelector('.shift-result');
-    if(r)r.innerHTML=`Util: <span class="${s.util>=80?'kpi-good':'kpi-bad'}">${s.util}%</span> | Eff: <span class="${s.eff>=80?'kpi-good':'kpi-bad'}">${s.eff}%</span>`});
-    this.setCard('laborCard',l.allOk);this.setBadge('laborBadge',l.allOk)},
-  render5S(f){[...document.querySelectorAll('.fives-station')].forEach((el,i)=>{if(!f.results[i])return;const s=f.results[i];
-    const p=el.querySelector('.fives-pct');if(p){p.textContent=s.pct+'%';p.className='fives-pct '+(s.ok?'kpi-good':'kpi-bad')}
-    el.className='fives-station '+(s.ok?'fives-green':'fives-red')});
-    this.setCard('fiveSCard',f.ok);this.setBadge('fiveSBadge',f.ok,f.overallPct+'%')},
-  renderDashboard(result,prev){
-    const set=(tid,vid,trid,val,ok,pv)=>{const t=g(tid),v=g(vid),tr=g(trid);
-      if(t)t.className='dash-tile '+(ok?'tile-green':'tile-red');if(v)v.innerHTML=val;
-      if(tr&&pv!==null&&pv!==undefined){const d=+(parseFloat(val)-pv).toFixed(1);
-        tr.innerHTML=d>0?`<span class="trend-up">▲${d}</span>`:d<0?`<span class="trend-down">▼${Math.abs(d)}</span>`:`<span class="trend-flat">—</span>`}
-      else if(tr)tr.innerHTML=''};
-    const pm=prev?prev.machines.overallUtil:null,pl=prev?prev.labor.util:null,pa=prev?prev.attendance.pct:null,p5=prev?prev.fiveS.overallPct:null;
-    set('dashMach','dashMachVal','dashMachTrend',result.machines.overallUtil+'%',result.machines.allOk,pm);
-    set('dashLabor','dashLaborVal','dashLaborTrend',result.labor.util+'%',result.labor.allOk,pl);
-    set('dashSafety','dashSafetyVal','dashSafetyTrend',result.safety.ok?'OK':'⚠',result.safety.ok,null);
-    set('dashAtt','dashAttVal','dashAttTrend',result.attendance.pct+'%',result.attendance.ok,pa);
-    set('dash5S','dash5SVal','dash5STrend',result.fiveS.overallPct+'%',result.fiveS.ok,p5);
-    set('dashQual','dashQualVal','dashQualTrend',result.quality.ok?'OK':'⚠',result.quality.ok,null);
-    const ds=g('dayStatus'),red=KPIEngine.isRedDay(result);ds.className='day-status '+(red?'red-day':'green-day');ds.textContent=red?'🔴 RED DAY':'🟢 GREEN DAY'
-  },
-  renderSummaryHTML(id,s){const el=g(id);if(!el)return;if(!s){el.innerHTML='<div style="color:var(--text2);font-size:.78rem">No saved data found.</div>';return}
-    const c=(v,t)=>v>=t?'kpi-good':'kpi-bad';
-    el.innerHTML=`<div class="summary-block">
-      <div class="summary-row"><span class="summary-label">Days</span><span>${s.days}</span></div>
-      <div class="summary-row"><span class="summary-label">Avg Machine Util</span><span class="${c(s.avgMachUtil,50)}">${s.avgMachUtil}%</span></div>
-      <div class="summary-row"><span class="summary-label">Avg Labor Util</span><span class="${c(s.avgLabUtil,80)}">${s.avgLabUtil}%</span></div>
-      <div class="summary-row"><span class="summary-label">Safety Incidents</span><span class="${s.totalSafetyInc===0?'kpi-good':'kpi-bad'}">${s.totalSafetyInc}</span></div>
-      <div class="summary-row"><span class="summary-label">Red Days</span><span class="${s.redDays===0?'kpi-good':'kpi-bad'}">${s.redDays}</span></div>
-      <div class="summary-row"><span class="summary-label">Avg 5S</span><span class="${c(s.avgFiveS,85)}">${s.avgFiveS}%</span></div>
-      <div class="summary-row"><span class="summary-label">Avg Attendance</span><span class="${c(s.avgAtt,100)}">${s.avgAtt}%</span></div></div>`},
-  fullRender(result,prev){
-    this.renderMachines(result.machines);this.setCard('safetyCard',result.safety.ok);this.setBadge('safetyBadge',result.safety.ok);
-    this.setCard('qualityCard',result.quality.ok);this.setBadge('qualityBadge',result.quality.ok);
-    this.renderShifts(result.labor);this.setCard('peopleCard',result.attendance.ok);this.setBadge('peopleBadge',result.attendance.ok,result.attendance.pct+'%');
-    this.render5S(result.fiveS);this.renderDashboard(result,prev);g('reportOutput').value=Formatter.daily(result);
-    const acts=result.actions||[];const pend=acts.filter(a=>!a.done).length;const ab=g('actionBadge');
-    if(ab){ab.textContent=pend;ab.className='badge '+(pend===0?'badge-green':'badge-red')}
-    const w=SummaryEngine.weekly();this.renderSummaryHTML('weeklySummaryContent',w);g('weeklyOutput').value=Formatter.summary('WEEKLY SUMMARY (Last 7 Days)',w);
-    ChartEngine.renderSummaryCharts('weeklyCharts',w);
-    const mo=SummaryEngine.monthly();this.renderSummaryHTML('monthlySummaryContent',mo);g('monthlyOutput').value=Formatter.summary('MONTHLY SUMMARY',mo);
-    ChartEngine.renderSummaryCharts('monthlyCharts',mo);
-    CalendarEngine.render();
-  }
-};
-
-/* ========== PDFEngine (inline, no library) ========== */
-const PDFEngine={
-  /* Lightweight PDF generator — produces a formatted multi-page canvas-to-PDF */
-  export(reportText,date){
-    const lines=reportText.split('\n');
-    const pageW=595,pageH=842,margin=50,lh=16,maxLines=Math.floor((pageH-margin*2)/lh);
-    const pages=[];
-    for(let i=0;i<lines.length;i+=maxLines)pages.push(lines.slice(i,i+maxLines));
-    
-    // Build PDF binary
-    const objects=[];let objN=0;
-    const addObj=content=>{objN++;objects.push({n:objN,content});return objN};
-    
-    // Catalog
-    const catN=addObj('');const pagesN=addObj('');
-    const pageNums=[];
-    
-    pages.forEach((pageLines,pi)=>{
-      // Content stream
-      let stream='BT\n/F1 11 Tf\n';
-      // Header bar
-      if(pi===0){
-        stream+=`0.039 0.102 0.176 rg\n${margin} ${pageH-margin+10} ${pageW-margin*2} 22 re f\n`;
-        stream+=`0 0.831 0.667 rg\n/F1 13 Tf\n${margin+8} ${pageH-margin+15} Td\n(KPI DASHBOARD PRO — DAILY REPORT) Tj\n0 0 0 rg\n/F1 11 Tf\n`;
-        stream+=`0 -30 Td\n`;
-      }
-      pageLines.forEach((line,li)=>{
-        const clean=line.replace(/[()\\]/g,c=>'\\'+c).replace(/[^\x20-\x7E]/g,'');
-        if(pi===0&&li===0)stream+=`${margin} ${pageH-margin-25} Td\n`;
-        else if(li===0)stream+=`${margin} ${pageH-margin} Td\n`;
-        else stream+=`0 -${lh} Td\n`;
-        // Color coding
-        if(line.includes('RED DAY'))stream+=`1 0.2 0.2 rg\n`;
-        else if(line.includes('GREEN DAY'))stream+=`0 0.6 0.4 rg\n`;
-        else stream+=`0.2 0.2 0.2 rg\n`;
-        stream+=`(${clean}) Tj\n`;
-      });
-      // Footer
-      stream+=`0.5 0.5 0.5 rg\n/F1 8 Tf\n${margin} 30 Td\n(Page ${pi+1} of ${pages.length}  |  Generated: ${new Date().toLocaleString()}) Tj\n`;
-      stream+=`ET\n`;
-      
-      const streamN=addObj(`<< /Length ${stream.length} >>\nstream\n${stream}endstream`);
-      const pageN=addObj(`<< /Type /Page /Parent ${pagesN} 0 R /MediaBox [0 0 ${pageW} ${pageH}] /Contents ${streamN} 0 R /Resources << /Font << /F1 ${objN+1} 0 R >> >> >>`);
-      pageNums.push(pageN);
+/* ===== ExportEngine - PNG & PDF ===== */
+const ExportEngine={
+  /* Render report text to a high-res canvas and return it */
+  _renderCanvas(text,scale){
+    scale=scale||2;
+    const lines=text.split('\n');
+    const fontSize=13*scale,lineH=20*scale,padX=30*scale,padY=30*scale,headerH=40*scale;
+    const canvas=document.createElement('canvas');
+    const ctx=canvas.getContext('2d');
+    ctx.font=fontSize+'px JetBrains Mono, Courier New, monospace';
+    let maxW=0;lines.forEach(l=>{const w=ctx.measureText(l).width;if(w>maxW)maxW=w});
+    const W=Math.max(maxW+padX*2,400*scale);
+    const H=headerH+lines.length*lineH+padY*2;
+    canvas.width=W;canvas.height=H;
+    // BG
+    ctx.fillStyle='#0c1a2e';ctx.fillRect(0,0,W,H);
+    // Header bar
+    ctx.fillStyle='#132240';ctx.fillRect(0,0,W,headerH);
+    ctx.fillStyle='#00d4aa';ctx.fillRect(0,0,W,4*scale);
+    ctx.font='bold '+(14*scale)+'px DM Sans, sans-serif';
+    ctx.fillStyle='#00d4aa';ctx.fillText('KPI DASHBOARD PRO — DAILY REPORT',padX,headerH*0.65);
+    // Date on right
+    const dateStr=$('kpiDate').value||'';
+    ctx.font=(11*scale)+'px JetBrains Mono, monospace';
+    ctx.fillStyle='#8da0be';
+    const dw=ctx.measureText(dateStr).width;
+    ctx.fillText(dateStr,W-padX-dw,headerH*0.65);
+    // Body
+    ctx.font=fontSize+'px JetBrains Mono, Courier New, monospace';
+    lines.forEach((line,i)=>{
+      const y=headerH+padY+i*lineH;
+      if(line.includes('RED DAY')){ctx.fillStyle='#ff6b6b'}
+      else if(line.includes('GREEN DAY')){ctx.fillStyle='#00d4aa'}
+      else if(line.startsWith('📊')||line.startsWith('⚙')||line.startsWith('🛡')||line.startsWith('✅')||line.startsWith('👷')||line.startsWith('👥')||line.startsWith('🏷')||line.startsWith('📌')){ctx.fillStyle='#4fc3f7'}
+      else if(line.includes('━')){ctx.fillStyle='#243a5e'}
+      else{ctx.fillStyle='#e8edf5'}
+      ctx.fillText(line,padX,y);
     });
-    
-    // Font
-    const fontN=addObj('<< /Type /Font /Subtype /Type1 /BaseFont /Courier >>');
-    
-    // Fix catalog and pages
-    objects[0].content=`<< /Type /Catalog /Pages ${pagesN} 0 R >>`;
-    objects[1].content=`<< /Type /Pages /Kids [${pageNums.map(n=>n+' 0 R').join(' ')}] /Count ${pageNums.length} >>`;
-    
-    // Build file
-    let pdf='%PDF-1.4\n';const offsets=[];
-    objects.forEach(obj=>{offsets.push(pdf.length);pdf+=`${obj.n} 0 obj\n${obj.content}\nendobj\n`});
+    // Footer
+    ctx.fillStyle='#243a5e';ctx.font=(9*scale)+'px DM Sans, sans-serif';
+    ctx.fillText('Generated: '+new Date().toLocaleString(),padX,H-10*scale);
+    return canvas;
+  },
+
+  exportPNG(){
+    const text=$('reportOutput').value;
+    if(!text.trim()){showToast('No report to export');return}
+    const canvas=this._renderCanvas(text,3);
+    canvas.toBlob(blob=>{
+      const url=URL.createObjectURL(blob);
+      const a=document.createElement('a');
+      a.href=url;a.download='KPI_Report_'+($('kpiDate').value||'report')+'.png';
+      a.click();URL.revokeObjectURL(url);
+      showToast('PNG exported!');
+    },'image/png');
+  },
+
+  exportPDF(){
+    const text=$('reportOutput').value;
+    if(!text.trim()){showToast('No report to export');return}
+    /* Render to canvas, then embed as hex-encoded image in a pure-ASCII PDF.
+       Using ASCIIHexDecode avoids all binary-offset pitfalls. */
+    const canvas=this._renderCanvas(text,2);
+    const jpegData=canvas.toDataURL('image/jpeg',0.90);
+    const raw=atob(jpegData.split(',')[1]);
+    // Convert to hex string
+    let hex='';for(let i=0;i<raw.length;i++){const b=raw.charCodeAt(i);hex+=(b<16?'0':'')+b.toString(16)}
+    hex+='>'; // ASCIIHexDecode end marker
+
+    const pW=595.28,pH=841.89,mg=28;
+    const aspect=canvas.width/canvas.height;
+    const drawW=pW-mg*2,drawH=drawW/aspect;
+    // Scale to fit single page if needed
+    const fitH=Math.min(drawH,pH-mg*2);
+    const fitW=fitH*aspect;
+
+    // All-ASCII PDF construction — offsets are just string positions
+    const objs=[];let n=0;
+    const add=c=>{n++;objs.push({n,c});return n};
+
+    const catN=add('');// placeholder
+    const pagesN=add('');// placeholder
+    const fontN=add('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>');
+
+    // Image XObject with hex-encoded JPEG
+    const imgN=add('<< /Type /XObject /Subtype /Image /Width '+canvas.width+' /Height '+canvas.height+
+      ' /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter [/ASCIIHexDecode /DCTDecode] /Length '+hex.length+' >>\nstream\n'+hex+'\nendstream');
+
+    // Content stream — draw image centered on page
+    const xOff=mg,yOff=pH-mg-fitH;
+    let stream='q '+fitW.toFixed(2)+' 0 0 '+fitH.toFixed(2)+' '+xOff.toFixed(2)+' '+yOff.toFixed(2)+' cm /Img Do Q\n';
+    stream+='BT /F1 8 Tf 0.55 0.63 0.75 rg '+mg+' 14 Td (KPI Dashboard Pro  |  '+($('kpiDate').value||'')+
+      '  |  Generated: '+new Date().toLocaleDateString()+') Tj ET\n';
+    const contentN=add('<< /Length '+stream.length+' >>\nstream\n'+stream+'endstream');
+
+    const pageN=add('<< /Type /Page /Parent '+pagesN+' 0 R /MediaBox [0 0 '+pW+' '+pH+
+      '] /Contents '+contentN+' 0 R /Resources << /Font << /F1 '+fontN+' 0 R >> /XObject << /Img '+imgN+' 0 R >> >> >>');
+
+    // Fix placeholders
+    objs[0].c='<< /Type /Catalog /Pages '+pagesN+' 0 R >>';
+    objs[1].c='<< /Type /Pages /Kids ['+pageN+' 0 R] /Count 1 >>';
+
+    // Serialize
+    let pdf='%PDF-1.4\n';
+    const offsets=[];
+    objs.forEach(o=>{offsets.push(pdf.length);pdf+=o.n+' 0 obj\n'+o.c+'\nendobj\n'});
     const xrefOff=pdf.length;
-    pdf+=`xref\n0 ${objects.length+1}\n0000000000 65535 f \n`;
+    pdf+='xref\n0 '+(n+1)+'\n0000000000 65535 f \n';
     offsets.forEach(o=>{pdf+=String(o).padStart(10,'0')+' 00000 n \n'});
-    pdf+=`trailer\n<< /Size ${objects.length+1} /Root ${catN} 0 R >>\nstartxref\n${xrefOff}\n%%EOF`;
-    
+    pdf+='trailer\n<< /Size '+(n+1)+' /Root '+catN+' 0 R >>\nstartxref\n'+xrefOff+'\n%%EOF';
+
     const blob=new Blob([pdf],{type:'application/pdf'});
-    const url=URL.createObjectURL(blob);
-    const a=document.createElement('a');a.href=url;a.download=`KPI_Report_${date||'report'}.pdf`;a.click();
-    URL.revokeObjectURL(url);showToast('PDF exported!');
+    const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+    a.download='KPI_Report_'+($('kpiDate').value||'report')+'.pdf';
+    a.click();showToast('PDF exported!');
   }
 };
 
-/* ========== MAIN APP ========== */
-const App={
-  locked:false,shiftCount:0,
+/* ===== NotificationEngine ===== */
+const NotifEngine={
+  _defaults:{enabled:true,meetingTime:'10:00',reminderMin:10,days:[1,2,3,4,5,6]}, // Mon=1..Sat=6
+  _intervalId:null,
+
+  getSettings(){
+    const s=SM.getNotifSettings();
+    return s?{...this._defaults,...s}:{...this._defaults};
+  },
+
+  saveSettings(s){SM.setNotifSettings(s)},
 
   init(){
-    g('kpiDate').value=yesterdayStr();g('teamLead').value=SM.loadLead();this._updateDateDisplay();
-    const saved=SM.load(g('kpiDate').value);
-    if(saved)this.restoreData(saved);else{this.addMachine();this.addShift();this.add5S()}
-    document.addEventListener('input',()=>{if(!this.locked){this.autoSave();this.recalculate()}});
-    document.addEventListener('change',()=>{if(!this.locked){this.autoSave();this.recalculate()}});
-    g('kpiDate').addEventListener('change',()=>this._loadDate(g('kpiDate').value));
-    g('newAction').addEventListener('keydown',e=>{if(e.key==='Enter')this.addAction()});
-    this.recalculate();this._checkReminder();
+    // Check data reminder on load
+    this._checkDataReminder();
+    // Start scheduler - check every 30 seconds
+    this._intervalId=setInterval(()=>this._tick(),30000);
+    this._tick(); // run immediately
   },
 
-  _updateDateDisplay(){const d=g('kpiDate').value,dd=g('dateDisplay');if(d&&dd){const dt=new Date(d+'T12:00:00');
-    dd.textContent=`${['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][dt.getDay()]} ${dt.getDate()} ${['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][dt.getMonth()]}`}},
-
-  _loadDate(d){this._updateDateDisplay();const saved=SM.load(d);
-    if(saved){this.clearAll();this.restoreData(saved);showToast('Loaded: '+d)}
-    else{this.clearAll();this.addMachine();this.addShift();this.add5S();this.recalculate();showToast('New day: '+d)}},
-
-  _getPrevResult(){const d=g('kpiDate').value;if(!d)return null;const prev=new Date(d+'T12:00:00');prev.setDate(prev.getDate()-1);
-    const raw=SM.load(dateStr(prev));return raw?KPIEngine.calcAll(raw):null},
-
-  recalculate(){const data=DataCollector.collect(),result=KPIEngine.calcAll(data),prev=this._getPrevResult();UIRenderer.fullRender(result,prev)},
-  autoSave(){const data=DataCollector.collect();if(data.date)SM.save(data.date,data);if(data.teamLead)SM.saveLead(data.teamLead)},
-
-  navDate(dir){const d=g('kpiDate').value;if(!d)return;const dt=new Date(d+'T12:00:00');dt.setDate(dt.getDate()+dir);g('kpiDate').value=dateStr(dt);this._loadDate(g('kpiDate').value)},
-  goToday(){g('kpiDate').value=yesterdayStr();this._loadDate(g('kpiDate').value);showToast('Back to yesterday')},
-
-  copyPreviousDay(){const cur=g('kpiDate').value;if(!cur)return;const prev=new Date(cur+'T12:00:00');prev.setDate(prev.getDate()-1);const ps=dateStr(prev);
-    const saved=SM.load(ps);if(saved){saved.date=cur;this.clearAll();this.restoreData(saved);g('kpiDate').value=cur;this.autoSave();showToast('Copied from '+ps)}
-    else showToast('No data for '+ps)},
-
-  jumpToDate(d){g('modalBg').classList.add('modal-hide');g('kpiDate').value=d;this._loadDate(d)},
-
-  /* Dynamic Rows */
-  addMachine(d){const tbody=g('machineBody'),tr=document.createElement('tr');
-    tr.innerHTML=`<td><input class="inp" placeholder="Machine" value="${d?.name||''}"></td>
-      <td><input class="inp" type="number" placeholder="0" value="${d?.availHrs||''}"></td>
-      <td><input class="inp" type="number" placeholder="0" value="${d?.operHrs||''}"></td>
-      <td><input class="inp" type="number" placeholder="0" value="${d?.plannedRate||''}"></td>
-      <td><input class="inp" type="number" placeholder="0" value="${d?.actualRate||''}"></td>
-      <td><input class="inp" placeholder="Remark" value="${d?.remark||''}"></td>
-      <td><button class="btn btn-sm btn-danger" onclick="this.closest('tr').remove();App.recalculate();App.autoSave()">✕</button></td>
-      <td class="res-util">0%</td><td class="res-eff">0%</td>`;tbody.appendChild(tr)},
-
-  addShift(d){this.shiftCount++;const c=g('laborShifts'),div=document.createElement('div');div.className='shift-block';
-    const pj=d?.projects||[],il=d?.idles||[];
-    let ph='';pj.forEach(p=>{ph+=`<tr class="proj-row"><td><input class="inp" placeholder="Project" value="${p.name||''}"></td><td><input class="inp" type="number" value="${p.workers||0}"></td><td><input class="inp" type="number" value="${p.plannedHrs||0}"></td><td><input class="inp" type="number" value="${p.actualHrs||0}"></td><td><button class="btn btn-sm btn-danger" onclick="this.closest('tr').remove();App.recalculate();App.autoSave()">✕</button></td></tr>`});
-    let ih='';il.forEach(i=>{ih+=`<tr class="idle-row"><td><input class="inp" type="number" value="${i.workers||0}"></td><td><input class="inp" type="number" value="${i.hours||0}"></td><td><button class="btn btn-sm btn-danger" onclick="this.closest('tr').remove();App.recalculate();App.autoSave()">✕</button></td></tr>`});
-    div.innerHTML=`<div style="display:flex;justify-content:space-between;align-items:center">
-      <div class="shift-title">Shift ${this.shiftCount}</div>
-      <button class="btn btn-sm btn-danger" onclick="this.closest('.shift-block').remove();App.recalculate();App.autoSave()">✕</button></div>
-      <table class="tbl"><tr><th>Shift Hrs</th><td><input class="inp shift-main-inp" type="number" value="${d?.shiftHours||8}" min="1" max="12"></td></tr>
-      <tr><th># Workers</th><td><input class="inp shift-main-inp" type="number" value="${d?.workers||0}"></td></tr></table>
-      <div style="margin-top:6px;font-weight:600;font-size:.74rem;color:var(--accent)">Projects</div>
-      <table class="tbl proj-table"><thead><tr><th>Project</th><th>Workers</th><th>Plan Hrs</th><th>Act Hrs</th><th></th></tr></thead><tbody>${ph}</tbody></table>
-      <button class="btn btn-sm" onclick="App.addProject(this)" style="margin:4px 0">+ Project</button>
-      <div style="margin-top:6px;font-weight:600;font-size:.74rem;color:var(--warn)">Idle Time</div>
-      <table class="tbl idle-table"><thead><tr><th>Workers</th><th>Hours</th><th></th></tr></thead><tbody>${ih}</tbody></table>
-      <button class="btn btn-sm" onclick="App.addIdle(this)" style="margin:4px 0">+ Idle</button>
-      <div class="shift-result">Util: 0% | Eff: 0%</div>`;c.appendChild(div)},
-
-  addProject(btn){const tb=btn.previousElementSibling.querySelector('tbody'),tr=document.createElement('tr');tr.className='proj-row';
-    tr.innerHTML=`<td><input class="inp" placeholder="Project"></td><td><input class="inp" type="number" value="0"></td><td><input class="inp" type="number" value="0"></td><td><input class="inp" type="number" value="0"></td><td><button class="btn btn-sm btn-danger" onclick="this.closest('tr').remove();App.recalculate();App.autoSave()">✕</button></td>`;tb.appendChild(tr)},
-
-  addIdle(btn){const tb=btn.previousElementSibling.querySelector('tbody'),tr=document.createElement('tr');tr.className='idle-row';
-    tr.innerHTML=`<td><input class="inp" type="number" value="0"></td><td><input class="inp" type="number" value="0"></td><td><button class="btn btn-sm btn-danger" onclick="this.closest('tr').remove();App.recalculate();App.autoSave()">✕</button></td>`;tb.appendChild(tr)},
-
-  add5S(d){const grid=g('fiveSGrid'),div=document.createElement('div');div.className='fives-station';
-    div.innerHTML=`<div class="fives-inputs"><input class="inp" placeholder="Station" value="${d?.name||''}">
-      <input class="inp" type="number" placeholder="Alloc" value="${d?.allocated||''}" min="0">
-      <input class="inp" type="number" placeholder="Follow" value="${d?.followed||''}" min="0"></div>
-      <div style="display:flex;align-items:center;gap:6px"><div class="fives-pct">0%</div>
-      <button class="btn btn-sm btn-danger" onclick="this.closest('.fives-station').remove();App.recalculate();App.autoSave()">✕</button></div>`;grid.appendChild(div)},
-
-  addAction(text,done){const inp=g('newAction');const t=text||inp.value.trim();if(!t)return;
-    const list=g('actionList'),div=document.createElement('div');div.className='action-item'+(done?' done':'');
-    div.innerHTML=`<input type="checkbox" ${done?'checked':''} onchange="this.parentElement.classList.toggle('done');App.autoSave();App.recalculate()">
-      <input class="inp action-text" value="${t}" style="border:none;background:transparent;color:var(--text)">
-      <button class="btn btn-sm btn-danger" onclick="this.closest('.action-item').remove();App.autoSave();App.recalculate()">✕</button>`;
-    list.appendChild(div);if(!text){inp.value='';this.autoSave();this.recalculate()}},
-
-  clearAll(){g('machineBody').innerHTML='';g('laborShifts').innerHTML='';g('fiveSGrid').innerHTML='';g('actionList').innerHTML='';this.shiftCount=0},
-
-  restoreData(d){
-    g('teamLead').value=d.teamLead||SM.loadLead()||'';g('kpiDate').value=d.date||'';this._updateDateDisplay();
-    g('dept').value=d.dept||'Aerospace';g('accident').value=d.accident||'No';g('nearMiss').value=d.nearMiss||'No';
-    g('custComplaint').value=d.complaint||'No';g('scrap').value=d.scrap||'No';g('ncMtd').value=d.nc||'No';
-    g('extraCons').value=d.extraCons||'No';g('plannedPeople').value=d.plannedPeople||'';g('presentPeople').value=d.presentPeople||'';
-    this.clearAll();
-    if(d.machines?.length)d.machines.forEach(m=>this.addMachine(m));else this.addMachine();
-    if(d.shifts?.length)d.shifts.forEach(s=>this.addShift(s));else this.addShift();
-    if(d.stations?.length)d.stations.forEach(s=>this.add5S(s));else this.add5S();
-    if(d.actions?.length)d.actions.forEach(a=>this.addAction(a.text,a.done));
-    this.recalculate()},
-
-  toggleLock(){this.locked=!this.locked;const b=g('lockBtn'),c=g('mainContainer');
-    if(this.locked){b.textContent='🔒 Locked';b.classList.add('locked');c.classList.add('locked-overlay')}
-    else{b.textContent='🔓 Open';b.classList.remove('locked');c.classList.remove('locked-overlay')}},
-
-  /* Clipboard / Share */
-  _copy(t){if(navigator.clipboard?.writeText)navigator.clipboard.writeText(t).catch(()=>this._fb(t));else this._fb(t)},
-  _fb(t){const ta=document.createElement('textarea');ta.value=t;ta.style.cssText='position:fixed;opacity:0';document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta)},
-  copyReport(){this._copy(g('reportOutput').value);showToast('Report copied!')},
-  copyText(id,msg){this._copy(g(id).value);showToast(msg)},
-  shareReport(){const t=g('reportOutput').value;if(navigator.share)navigator.share({title:'KPI Report',text:t}).catch(()=>{});else{this._copy(t);showToast('Copied (share unavailable)')}},
-  
-  saveAsImage(){
-    const text=g('reportOutput').value,lines=text.split('\n'),lh=20,pad=30;
-    const canvas=document.createElement('canvas'),ctx=canvas.getContext('2d');
-    ctx.font='13px JetBrains Mono,monospace';let mw=0;lines.forEach(l=>{const w=ctx.measureText(l).width;if(w>mw)mw=w});
-    canvas.width=Math.max(mw+pad*2,400);canvas.height=lines.length*lh+pad*2+40;
-    ctx.fillStyle='#0c1a2e';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.fillStyle='#00d4aa';ctx.fillRect(0,0,canvas.width,4);
-    ctx.font='13px JetBrains Mono,monospace';ctx.fillStyle='#e8edf5';
-    lines.forEach((l,i)=>{ctx.fillText(l,pad,pad+20+i*lh)});
-    ctx.fillStyle='#243a5e';ctx.font='10px DM Sans,sans-serif';ctx.fillText('KPI Dashboard Pro',pad,canvas.height-12);
-    canvas.toBlob(b=>{const u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download=`KPI_${g('kpiDate').value||'report'}.png`;a.click();URL.revokeObjectURL(u);showToast('Image saved!')})},
-
-  exportPDF(){PDFEngine.export(g('reportOutput').value,g('kpiDate').value)},
-
-  /* ===== TEMPLATES ===== */
-  saveTemplate(type){
-    const data=DataCollector.collect();
-    const name=prompt(`Name this ${type} template:`);if(!name)return;
-    const templates=SM.getTemplates();if(!templates[type])templates[type]={};
-    if(type==='machine')templates[type][name]=data.machines;
-    else if(type==='shift')templates[type][name]=data.shifts;
-    else if(type==='5s')templates[type][name]=data.stations;
-    SM.saveTemplates(templates);showToast(`Template "${name}" saved!`)},
-
-  loadTemplate(type,name){
-    const templates=SM.getTemplates();const tpl=templates[type]?.[name];if(!tpl)return;
-    if(type==='machine'){g('machineBody').innerHTML='';tpl.forEach(m=>this.addMachine(m))}
-    else if(type==='shift'){g('laborShifts').innerHTML='';this.shiftCount=0;tpl.forEach(s=>this.addShift(s))}
-    else if(type==='5s'){g('fiveSGrid').innerHTML='';tpl.forEach(s=>this.add5S(s))}
-    this.recalculate();this.autoSave();showToast(`Template "${name}" loaded!`);g('modalBg').classList.add('modal-hide')},
-
-  deleteTemplate(type,name){
-    if(!confirm(`Delete template "${name}"?`))return;
-    const t=SM.getTemplates();if(t[type])delete t[type][name];SM.saveTemplates(t);this.showTemplates()},
-
-  showTemplates(){
-    const templates=SM.getTemplates();
-    const sections=[{key:'machine',icon:'⚙',label:'Machine Templates'},{key:'shift',icon:'👷',label:'Shift Templates'},{key:'5s',icon:'🏷',label:'5S Templates'}];
-    let h='<h3>📦 Templates</h3><p style="font-size:.76rem;color:var(--text2);margin-bottom:12px">Save your common machine, shift, and 5S setups. Load them with one tap.</p>';
-    sections.forEach(sec=>{
-      h+=`<div style="margin-bottom:14px"><div style="font-weight:700;font-size:.8rem;margin-bottom:6px">${sec.icon} ${sec.label}</div>`;
-      const items=templates[sec.key]||{};const names=Object.keys(items);
-      if(!names.length)h+=`<div style="color:var(--text2);font-size:.74rem">No templates saved. Use the 💾 button in the ${sec.label.split(' ')[0]} section to save one.</div>`;
-      else{h+=`<div class="tpl-list">`;names.forEach(n=>{
-        h+=`<div class="tpl-pill" onclick="App.loadTemplate('${sec.key}','${n.replace(/'/g,"\\'")}')">${n} <span class="tpl-del" onclick="event.stopPropagation();App.deleteTemplate('${sec.key}','${n.replace(/'/g,"\\'")}')">✕</span></div>`});
-        h+=`</div>`}
-      h+=`</div>`});
-    h+=`<button class="btn btn-full" onclick="g('modalBg').classList.add('modal-hide')" style="margin-top:8px">Close</button>`;
-    g('modalContent').innerHTML=h;g('modalBg').classList.remove('modal-hide')},
-
-  /* Calendar */
-  showCalendar(){
-    // Open the calendar card and scroll to it
-    const head=g('calendarCard').querySelector('.card-head');
-    if(head.classList.contains('collapsed')){head.classList.remove('collapsed');head.nextElementSibling.classList.remove('hidden')}
-    CalendarEngine.render();g('calendarCard').scrollIntoView({behavior:'smooth'})},
-
-  /* Export/Import */
-  showExportModal(){
-    let h=`<h3>💾 Data Backup</h3><p style="font-size:.78rem;color:var(--text2);margin-bottom:12px">Export all saved data or import a backup.</p>
-      <button class="btn btn-primary btn-full" onclick="App.exportData()" style="margin-bottom:8px">📥 Export All Data</button>
-      <div style="margin:8px 0;font-size:.74rem;color:var(--text2);text-align:center">— or —</div>
-      <label class="btn btn-full btn-warn" style="margin-bottom:8px">📤 Import Backup<input type="file" accept=".json" style="display:none" onchange="App.importData(event)"></label>
-      <button class="btn btn-full btn-danger" onclick="if(confirm('Delete ALL data?')){localStorage.clear();showToast('Cleared');g('modalBg').classList.add('modal-hide');App.recalculate()}" style="margin-top:8px">🗑 Clear All</button>
-      <button class="btn btn-full" onclick="g('modalBg').classList.add('modal-hide')" style="margin-top:8px">Close</button>`;
-    g('modalContent').innerHTML=h;g('modalBg').classList.remove('modal-hide')},
-  exportData(){const json=SM.exportAll();const blob=new Blob([json],{type:'application/json'});const url=URL.createObjectURL(blob);
-    const a=document.createElement('a');a.href=url;a.download=`KPI_Backup_${todayStr()}.json`;a.click();URL.revokeObjectURL(url);showToast('Backup exported!')},
-  importData(e){const file=e.target.files[0];if(!file)return;const reader=new FileReader();
-    reader.onload=ev=>{if(SM.importAll(ev.target.result)){showToast('Imported!');g('modalBg').classList.add('modal-hide');this.recalculate()}else showToast('Invalid file')};reader.readAsText(file)},
-
-  /* ===== NOTIFICATION REMINDER ===== */
-  _checkReminder(){
-    const yesterday=yesterdayStr();const hasTodayData=SM.load(yesterday);
-    if(!hasTodayData&&!SM.isNotifDismissed()){
-      g('notifBar').classList.remove('notif-hide');
-      g('notifText').textContent=`⏰ No data for ${yesterday} yet — fill it in before the SQCDP meeting!`;
-    }
-    // Also try push notification if permission granted
-    if('Notification' in window && Notification.permission==='granted'){
-      if(!hasTodayData&&!SM.isNotifDismissed()){
-        try{new Notification('KPI Dashboard Pro',{body:`Reminder: Fill in KPI data for ${yesterday}`,icon:'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="20" fill="%230c1a2e"/><text x="50" y="68" font-size="50" text-anchor="middle" fill="%2300d4aa">⚙</text></svg>'})}catch(e){}
-      }
+  _checkDataReminder(){
+    const y=yesterday();const hasData=SM.load(y);
+    const state=SM.getNotifState();
+    if(!hasData&&state.dataDismissed!==today()){
+      $('notifBanner').classList.remove('notif-hide');
+      $('notifText').textContent='⏰ No data for '+y+' — fill it in before the meeting!';
     }
   },
-  dismissNotif(){g('notifBar').classList.add('notif-hide');SM.dismissNotif()},
-  enablePushNotif(){
-    if(!('Notification' in window)){showToast('Notifications not supported');return}
+
+  dismiss(){
+    $('notifBanner').classList.add('notif-hide');
+    const state=SM.getNotifState();
+    state.dataDismissed=today();
+    SM.setNotifState(state);
+  },
+
+  _tick(){
+    const settings=this.getSettings();
+    if(!settings.enabled)return;
+    const now=new Date();
+    const dow=now.getDay(); // 0=Sun, 1=Mon..6=Sat
+    if(!settings.days.includes(dow))return;
+
+    const [meetH,meetM]=settings.meetingTime.split(':').map(Number);
+    const nowMin=now.getHours()*60+now.getMinutes();
+    const meetMin=meetH*60+meetM;
+    const remMin=meetMin-settings.reminderMin;
+
+    const state=SM.getNotifState();
+    const todayKey=today();
+
+    // Reminder notification (X min before meeting)
+    if(nowMin>=remMin&&nowMin<meetMin&&state.reminderFired!==todayKey){
+      state.reminderFired=todayKey;SM.setNotifState(state);
+      this._fireNotif('⏰ KPI Reminder','Fill in your KPI data — meeting in '+settings.reminderMin+' minutes!');
+      // Also show in-app banner
+      $('notifBanner').classList.remove('notif-hide');
+      $('notifText').textContent='⏰ Meeting in '+settings.reminderMin+' min — fill in your report!';
+    }
+
+    // Meeting notification (at meeting time)
+    if(nowMin>=meetMin&&nowMin<meetMin+2&&state.meetingFired!==todayKey){
+      state.meetingFired=todayKey;SM.setNotifState(state);
+      this._fireNotif('📊 SQCDP Meeting Now','It\'s meeting time! Open your KPI report.');
+      $('notifBanner').classList.remove('notif-hide');
+      $('notifText').textContent='📊 SQCDP Meeting is starting now!';
+    }
+  },
+
+  _fireNotif(title,body){
+    if(!('Notification' in window))return;
+    if(Notification.permission==='granted'){
+      try{new Notification(title,{body,icon:'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="20" fill="%230c1a2e"/><text x="50" y="68" font-size="50" text-anchor="middle" fill="%2300d4aa">⚙</text></svg>'})}catch(e){}
+    }
+  },
+
+  requestPermission(){
+    if(!('Notification' in window)){showToast('Browser doesn\'t support notifications');return}
     Notification.requestPermission().then(p=>{
-      if(p==='granted'){showToast('Notifications enabled!');this.dismissNotif()}
-      else showToast('Permission denied')})},
+      if(p==='granted')showToast('Notifications enabled!');
+      else showToast('Permission denied — enable in browser settings');
+    });
+  }
 };
 
-/* ========== INIT ========== */
+/* ===== CalendarEngine ===== */
+const CalEng={
+  y:new Date().getFullYear(),m:new Date().getMonth()+1,
+  render(){
+    const el=$('calBody');if(!el)return;
+    const y=this.y,m=this.m,months=['','January','February','March','April','May','June','July','August','September','October','November','December'];
+    const first=new Date(y,m-1,1),last=new Date(y,m,0);
+    let startDay=(first.getDay()+6)%7;const totalDays=last.getDate();
+    const saved=new Set(SM.monthDates(y,m));const tod=today();
+    let greenD=0,redD=0,noD=0;
+    for(let d=1;d<=totalDays;d++){const ds=y+'-'+String(m).padStart(2,'0')+'-'+String(d).padStart(2,'0');
+    if(ds>tod)continue;if(saved.has(ds)){const raw=SM.load(ds);if(raw){KE.isRed(KE.all(raw))?redD++:greenD++}else noD++}else noD++}
+    let h='<div class="cal-nav"><button class="btn btn-sm" onclick="CalEng.nav(-1)">◀</button><div class="cal-month-label">'+months[m]+' '+y+'</div><button class="btn btn-sm" onclick="CalEng.nav(1)">▶</button><button class="btn btn-sm btn-primary" onclick="CalEng.now()">Now</button></div>';
+    h+='<div class="cal-grid">';['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].forEach(d=>{h+='<div class="cal-header">'+d+'</div>'});
+    for(let i=0;i<startDay;i++)h+='<div class="cal-day empty"></div>';
+    for(let d=1;d<=totalDays;d++){const ds=y+'-'+String(m).padStart(2,'0')+'-'+String(d).padStart(2,'0');
+    const isFut=ds>tod,isTod=ds===tod;let cls='cal-none';
+    if(isFut)cls='cal-none cal-future';else if(saved.has(ds)){const raw=SM.load(ds);if(raw)cls=KE.isRed(KE.all(raw))?'cal-red':'cal-green'}
+    h+='<div class="cal-day '+cls+(isTod?' cal-today':'')+'" onclick="App.jumpTo(\''+ds+'\')">'+d+'</div>'}
+    h+='</div><div class="cal-stats"><div class="cal-stat"><div class="cal-stat-val kpi-good">'+greenD+'</div><div class="cal-stat-lbl">Green</div></div><div class="cal-stat"><div class="cal-stat-val kpi-bad">'+redD+'</div><div class="cal-stat-lbl">Red</div></div><div class="cal-stat"><div class="cal-stat-val" style="color:var(--text2)">'+noD+'</div><div class="cal-stat-lbl">No Data</div></div></div>';
+    el.innerHTML=h},
+  nav(dir){this.m+=dir;if(this.m>12){this.m=1;this.y++}if(this.m<1){this.m=12;this.y--}this.render()},
+  now(){this.y=new Date().getFullYear();this.m=new Date().getMonth()+1;this.render()}
+};
+
+/* ===== MAIN APP ===== */
+const App={
+locked:false,sC:0,
+init(){$('kpiDate').value=yesterday();$('teamLead').value=SM.loadLead();this._ud();
+const s=SM.load($('kpiDate').value);if(s)this.restore(s);else{this.addMachine();this.addShift();this.add5S()}
+document.addEventListener('input',()=>{if(!this.locked){this.save();this.calc()}});
+document.addEventListener('change',()=>{if(!this.locked){this.save();this.calc()}});
+$('kpiDate').addEventListener('change',()=>this._ld($('kpiDate').value));
+$('newAction').addEventListener('keydown',e=>{if(e.key==='Enter')this.addAction()});
+this.calc();CalEng.render();NotifEngine.init()},
+_ud(){const d=$('kpiDate').value,dd=$('dateDisplay');if(!d||!dd)return;const dt=new Date(d+'T12:00:00');
+dd.textContent=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][dt.getDay()]+' '+dt.getDate()+' '+['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][dt.getMonth()]},
+_ld(d){this._ud();const s=SM.load(d);if(s){this.clearAll();this.restore(s);showToast('Loaded: '+d)}
+else{this.clearAll();this.addMachine();this.addShift();this.add5S();this.calc();showToast('New: '+d)}},
+_gp(){const d=$('kpiDate').value;if(!d)return null;const p=new Date(d+'T12:00:00');p.setDate(p.getDate()-1);const raw=SM.load(dStr(p));return raw?KE.all(raw):null},
+calc(){const d=DC.collect();UI.full(KE.all(d),this._gp())},
+save(){const d=DC.collect();if(d.date)SM.save(d.date,d);if(d.teamLead)SM.saveLead(d.teamLead)},
+navDate(dir){const d=$('kpiDate').value;if(!d)return;const dt=new Date(d+'T12:00:00');dt.setDate(dt.getDate()+dir);$('kpiDate').value=dStr(dt);this._ld($('kpiDate').value)},
+goToday(){$('kpiDate').value=yesterday();this._ld($('kpiDate').value);showToast('Back to default')},
+copyPrev(){const c=$('kpiDate').value;if(!c)return;const p=new Date(c+'T12:00:00');p.setDate(p.getDate()-1);const ps=dStr(p);
+const s=SM.load(ps);if(s){s.date=c;this.clearAll();this.restore(s);$('kpiDate').value=c;this.save();showToast('Copied from '+ps)}else showToast('No data: '+ps)},
+jumpTo(d){$('modalBg').classList.add('modal-hide');$('kpiDate').value=d;this._ld(d);CalEng.render()},
+addMachine(d){const tb=$('machineBody'),tr=document.createElement('tr');
+tr.innerHTML='<td><input class="inp" placeholder="Machine" value="'+(d?d.name:'')+'"></td><td><input class="inp" type="number" placeholder="0" value="'+(d?d.availHrs:'')+'"></td><td><input class="inp" type="number" placeholder="0" value="'+(d?d.operHrs:'')+'"></td><td><input class="inp" type="number" placeholder="0" value="'+(d?d.plannedRate:'')+'"></td><td><input class="inp" type="number" placeholder="0" value="'+(d?d.actualRate:'')+'"></td><td><input class="inp" placeholder="" value="'+(d?d.remark:'')+'"></td><td><button class="btn btn-sm btn-danger" onclick="this.closest(\'tr\').remove();App.calc();App.save()">✕</button></td><td class="ru">—</td><td class="re">—</td>';tb.appendChild(tr)},
+addShift(d){this.sC++;const c=$('laborShifts'),div=document.createElement('div');div.className='shift-block';
+let ph='';(d?d.projects:[]).forEach(p=>{ph+='<tr class="proj-row"><td><input class="inp" value="'+(p.name||'')+'"></td><td><input class="inp" type="number" value="'+(p.workers||0)+'"></td><td><input class="inp" type="number" value="'+(p.plannedHrs||0)+'"></td><td><input class="inp" type="number" value="'+(p.actualHrs||0)+'"></td><td><button class="btn btn-sm btn-danger" onclick="this.closest(\'tr\').remove();App.calc();App.save()">✕</button></td></tr>'});
+let ih='';(d?d.idles:[]).forEach(i=>{ih+='<tr class="idle-row"><td><input class="inp" type="number" value="'+(i.workers||0)+'"></td><td><input class="inp" type="number" value="'+(i.hours||0)+'"></td><td><button class="btn btn-sm btn-danger" onclick="this.closest(\'tr\').remove();App.calc();App.save()">✕</button></td></tr>'});
+div.innerHTML='<div style="display:flex;justify-content:space-between;align-items:center"><div class="shift-title">Shift '+this.sC+'</div><button class="btn btn-sm btn-danger" onclick="this.closest(\'.shift-block\').remove();App.calc();App.save()">✕</button></div><table class="tbl"><tr><th>Hrs</th><td><input class="inp shift-main-inp" type="number" value="'+(d?d.shiftHours:8)+'"></td></tr><tr><th>Workers</th><td><input class="inp shift-main-inp" type="number" value="'+(d?d.workers:0)+'"></td></tr></table><div style="margin-top:5px;font-weight:600;font-size:.74rem;color:var(--accent)">Projects</div><table class="tbl proj-table"><thead><tr><th>Project</th><th>Wkrs</th><th>Plan</th><th>Act</th><th></th></tr></thead><tbody>'+ph+'</tbody></table><button class="btn btn-sm" onclick="App.addProj(this)" style="margin:3px 0">+ Project</button><div style="margin-top:5px;font-weight:600;font-size:.74rem;color:var(--warn)">Idle</div><table class="tbl idle-table"><thead><tr><th>Wkrs</th><th>Hrs</th><th></th></tr></thead><tbody>'+ih+'</tbody></table><button class="btn btn-sm" onclick="App.addIdle(this)" style="margin:3px 0">+ Idle</button><div class="shift-result">U: 0% | E: 0%</div>';c.appendChild(div)},
+addProj(btn){const tb=btn.previousElementSibling.querySelector('tbody'),tr=document.createElement('tr');tr.className='proj-row';
+tr.innerHTML='<td><input class="inp"></td><td><input class="inp" type="number" value="0"></td><td><input class="inp" type="number" value="0"></td><td><input class="inp" type="number" value="0"></td><td><button class="btn btn-sm btn-danger" onclick="this.closest(\'tr\').remove();App.calc();App.save()">✕</button></td>';tb.appendChild(tr)},
+addIdle(btn){const tb=btn.previousElementSibling.querySelector('tbody'),tr=document.createElement('tr');tr.className='idle-row';
+tr.innerHTML='<td><input class="inp" type="number" value="0"></td><td><input class="inp" type="number" value="0"></td><td><button class="btn btn-sm btn-danger" onclick="this.closest(\'tr\').remove();App.calc();App.save()">✕</button></td>';tb.appendChild(tr)},
+add5S(d){const grid=$('fiveSGrid'),div=document.createElement('div');div.className='fives-station';
+div.innerHTML='<div class="fives-inputs"><input class="inp" placeholder="Station" value="'+(d?d.name:'')+'"><input class="inp" type="number" placeholder="Alloc" value="'+(d?d.allocated:'')+'" min="0"><input class="inp" type="number" placeholder="Foll" value="'+(d?d.followed:'')+'" min="0"></div><div style="display:flex;align-items:center;gap:5px"><div class="fives-pct">—</div><button class="btn btn-sm btn-danger" onclick="this.closest(\'.fives-station\').remove();App.calc();App.save()">✕</button></div>';grid.appendChild(div)},
+addAction(text,done){const inp=$('newAction');const t=text||inp.value.trim();if(!t)return;
+const list=$('actionList'),div=document.createElement('div');div.className='action-item'+(done?' done':'');
+div.innerHTML='<input type="checkbox" '+(done?'checked':'')+' onchange="this.parentElement.classList.toggle(\'done\');App.save();App.calc()"><input class="inp action-text" value="'+t.replace(/"/g,'&quot;')+'" style="border:none;background:transparent;color:var(--text)"><button class="btn btn-sm btn-danger" onclick="this.closest(\'.action-item\').remove();App.save();App.calc()">✕</button>';
+list.appendChild(div);if(!text){inp.value='';this.save();this.calc()}},
+clearAll(){$('machineBody').innerHTML='';$('laborShifts').innerHTML='';$('fiveSGrid').innerHTML='';$('actionList').innerHTML='';this.sC=0},
+restore(d){$('teamLead').value=d.teamLead||SM.loadLead()||'';$('kpiDate').value=d.date||'';this._ud();
+$('dept').value=d.dept||'Aerospace';$('accident').value=d.accident||'No';$('nearMiss').value=d.nearMiss||'No';
+$('custComplaint').value=d.complaint||'No';$('scrap').value=d.scrap||'No';$('ncMtd').value=d.nc||'No';
+$('extraCons').value=d.extraCons||'No';$('plannedPeople').value=d.plannedPeople||'';$('presentPeople').value=d.presentPeople||'';
+this.clearAll();(d.machines&&d.machines.length?d.machines:[null]).forEach(m=>this.addMachine(m));
+(d.shifts&&d.shifts.length?d.shifts:[null]).forEach(s=>this.addShift(s));
+(d.stations&&d.stations.length?d.stations:[null]).forEach(s=>this.add5S(s));
+if(d.actions)d.actions.forEach(a=>this.addAction(a.text,a.done));this.calc()},
+toggleLock(){this.locked=!this.locked;const b=$('lockBtn'),c=$('mainContainer');
+if(this.locked){b.textContent='🔒 Locked';b.classList.add('locked');c.classList.add('locked-overlay')}
+else{b.textContent='🔓 Open';b.classList.remove('locked');c.classList.remove('locked-overlay')}},
+_copy(t){if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).catch(()=>this._fb(t));else this._fb(t)},
+_fb(t){const ta=document.createElement('textarea');ta.value=t;ta.style.cssText='position:fixed;opacity:0';document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta)},
+copyReport(){this._copy($('reportOutput').value);showToast('Copied!')},
+copyEl(id,msg){this._copy($(id).value);showToast(msg)},
+shareReport(){const t=$('reportOutput').value;if(navigator.share)navigator.share({title:'KPI Report',text:t}).catch(()=>{});else{this._copy(t);showToast('Copied!')}},
+exportPNG(){ExportEngine.exportPNG()},
+exportPDF(){ExportEngine.exportPDF()},
+saveAsImage(){ExportEngine.exportPNG()}, // alias
+dismissNotif(){NotifEngine.dismiss()},
+showCalendar(){const head=document.querySelector('#calBody').parentElement.querySelector('.card-head');
+if(head.classList.contains('collapsed')){head.classList.remove('collapsed');head.nextElementSibling.classList.remove('hidden')}
+CalEng.render();head.parentElement.scrollIntoView({behavior:'smooth'})},
+
+/* Notification Settings Modal */
+showNotifSettings(){
+  const s=NotifEngine.getSettings();
+  const permText=('Notification' in window)?'Permission: '+Notification.permission:'Not supported';
+  const dayNames=['','Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  let daysHTML='';
+  for(let d=1;d<=7;d++){
+    const checked=s.days.includes(d)?'checked':'';
+    daysHTML+='<label style="display:inline-flex;align-items:center;gap:3px;font-size:.76rem;margin-right:8px"><input type="checkbox" value="'+d+'" '+checked+' class="notif-day-cb" style="accent-color:var(--accent)">'+dayNames[d]+'</label>';
+  }
+  let h='<h3>🔔 Notification Settings</h3>';
+  h+='<div class="notif-settings">';
+  h+='<div class="notif-row"><div><div class="notif-row-label">Enable Notifications</div><div class="notif-row-sub">In-app + push alerts</div></div><label class="toggle-switch"><input type="checkbox" id="notifEnabled" '+(s.enabled?'checked':'')+' onchange="App._updateNotifSettings()"><span class="toggle-slider"></span></label></div>';
+  h+='<div class="notif-row"><div><div class="notif-row-label">Meeting Time</div><div class="notif-row-sub">When does the SQCDP meeting start?</div></div><input type="time" id="notifMeetTime" class="inp" value="'+s.meetingTime+'" style="width:110px;text-align:center" onchange="App._updateNotifSettings()"></div>';
+  h+='<div class="notif-row"><div><div class="notif-row-label">Reminder Before Meeting</div><div class="notif-row-sub">How many minutes before?</div></div><select id="notifRemMin" class="inp" style="width:80px;text-align:center" onchange="App._updateNotifSettings()"><option value="5" '+(s.reminderMin===5?'selected':'')+'>5 min</option><option value="10" '+(s.reminderMin===10?'selected':'')+'>10 min</option><option value="15" '+(s.reminderMin===15?'selected':'')+'>15 min</option><option value="20" '+(s.reminderMin===20?'selected':'')+'>20 min</option><option value="30" '+(s.reminderMin===30?'selected':'')+'>30 min</option></select></div>';
+  h+='<div class="notif-row"><div><div class="notif-row-label">Meeting Days</div><div class="notif-row-sub">Which days do you meet?</div></div></div>';
+  h+='<div style="padding:6px 10px;background:var(--bg);border:1px solid var(--border);border-radius:8px;margin-top:-6px">'+daysHTML+'</div>';
+  h+='<div class="notif-row"><div><div class="notif-row-label">Push Notifications</div><div class="notif-row-sub">'+permText+'</div></div><button class="btn btn-sm btn-primary" onclick="NotifEngine.requestPermission()">Enable Push</button></div>';
+  h+='</div>';
+  h+='<button class="btn btn-full" onclick="$(\'modalBg\').classList.add(\'modal-hide\')" style="margin-top:12px">Close</button>';
+  $('modalContent').innerHTML=h;$('modalBg').classList.remove('modal-hide')},
+_updateNotifSettings(){
+  const enabled=$('notifEnabled').checked;
+  const meetingTime=$('notifMeetTime').value;
+  const reminderMin=parseInt($('notifRemMin').value)||10;
+  const days=[...document.querySelectorAll('.notif-day-cb')].filter(cb=>cb.checked).map(cb=>parseInt(cb.value));
+  NotifEngine.saveSettings({enabled,meetingTime,reminderMin,days});
+  showToast('Settings saved!')},
+
+/* Templates */
+showTemplates(){const tmpls=SM.loadTmpl();
+let h='<h3>📦 Templates</h3><p style="font-size:.76rem;color:var(--text2);margin-bottom:10px">Save machine/shift/5S config for one-tap loading.</p>';
+h+='<button class="btn btn-primary btn-full" onclick="App.saveTmpl()" style="margin-bottom:12px">💾 Save Current as Template</button>';
+if(tmpls.length){tmpls.forEach((t,i)=>{h+='<div style="display:flex;align-items:center;gap:6px;margin:4px 0;padding:8px;background:var(--bg);border:1px solid var(--border);border-radius:6px"><div style="flex:1"><div style="font-weight:700;font-size:.8rem">'+t.name+'</div><div style="font-size:.64rem;color:var(--text2)">'+t.machines.length+'M · '+t.shifts.length+'S · '+t.stations.length+' 5S</div></div><button class="btn btn-sm btn-primary" onclick="App.loadTmpl('+i+')">Load</button><button class="btn btn-sm btn-danger" onclick="App.delTmpl('+i+')">✕</button></div>'})}
+else h+='<div style="color:var(--text2);font-size:.78rem">No templates yet.</div>';
+h+='<button class="btn btn-full" onclick="$(\'modalBg\').classList.add(\'modal-hide\')" style="margin-top:12px">Close</button>';
+$('modalContent').innerHTML=h;$('modalBg').classList.remove('modal-hide')},
+saveTmpl(){const name=prompt('Template name:');if(!name)return;const d=DC.collect();const t=SM.loadTmpl();
+t.push({name,machines:d.machines,shifts:d.shifts,stations:d.stations,dept:d.dept,plannedPeople:d.plannedPeople});
+SM.saveTmpl(t);showToast('Saved!');this.showTemplates()},
+loadTmpl(i){const t=SM.loadTmpl()[i];if(!t)return;this.clearAll();
+t.machines.forEach(m=>this.addMachine(m));t.shifts.forEach(s=>this.addShift(s));t.stations.forEach(s=>this.add5S(s));
+if(t.dept)$('dept').value=t.dept;if(t.plannedPeople)$('plannedPeople').value=t.plannedPeople;
+this.calc();this.save();$('modalBg').classList.add('modal-hide');showToast('Template loaded!')},
+delTmpl(i){if(!confirm('Delete?'))return;const t=SM.loadTmpl();t.splice(i,1);SM.saveTmpl(t);this.showTemplates()},
+showBackup(){let h='<h3>💾 Backup</h3><button class="btn btn-primary btn-full" onclick="App.expData()" style="margin-bottom:8px">📥 Export All</button><label class="btn btn-full btn-warn" style="margin-bottom:8px">📤 Import<input type="file" accept=".json" style="display:none" onchange="App.impData(event)"></label><button class="btn btn-full btn-danger" onclick="if(confirm(\'Delete ALL data?\')){localStorage.clear();showToast(\'Cleared\');location.reload()}" style="margin-top:8px">🗑 Clear All</button><button class="btn btn-full" onclick="$(\'modalBg\').classList.add(\'modal-hide\')" style="margin-top:8px">Close</button>';
+$('modalContent').innerHTML=h;$('modalBg').classList.remove('modal-hide')},
+expData(){const j=SM.exportAll();const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([j],{type:'application/json'}));a.download='KPI_Backup_'+today()+'.json';a.click();showToast('Exported!')},
+impData(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{if(SM.importAll(ev.target.result)){showToast('Imported!');$('modalBg').classList.add('modal-hide');this.calc();CalEng.render()}else showToast('Invalid')};r.readAsText(f)}
+};
+
 document.addEventListener('DOMContentLoaded',()=>App.init());
 
-/* ========== PWA ========== */
+/* ===== PWA ===== */
 (function(){
-  const manifest={name:'KPI Dashboard Pro',short_name:'KPI Pro',description:'Daily KPI Calculator for SQCDP',
-    start_url:'./',display:'standalone',background_color:'#0c1a2e',theme_color:'#0a1628',
-    icons:[{src:'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="20" fill="%230c1a2e"/><text x="50" y="68" font-size="50" text-anchor="middle" fill="%2300d4aa">⚙</text></svg>',sizes:'512x512',type:'image/svg+xml',purpose:'any maskable'}]};
-  const ml=document.createElement('link');ml.rel='manifest';ml.href=URL.createObjectURL(new Blob([JSON.stringify(manifest)],{type:'application/json'}));document.head.appendChild(ml);
-  const al=document.createElement('link');al.rel='apple-touch-icon';al.href=manifest.icons[0].src;document.head.appendChild(al);
-  if('serviceWorker' in navigator){
-    const sw=`const C='kpi-v4';self.addEventListener('install',e=>{e.waitUntil(caches.open(C).then(c=>c.addAll(['./'])).then(()=>self.skipWaiting()))});self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==C).map(x=>caches.delete(x)))).then(()=>self.clients.claim()))});self.addEventListener('fetch',e=>{e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).then(res=>{if(res.status===200){const cl=res.clone();caches.open(C).then(c=>c.put(e.request,cl))}return res}).catch(()=>caches.match('./')))});`;
-    navigator.serviceWorker.register(URL.createObjectURL(new Blob([sw],{type:'application/javascript'}))).catch(()=>{})
-  }
+const manifest={name:'KPI Dashboard Pro',short_name:'KPI Pro',description:'SQCDP KPI Calculator',start_url:'./',display:'standalone',background_color:'#0c1a2e',theme_color:'#0a1628',
+icons:[{src:'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="20" fill="%230c1a2e"/><text x="50" y="68" font-size="50" text-anchor="middle" fill="%2300d4aa">⚙</text></svg>',sizes:'512x512',type:'image/svg+xml',purpose:'any maskable'}]};
+const l=document.createElement('link');l.rel='manifest';l.href=URL.createObjectURL(new Blob([JSON.stringify(manifest)],{type:'application/json'}));document.head.appendChild(l);
+const a=document.createElement('link');a.rel='apple-touch-icon';a.href=manifest.icons[0].src;document.head.appendChild(a);
+if('serviceWorker' in navigator){
+const sw="var C='kpi-v5';self.addEventListener('install',function(e){e.waitUntil(caches.open(C).then(function(c){return c.addAll(['./'])}).then(function(){return self.skipWaiting()}))});self.addEventListener('activate',function(e){e.waitUntil(caches.keys().then(function(k){return Promise.all(k.filter(function(x){return x!==C}).map(function(x){return caches.delete(x)}))}).then(function(){return self.clients.claim()}))});self.addEventListener('fetch',function(e){e.respondWith(caches.match(e.request).then(function(r){return r||fetch(e.request).then(function(res){if(res.status===200){var cl=res.clone();caches.open(C).then(function(c){c.put(e.request,cl)})}return res}).catch(function(){return caches.match('./')})}))});";
+navigator.serviceWorker.register(URL.createObjectURL(new Blob([sw],{type:'application/javascript'}))).catch(function(){})}
 })();
 </script>
 </body>
