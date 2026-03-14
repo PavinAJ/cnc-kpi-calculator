@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -157,6 +158,7 @@ textarea.inp{resize:vertical;min-height:170px;font-family:var(--mono);font-size:
 </div></div>
 
 <!-- DATE NAV -->
+
 <div class="date-nav">
 <button class="btn btn-sm" onclick="App.navDate(-1)">◀</button>
 <button class="btn btn-sm" onclick="App.copyPrev()">📋 Copy Prev</button>
@@ -177,6 +179,7 @@ textarea.inp{resize:vertical;min-height:170px;font-family:var(--mono);font-size:
 </div>
 
 <!-- BASIC -->
+
 <div class="card" id="basicCard"><div class="card-head" onclick="TC(this)"><h2>📋 Basic Info</h2><span class="chevron">▼</span></div>
 <div class="card-body"><table class="tbl">
 <tr><th>Team Lead</th><td><input class="inp" type="text" id="teamLead" placeholder="Your name (required)"></td></tr>
@@ -184,6 +187,7 @@ textarea.inp{resize:vertical;min-height:170px;font-family:var(--mono);font-size:
 </table></div></div>
 
 <!-- MACHINES -->
+
 <div class="card" id="machineCard"><div class="card-head" onclick="TC(this)"><h2>⚙ Machines <span class="badge" id="machineBadge"></span></h2><span class="chevron">▼</span></div>
 <div class="card-body">
 <div style="font-size:.68rem;color:var(--text2);margin-bottom:6px">OK: Util ≥ 50% AND Eff ≥ 70%</div>
@@ -192,6 +196,7 @@ textarea.inp{resize:vertical;min-height:170px;font-family:var(--mono);font-size:
 </div></div>
 
 <!-- SAFETY -->
+
 <div class="card" id="safetyCard"><div class="card-head" onclick="TC(this)"><h2>🛡 Safety <span class="badge" id="safetyBadge"></span></h2><span class="chevron">▼</span></div>
 <div class="card-body"><table class="tbl">
 <tr><th>Accident</th><td><select class="inp" id="accident"><option>No</option><option>Yes</option></select></td></tr>
@@ -199,6 +204,7 @@ textarea.inp{resize:vertical;min-height:170px;font-family:var(--mono);font-size:
 </table></div></div>
 
 <!-- QUALITY -->
+
 <div class="card" id="qualityCard"><div class="card-head" onclick="TC(this)"><h2>✅ Quality <span class="badge" id="qualityBadge"></span></h2><span class="chevron">▼</span></div>
 <div class="card-body"><table class="tbl">
 <tr><th>Customer Complaint</th><td><select class="inp" id="custComplaint"><option>No</option><option>Yes</option></select></td></tr>
@@ -208,6 +214,7 @@ textarea.inp{resize:vertical;min-height:170px;font-family:var(--mono);font-size:
 </table></div></div>
 
 <!-- LABOR -->
+
 <div class="card" id="laborCard"><div class="card-head" onclick="TC(this)"><h2>👷 Labor <span class="badge" id="laborBadge"></span></h2><span class="chevron">▼</span></div>
 <div class="card-body">
 <div style="font-size:.68rem;color:var(--text2);margin-bottom:6px">OK: Util ≥ 80% AND Eff ≥ 80%</div>
@@ -216,6 +223,7 @@ textarea.inp{resize:vertical;min-height:170px;font-family:var(--mono);font-size:
 </div></div>
 
 <!-- PEOPLE -->
+
 <div class="card" id="peopleCard"><div class="card-head" onclick="TC(this)"><h2>👥 People <span class="badge" id="peopleBadge"></span></h2><span class="chevron">▼</span></div>
 <div class="card-body">
 <div style="font-size:.68rem;color:var(--text2);margin-bottom:6px">OK: Attendance ≥ 100%</div>
@@ -225,6 +233,7 @@ textarea.inp{resize:vertical;min-height:170px;font-family:var(--mono);font-size:
 </table></div></div>
 
 <!-- 5S -->
+
 <div class="card" id="fiveSCard"><div class="card-head" onclick="TC(this)"><h2>🏷 5S Audit <span class="badge" id="fiveSBadge"></span></h2><span class="chevron">▼</span></div>
 <div class="card-body">
 <div style="font-size:.68rem;color:var(--text2);margin-bottom:6px">OK: ≥ 85% · (Followed ÷ Allocated) × 100</div>
@@ -233,12 +242,14 @@ textarea.inp{resize:vertical;min-height:170px;font-family:var(--mono);font-size:
 </div></div>
 
 <!-- ACTIONS -->
+
 <div class="card" id="actionCard"><div class="card-head" onclick="TC(this)"><h2>📌 Actions <span class="badge badge-green" id="actionBadge">0</span></h2><span class="chevron">▼</span></div>
 <div class="card-body"><div id="actionList"></div>
 <div style="display:flex;gap:6px;margin-top:8px"><input class="inp" type="text" id="newAction" placeholder="Add action..." style="flex:1"><button class="btn btn-primary" onclick="App.addAction()">+</button></div>
 </div></div>
 
 <!-- REPORT -->
+
 <div class="card" id="reportCard"><div class="card-head" onclick="TC(this)"><h2>📝 Daily Report</h2><span class="chevron">▼</span></div>
 <div class="card-body"><textarea class="inp" id="reportOutput" readonly></textarea>
 <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap">
@@ -249,18 +260,21 @@ textarea.inp{resize:vertical;min-height:170px;font-family:var(--mono);font-size:
 </div></div></div>
 
 <!-- WEEKLY -->
+
 <div class="card"><div class="card-head collapsed" onclick="TC(this)"><h2>📊 Weekly (7 Days)</h2><span class="chevron">▼</span></div>
 <div class="card-body hidden"><div id="wkSum"></div><div id="wkChart"></div>
 <textarea class="inp" id="wkOut" readonly style="margin-top:8px"></textarea>
 <button class="btn btn-full" onclick="App.copyEl('wkOut','Copied!')" style="margin-top:6px">📋 Copy</button></div></div>
 
 <!-- MONTHLY -->
+
 <div class="card"><div class="card-head collapsed" onclick="TC(this)"><h2>📈 Monthly</h2><span class="chevron">▼</span></div>
 <div class="card-body hidden"><div id="moSum"></div><div id="moChart"></div>
 <textarea class="inp" id="moOut" readonly style="margin-top:8px"></textarea>
 <button class="btn btn-full" onclick="App.copyEl('moOut','Copied!')" style="margin-top:6px">📋 Copy</button></div></div>
 
 <!-- CALENDAR -->
+
 <div class="card"><div class="card-head collapsed" onclick="TC(this)"><h2>🗓 Calendar Heatmap</h2><span class="chevron">▼</span></div>
 <div class="card-body hidden" id="calBody"></div></div>
 </div>
@@ -538,27 +552,41 @@ const ExportEngine={
 
 /* ===== NotificationEngine ===== */
 const NotifEngine={
-  _defaults:{enabled:true,meetingTime:'10:00',reminderMin:10,days:[1,2,3,4,5,6]}, // Mon=1..Sat=6
-  _intervalId:null,
+  _defaults:{enabled:true,meetingTime:'10:00',reminderMin:10,days:[1,2,3,4,5,6]},
+  _intervalId:null,_swReg:null,
 
-  getSettings(){
-    const s=SM.getNotifSettings();
-    return s?{...this._defaults,...s}:{...this._defaults};
-  },
-
-  saveSettings(s){SM.setNotifSettings(s)},
+  getSettings(){const s=SM.getNotifSettings();return s?{...this._defaults,...s}:{...this._defaults}},
+  saveSettings(s){SM.setNotifSettings(s);this._syncToSW()},
 
   init(){
-    // Check data reminder on load
     this._checkDataReminder();
-    // Start scheduler - check every 30 seconds
     this._intervalId=setInterval(()=>this._tick(),30000);
-    this._tick(); // run immediately
+    this._tick();
+    // Get SW registration for showNotification
+    if('serviceWorker' in navigator){
+      navigator.serviceWorker.ready.then(reg=>{
+        this._swReg=reg;
+        this._syncToSW();
+        // Try periodic background sync (Android installed PWA)
+        if('periodicSync' in reg){
+          reg.periodicSync.register('kpi-notif-check',{minInterval:60*60*1000}).catch(()=>{});
+        }
+      }).catch(()=>{});
+      // Listen for SW messages (e.g. notification click)
+      navigator.serviceWorker.addEventListener('message',e=>{
+        if(e.data&&e.data.action==='open-app'){App.goToday()}
+      });
+    }
+  },
+
+  /* Send settings to SW so it can fire notifications independently */
+  _syncToSW(){
+    if(!this._swReg||!this._swReg.active)return;
+    this._swReg.active.postMessage({type:'notif-settings',settings:this.getSettings()});
   },
 
   _checkDataReminder(){
-    const y=yesterday();const hasData=SM.load(y);
-    const state=SM.getNotifState();
+    const y=yesterday();const hasData=SM.load(y);const state=SM.getNotifState();
     if(!hasData&&state.dataDismissed!==today()){
       $('notifBanner').classList.remove('notif-hide');
       $('notifText').textContent='⏰ No data for '+y+' — fill it in before the meeting!';
@@ -567,57 +595,87 @@ const NotifEngine={
 
   dismiss(){
     $('notifBanner').classList.add('notif-hide');
-    const state=SM.getNotifState();
-    state.dataDismissed=today();
-    SM.setNotifState(state);
+    const state=SM.getNotifState();state.dataDismissed=today();SM.setNotifState(state);
   },
 
   _tick(){
-    const settings=this.getSettings();
-    if(!settings.enabled)return;
-    const now=new Date();
-    const dow=now.getDay(); // 0=Sun, 1=Mon..6=Sat
+    const settings=this.getSettings();if(!settings.enabled)return;
+    const now=new Date();const dow=now.getDay();
     if(!settings.days.includes(dow))return;
-
-    const [meetH,meetM]=settings.meetingTime.split(':').map(Number);
+    const [mH,mM]=settings.meetingTime.split(':').map(Number);
     const nowMin=now.getHours()*60+now.getMinutes();
-    const meetMin=meetH*60+meetM;
-    const remMin=meetMin-settings.reminderMin;
+    const meetMin=mH*60+mM;const remMin=meetMin-settings.reminderMin;
+    const state=SM.getNotifState();const tk=today();
 
-    const state=SM.getNotifState();
-    const todayKey=today();
-
-    // Reminder notification (X min before meeting)
-    if(nowMin>=remMin&&nowMin<meetMin&&state.reminderFired!==todayKey){
-      state.reminderFired=todayKey;SM.setNotifState(state);
+    if(nowMin>=remMin&&nowMin<meetMin&&state.reminderFired!==tk){
+      state.reminderFired=tk;SM.setNotifState(state);
       this._fireNotif('⏰ KPI Reminder','Fill in your KPI data — meeting in '+settings.reminderMin+' minutes!');
-      // Also show in-app banner
       $('notifBanner').classList.remove('notif-hide');
       $('notifText').textContent='⏰ Meeting in '+settings.reminderMin+' min — fill in your report!';
     }
-
-    // Meeting notification (at meeting time)
-    if(nowMin>=meetMin&&nowMin<meetMin+2&&state.meetingFired!==todayKey){
-      state.meetingFired=todayKey;SM.setNotifState(state);
-      this._fireNotif('📊 SQCDP Meeting Now','It\'s meeting time! Open your KPI report.');
+    if(nowMin>=meetMin&&nowMin<meetMin+2&&state.meetingFired!==tk){
+      state.meetingFired=tk;SM.setNotifState(state);
+      this._fireNotif('📊 SQCDP Meeting Now','Meeting time! Open your KPI report.');
       $('notifBanner').classList.remove('notif-hide');
       $('notifText').textContent='📊 SQCDP Meeting is starting now!';
     }
   },
 
+  /* Use SW registration.showNotification — works when tab is in BACKGROUND */
   _fireNotif(title,body){
-    if(!('Notification' in window))return;
-    if(Notification.permission==='granted'){
-      try{new Notification(title,{body,icon:'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="20" fill="%230c1a2e"/><text x="50" y="68" font-size="50" text-anchor="middle" fill="%2300d4aa">⚙</text></svg>'})}catch(e){}
+    if(Notification.permission!=='granted')return;
+    const opts={body,badge:'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="20" fill="%230c1a2e"/><text x="50" y="68" font-size="50" text-anchor="middle" fill="%2300d4aa">⚙</text></svg>',
+      tag:'kpi-'+Date.now(),renotify:true,requireInteraction:true,
+      data:{url:location.href},vibrate:[200,100,200]};
+    // Prefer SW showNotification (works in background)
+    if(this._swReg){
+      this._swReg.showNotification(title,opts).catch(()=>{
+        try{new Notification(title,{body})}catch(e){}
+      });
+    }else{
+      try{new Notification(title,{body})}catch(e){}
     }
   },
 
   requestPermission(){
-    if(!('Notification' in window)){showToast('Browser doesn\'t support notifications');return}
+    if(!('Notification' in window)){showToast('Not supported in this browser');return}
     Notification.requestPermission().then(p=>{
-      if(p==='granted')showToast('Notifications enabled!');
-      else showToast('Permission denied — enable in browser settings');
+      if(p==='granted'){showToast('Push enabled! Notifications will work in background.');this._syncToSW()}
+      else showToast('Denied — enable in browser settings');
     });
+  },
+
+  /* Generate .ics calendar file for native phone alarms (most reliable) */
+  downloadCalendarReminder(){
+    const s=this.getSettings();
+    const [h,m]=s.meetingTime.split(':').map(Number);
+    const dayMap={1:'MO',2:'TU',3:'WE',4:'TH',5:'FR',6:'SA',0:'SU'};
+    const rruleDays=s.days.map(d=>dayMap[d]).join(',');
+    // Start from next occurrence
+    const now=new Date();const start=new Date(now);
+    start.setHours(h,m,0,0);
+    if(start<=now)start.setDate(start.getDate()+1);
+    const pad2=n=>String(n).padStart(2,'0');
+    const fmtDT=d=>d.getFullYear()+pad2(d.getMonth()+1)+pad2(d.getDate())+'T'+pad2(d.getHours())+pad2(d.getMinutes())+'00';
+    const end=new Date(start);end.setMinutes(end.getMinutes()+30);
+    // Reminder alarm
+    const remAlarm=new Date(start);remAlarm.setMinutes(remAlarm.getMinutes()-s.reminderMin);
+
+    const ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//KPI Dashboard Pro//EN','CALSCALE:GREGORIAN',
+      'BEGIN:VEVENT','DTSTART:'+fmtDT(start),'DTEND:'+fmtDT(end),
+      'RRULE:FREQ=WEEKLY;BYDAY='+rruleDays,
+      'SUMMARY:📊 SQCDP Meeting — Fill KPI Report',
+      'DESCRIPTION:Open KPI Dashboard Pro and fill in yesterday\'s data before the meeting.',
+      'BEGIN:VALARM','TRIGGER:-PT'+s.reminderMin+'M','ACTION:DISPLAY',
+      'DESCRIPTION:⏰ Fill in KPI data — meeting in '+s.reminderMin+' minutes!',
+      'END:VALARM','BEGIN:VALARM','TRIGGER:PT0M','ACTION:DISPLAY',
+      'DESCRIPTION:📊 SQCDP Meeting is starting now!','END:VALARM',
+      'END:VEVENT','END:VCALENDAR'].join('\r\n');
+
+    const blob=new Blob([ics],{type:'text/calendar'});
+    const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+    a.download='SQCDP_Meeting_Reminder.ics';a.click();
+    showToast('Calendar file downloaded! Open it to add to your phone calendar.');
   }
 };
 
@@ -712,23 +770,33 @@ CalEng.render();head.parentElement.scrollIntoView({behavior:'smooth'})},
 /* Notification Settings Modal */
 showNotifSettings(){
   const s=NotifEngine.getSettings();
-  const permText=('Notification' in window)?'Permission: '+Notification.permission:'Not supported';
+  const hasPerm=('Notification' in window)&&Notification.permission==='granted';
+  const permLabel=!('Notification' in window)?'Not supported':Notification.permission==='granted'?'✅ Granted':Notification.permission==='denied'?'❌ Blocked':'⏳ Not yet asked';
   const dayNames=['','Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
   let daysHTML='';
-  for(let d=1;d<=7;d++){
-    const checked=s.days.includes(d)?'checked':'';
-    daysHTML+='<label style="display:inline-flex;align-items:center;gap:3px;font-size:.76rem;margin-right:8px"><input type="checkbox" value="'+d+'" '+checked+' class="notif-day-cb" style="accent-color:var(--accent)">'+dayNames[d]+'</label>';
-  }
+  for(let d=1;d<=7;d++){daysHTML+='<label style="display:inline-flex;align-items:center;gap:3px;font-size:.76rem;margin-right:8px"><input type="checkbox" value="'+d+'" '+(s.days.includes(d)?'checked':'')+' class="notif-day-cb" style="accent-color:var(--accent)">'+dayNames[d]+'</label>'}
   let h='<h3>🔔 Notification Settings</h3>';
   h+='<div class="notif-settings">';
-  h+='<div class="notif-row"><div><div class="notif-row-label">Enable Notifications</div><div class="notif-row-sub">In-app + push alerts</div></div><label class="toggle-switch"><input type="checkbox" id="notifEnabled" '+(s.enabled?'checked':'')+' onchange="App._updateNotifSettings()"><span class="toggle-slider"></span></label></div>';
-  h+='<div class="notif-row"><div><div class="notif-row-label">Meeting Time</div><div class="notif-row-sub">When does the SQCDP meeting start?</div></div><input type="time" id="notifMeetTime" class="inp" value="'+s.meetingTime+'" style="width:110px;text-align:center" onchange="App._updateNotifSettings()"></div>';
-  h+='<div class="notif-row"><div><div class="notif-row-label">Reminder Before Meeting</div><div class="notif-row-sub">How many minutes before?</div></div><select id="notifRemMin" class="inp" style="width:80px;text-align:center" onchange="App._updateNotifSettings()"><option value="5" '+(s.reminderMin===5?'selected':'')+'>5 min</option><option value="10" '+(s.reminderMin===10?'selected':'')+'>10 min</option><option value="15" '+(s.reminderMin===15?'selected':'')+'>15 min</option><option value="20" '+(s.reminderMin===20?'selected':'')+'>20 min</option><option value="30" '+(s.reminderMin===30?'selected':'')+'>30 min</option></select></div>';
-  h+='<div class="notif-row"><div><div class="notif-row-label">Meeting Days</div><div class="notif-row-sub">Which days do you meet?</div></div></div>';
-  h+='<div style="padding:6px 10px;background:var(--bg);border:1px solid var(--border);border-radius:8px;margin-top:-6px">'+daysHTML+'</div>';
-  h+='<div class="notif-row"><div><div class="notif-row-label">Push Notifications</div><div class="notif-row-sub">'+permText+'</div></div><button class="btn btn-sm btn-primary" onclick="NotifEngine.requestPermission()">Enable Push</button></div>';
+  h+='<div class="notif-row"><div><div class="notif-row-label">Enable Notifications</div><div class="notif-row-sub">In-app + background alerts</div></div><label class="toggle-switch"><input type="checkbox" id="notifEnabled" '+(s.enabled?'checked':'')+' onchange="App._updateNotifSettings()"><span class="toggle-slider"></span></label></div>';
+  h+='<div class="notif-row"><div><div class="notif-row-label">Meeting Time</div><div class="notif-row-sub">SQCDP meeting start time</div></div><input type="time" id="notifMeetTime" class="inp" value="'+s.meetingTime+'" style="width:110px;text-align:center" onchange="App._updateNotifSettings()"></div>';
+  h+='<div class="notif-row"><div><div class="notif-row-label">Reminder Before</div><div class="notif-row-sub">Alert before meeting starts</div></div><select id="notifRemMin" class="inp" style="width:80px;text-align:center" onchange="App._updateNotifSettings()"><option value="5"'+(s.reminderMin===5?' selected':'')+'>5 min</option><option value="10"'+(s.reminderMin===10?' selected':'')+'>10 min</option><option value="15"'+(s.reminderMin===15?' selected':'')+'>15 min</option><option value="20"'+(s.reminderMin===20?' selected':'')+'>20 min</option><option value="30"'+(s.reminderMin===30?' selected':'')+'>30 min</option></select></div>';
+  h+='<div class="notif-row"><div><div class="notif-row-label">Meeting Days</div></div></div>';
+  h+='<div style="padding:8px 10px;background:var(--bg);border:1px solid var(--border);border-radius:8px;margin-top:-6px">'+daysHTML+'</div>';
+  // Push permission
+  h+='<div class="notif-row"><div><div class="notif-row-label">Browser Push</div><div class="notif-row-sub">Status: '+permLabel+'</div></div>'+(hasPerm?'<span style="color:var(--green);font-size:.8rem;font-weight:700">Active</span>':'<button class="btn btn-sm btn-primary" onclick="NotifEngine.requestPermission()">Enable</button>')+'</div>';
   h+='</div>';
-  h+='<button class="btn btn-full" onclick="$(\'modalBg\').classList.add(\'modal-hide\')" style="margin-top:12px">Close</button>';
+  // Background notification info
+  h+='<div style="margin:12px 0;padding:10px;background:var(--bg);border:1px solid var(--border);border-radius:8px;font-size:.74rem;color:var(--text2);line-height:1.5">';
+  h+='<div style="font-weight:700;color:var(--accent);margin-bottom:4px">How notifications work:</div>';
+  h+='<div style="margin-bottom:4px"><span style="color:var(--green)">●</span> <b>App open</b> — notifications always work</div>';
+  h+='<div style="margin-bottom:4px"><span style="color:var(--accent)">●</span> <b>Tab in background</b> — works with Push enabled above</div>';
+  h+='<div style="margin-bottom:4px"><span style="color:var(--warn)">●</span> <b>Browser closed</b> — no browser can do this without a server</div>';
+  h+='<div style="margin-top:6px">For <b>guaranteed alerts</b> even when your phone is locked, use the calendar reminder below — it uses your phone\'s native alarm system.</div>';
+  h+='</div>';
+  // Calendar download
+  h+='<button class="btn btn-full btn-primary" onclick="NotifEngine.downloadCalendarReminder()" style="margin-bottom:8px">📅 Download Calendar Reminder (.ics)</button>';
+  h+='<div style="font-size:.68rem;color:var(--text2);margin-bottom:12px;text-align:center">Adds a recurring event to your phone calendar with alarms at meeting time + '+s.reminderMin+' min before. Works on iPhone, Android, and Outlook.</div>';
+  h+='<button class="btn btn-full" onclick="$(\'modalBg\').classList.add(\'modal-hide\')">Close</button>';
   $('modalContent').innerHTML=h;$('modalBg').classList.remove('modal-hide')},
 _updateNotifSettings(){
   const enabled=$('notifEnabled').checked;
@@ -736,7 +804,7 @@ _updateNotifSettings(){
   const reminderMin=parseInt($('notifRemMin').value)||10;
   const days=[...document.querySelectorAll('.notif-day-cb')].filter(cb=>cb.checked).map(cb=>parseInt(cb.value));
   NotifEngine.saveSettings({enabled,meetingTime,reminderMin,days});
-  showToast('Settings saved!')},
+  showToast('Settings saved & synced!')},
 
 /* Templates */
 showTemplates(){const tmpls=SM.loadTmpl();
@@ -769,9 +837,29 @@ icons:[{src:'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox=
 const l=document.createElement('link');l.rel='manifest';l.href=URL.createObjectURL(new Blob([JSON.stringify(manifest)],{type:'application/json'}));document.head.appendChild(l);
 const a=document.createElement('link');a.rel='apple-touch-icon';a.href=manifest.icons[0].src;document.head.appendChild(a);
 if('serviceWorker' in navigator){
-const sw="var C='kpi-v5';self.addEventListener('install',function(e){e.waitUntil(caches.open(C).then(function(c){return c.addAll(['./'])}).then(function(){return self.skipWaiting()}))});self.addEventListener('activate',function(e){e.waitUntil(caches.keys().then(function(k){return Promise.all(k.filter(function(x){return x!==C}).map(function(x){return caches.delete(x)}))}).then(function(){return self.clients.claim()}))});self.addEventListener('fetch',function(e){e.respondWith(caches.match(e.request).then(function(r){return r||fetch(e.request).then(function(res){if(res.status===200){var cl=res.clone();caches.open(C).then(function(c){c.put(e.request,cl)})}return res}).catch(function(){return caches.match('./')})}))});";
+const sw="var C='kpi-v5b';var notifSettings=null;"+
+"self.addEventListener('install',function(e){e.waitUntil(caches.open(C).then(function(c){return c.addAll(['./'])}).then(function(){return self.skipWaiting()}))});"+
+"self.addEventListener('activate',function(e){e.waitUntil(caches.keys().then(function(k){return Promise.all(k.filter(function(x){return x!==C}).map(function(x){return caches.delete(x)}))}).then(function(){return self.clients.claim()}))});"+
+"self.addEventListener('fetch',function(e){e.respondWith(caches.match(e.request).then(function(r){return r||fetch(e.request).then(function(res){if(res.status===200){var cl=res.clone();caches.open(C).then(function(c){c.put(e.request,cl)})}return res}).catch(function(){return caches.match('./')})}))});"+
+/* Handle messages from page */
+"self.addEventListener('message',function(e){if(e.data&&e.data.type==='notif-settings'){notifSettings=e.data.settings;scheduleCheck()}});"+
+/* Notification click — open/focus the app */
+"self.addEventListener('notificationclick',function(e){e.notification.close();e.waitUntil(clients.matchAll({type:'window',includeUncontrolled:true}).then(function(cls){for(var i=0;i<cls.length;i++){if(cls[i].url&&cls[i].focus)return cls[i].focus()}return clients.openWindow('./')}))});"+
+/* Periodic background sync (Android installed PWA) */
+"self.addEventListener('periodicsync',function(e){if(e.tag==='kpi-notif-check'){e.waitUntil(doBackgroundCheck())}});"+
+/* Background check — fire notification if it's meeting time */
+"function doBackgroundCheck(){if(!notifSettings||!notifSettings.enabled)return Promise.resolve();"+
+"var now=new Date();var dow=now.getDay();if(notifSettings.days.indexOf(dow)===-1)return Promise.resolve();"+
+"var parts=notifSettings.meetingTime.split(':');var mH=parseInt(parts[0]);var mM=parseInt(parts[1]);"+
+"var nowMin=now.getHours()*60+now.getMinutes();var meetMin=mH*60+mM;var remMin=meetMin-notifSettings.reminderMin;"+
+"if(nowMin>=remMin&&nowMin<remMin+3){return self.registration.showNotification('⏰ KPI Reminder',{body:'Meeting in '+notifSettings.reminderMin+' min — fill in your report!',tag:'kpi-rem',renotify:true,requireInteraction:true,vibrate:[200,100,200]})}"+
+"if(nowMin>=meetMin&&nowMin<meetMin+3){return self.registration.showNotification('📊 SQCDP Meeting',{body:'Meeting starting now! Open KPI Dashboard.',tag:'kpi-meet',renotify:true,requireInteraction:true,vibrate:[200,100,200]})}"+
+"return Promise.resolve()}"+
+/* Also run a self-timer inside SW (wakes up on setInterval if SW stays alive) */
+"var checkTimer=null;function scheduleCheck(){if(checkTimer)clearInterval(checkTimer);checkTimer=setInterval(function(){doBackgroundCheck()},60000);doBackgroundCheck()}";
 navigator.serviceWorker.register(URL.createObjectURL(new Blob([sw],{type:'application/javascript'}))).catch(function(){})}
 })();
 </script>
+
 </body>
 </html>
